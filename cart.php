@@ -62,11 +62,17 @@ if (!isset($_SESSION['user'])) {
                 } else {
                     echo "<h3>Your cart is empty!</h3>";
                 }
+
                 $detail = $db->query("SELECT sum(unit) as amount FROM cart where cart.u_id = '$u_id';")->fetch();
 
                 $provi = $db->query("SELECT sum(product.price*cart.unit) as provi FROM product INNER JOIN cart ON cart.p_id = product.p_id where cart.u_id = '$u_id';")->fetch();
 ?>
 </form>
+<?php
+                if (isset($_GET['tb'])) {
+                    echo '<small class ="form-text" style="color:red;">' . $_GET['tb'] . '</small>';
+                }
+                ?>
 <div class="pay_info border-top">
     <input type="hidden" name="provi" value="<?php echo $provi['provi']; ?>">
     <div class="row">
@@ -105,7 +111,7 @@ if (!isset($_SESSION['user'])) {
 <div class="form-check">
     <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1">
     <label class="form-check-label" for="exampleRadios1">
-        Payment on Delivery(COD)
+        Payment on Delivery(COD) + deposit(10%) <strong><?php echo $totals * 0.1; ?></strong> VND
     </label>
 </div>
 <div class="form-check">
@@ -113,13 +119,10 @@ if (!isset($_SESSION['user'])) {
     <label class="form-check-label" for="exampleRadios2">
 		Bank transfer 
     </label>
-    <div class="collapse" id="collapseExample">
-        <div class="card card-body">
+</div>
+<div class="card card-body">
             <strong>11110000555669 - BIDV - Tran Minh Quang</strong>
         </div>
-    </div>
-</div>
-			
     </div>
 
     <div class="col-md-5">
@@ -167,7 +170,7 @@ if (!isset($_SESSION['user'])) {
                     <label for="floatingTextarea">Take a note </label>
                 </div>
             </div>
-			 <div class="form-group">
+			<div class="form-group">
                 <div class="form-floating" style="width: 100%">
                     <textarea class="form-control" placeholder="Enter your friend's phone number" name="suggest" id="floatingTextarea" maxlength="80" style="height: calc(4rem + 2px);"></textarea>
                     <label for="floatingTextarea">Suggest a friend </label>
