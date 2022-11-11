@@ -9,14 +9,18 @@ require_once("template/header.php");
 			require_once("menu.php");
 			?>
 			<?php 
-				$temp = $_GET['action'];
-				if ($temp == "intro"){
+			if (isset($_GET['action'])) {
+				$tam = $_GET['action'];
+			} else {
+				$tam = '';
+			}
+				if ($tam == "intro"){
 					$img = "img/intro.jpg";
 				}
-				else if ($temp == "whole") {
+				else if ($tam == "whole") {
 					$img = "img/startsourcing.jpg";
 				}
-				else if ($temp == ""){
+				else if ($tam == ""){
 					$img = "img/banner.jpg";
 				}
 				else {
@@ -34,18 +38,14 @@ require_once("template/header.php");
 				} else {
 					$tam = '';
 				}
-				if ($tam == 'kit') {
-					require_once("main/kit.php");
-				} elseif ($tam == 'keycap') {
-					require_once("main/keycap.php");
-				} elseif ($tam == 'switch') {
-					require_once("main/switch.php");
+				if ($tam == '') {
+					require_once("main/home.php");
 				}elseif ($tam == 'whole') {
 						require_once("main/whole.php");
 				}elseif ($tam == 'intro') {
 						require_once("main/intro.php");
 				} else {
-					require_once("main/home.php");
+					require_once("main/cate_type.php");
 				}
 				?>
 			</div>

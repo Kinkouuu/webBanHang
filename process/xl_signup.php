@@ -27,7 +27,8 @@ if($pass != $cpass){
         header("location:../signup.php?fail='$fail'");
     } else {
         //thoa man
-        $db->query("INSERT INTO `user` ( `phone`, `pass`,`f_name`,`l_name`,`city`,`district`,`ward`,`street`,`no`) VALUES ( '$phone', '$pass','$fname','$lname','$city','$district','$ward','$street','$no');");
+        $md5_pass = md5($pass);
+        $db->query("INSERT INTO `user` ( `phone`, `pass`,`f_name`,`l_name`,`city`,`district`,`ward`,`street`,`no`) VALUES ( '$phone', '$md5_pass','$fname','$lname','$city','$district','$ward','$street','$no');");
         
         header("Location: ../signin.php");
     }

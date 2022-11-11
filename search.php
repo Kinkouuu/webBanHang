@@ -1,8 +1,10 @@
 <?php
 require_once "template/header.php";
+require_once "template/core.php";
     require_once "template/config.php";
     require_once "template/nav.php";
-require_once "template/core.php";
+    require_once "menu.php";
+
 ?>
 <div class="col-12 mt-5 ms-5">
 	<div class = "row">

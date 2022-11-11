@@ -5,7 +5,7 @@ session_start();
     <div class="container-fluid ">
         <a class="navbar-brand" href="./index.php">
             <img src="../img/logo.jpg" class="rounded" alt="" style="width:30%">
-            
+            Home
         </a>
         <div class="col-5">
             <form class="d-flex" action="./search.php" method="POST">

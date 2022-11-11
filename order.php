@@ -20,13 +20,13 @@ if (!isset($_SESSION['user'])) {
                     <th>Customer name</th>
                     <th>Phone number</th>
                     <th>Adress</th>
-                    <th>Order date</th>
                     <th>Product quantity</th>
                     <th>Provisional</th>
                     <th>Ship fee</th>
                     <th>Discount</th>
                     <th>Total money</th>
                     <th>Status</th>
+                    <th>Payment</th>
                     <th>&nbsp</th>
                 </tr>
                 <?php
@@ -44,10 +44,8 @@ if (!isset($_SESSION['user'])) {
                         <td><?php echo $order['adress']; ?></td>
 
 
-                        <td>
-                            <!-- <?php echo date("d-m-Y", $order['time']); ?> -->
-                        </td>
                         <?php
+                        $sl = $db->query("SELECT p_id FROM `details` WHERE o_id ='$o_id'")->rowCount();
                         $details = $db->query("SELECT details.o_id,sum(details.amount * product.price ) as provi,sum(details.amount) as amounts from `details` INNER JOIN `product` ON details.p_id = product.p_id WHERE o_id = $o_id;")->fetch();
                         foreach ($details as $detail) {
                             $provi = $details['provi'];
@@ -57,7 +55,7 @@ if (!isset($_SESSION['user'])) {
                         <td><?php echo $details['amounts'] ?></td>
                         <td><?php echo $provi ?> VND</td>
 
-                        <td>35.000 VND</td>
+                        <td><?php echo $sl*35000 ?> VND</td>
                         
                         <?php
                         $check_sale = $db->query("SELECT o_id,s_id FROM `order` WHERE o_id = $o_id;")->fetch();
@@ -72,7 +70,7 @@ if (!isset($_SESSION['user'])) {
                                 }
                             }
                         }
-                        $total0 = $provi - $discount + 35000;
+                        $total0 = $provi - $discount + $sl*35000;
 					    if ($total0 <0){
                             $total = 0;
                         }else{
@@ -81,7 +79,17 @@ if (!isset($_SESSION['user'])) {
                         ?>
                         <td><?php echo $discount?> VND</td>
                         <td><?php echo $total?> VND</td>
-                        <td></td>
+                        <td><?php echo $order['status']; ?></td>
+                        <?php
+                        if($order['statuspay'] == 'Đã cọc'){
+                            $coc = $details['provi']*0.1. 'VND';
+                        }elseif($order['statuspay'] == 'Bank full'){
+                            $coc = $total. 'VND';
+                        }else{
+                            $coc = '';
+                        }
+                    ?>
+                        <td><?php echo $order['statuspay']; ?><br><?php echo $coc ?></br></td>
 
                         <td><a href="details.php?o_id=<?= $o_id;?>">See more</a></td>
                         <?php } ?>

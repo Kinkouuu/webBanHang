@@ -9,10 +9,10 @@
     
     // $titleconfig = "";
     //ket noi db
-    $dbhost = 'a2nlmysql7plsk.secureserver.net:3306';
+    $dbhost = 'localhost';
     $dbname = 'shop';
-    $dbusername = 'shop';
-    $dbpassword = 'Hai@qt123';
+    $dbusername = 'root';
+    $dbpassword = '';
     //-- Kết Nối PDO --//
 
     // Kiểm tra kết nối

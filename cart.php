@@ -11,7 +11,7 @@ if (!isset($_SESSION['user'])) {
 <div class="container mt-5">
     <div class="row">
         <div class="col-md-7 border-end">
-            <form class="list_cart mt-2" id="giohang" action="process/xl_upcart.php" method="POST">
+            <form class="list_cart mt-2" id="giohang" action="process/xl_upcart.php" method="POST" style="overflow-y: auto;height:50vh">
                 <?php
                 $list = $db->query("SELECT product.p_id,p_name,pics,spec,price,f_id,remain,cart.u_id,unit from product inner join cart on product.p_id = cart.p_id where cart.u_id = '$u_id';");
                 if ($list->rowCount() > 0) {
@@ -20,7 +20,7 @@ if (!isset($_SESSION['user'])) {
                 ?>
                         <ul>
                             <li class="d-flex justify-content-between align-items-center">
-                                <div class="img-cart">
+                                <div class="col-md-6">
                                     <input type="hidden" name="p_id" value="<?php echo $product['p_id']; ?>">
                                     <input type="hidden" name="remain" value="<?php echo $product['remain']; ?>">
                                     <a href="cart.php">
@@ -28,7 +28,7 @@ if (!isset($_SESSION['user'])) {
                                     </a>
                                 </div>
 
-                                <div class="list_cart_info">
+                                <div class="col-md-4 d-flex flex-column">
 
                                     <p class="name_product"><?php echo $product['p_name'] ?></p>
 
@@ -37,7 +37,7 @@ if (!isset($_SESSION['user'])) {
                                     <p>Quantity: <?php echo $product['unit'] ?></p>
 
                                 </div>
-                                <div class="ms-3">
+                                <div class="col-md-2 d-flex flex-column">
                                     <button style="height: 30px;border:none;background-color:white">
                                         <a class="btn btn-info btn-sm" href="./product.php?p_id=<?= $product['p_id']; ?>">Change</a>
                                     </button>
@@ -55,24 +55,25 @@ if (!isset($_SESSION['user'])) {
                                     </button>
                                 </div>
         </li>
-
-        </ul>
-<?php
+        <?php
                     }
                 } else {
-                    echo "<h3>Your cart is empty!</h3>";
+                    echo "<h3 style ='text-align: center;'>Your cart is empty!</h3>";
                 }
+
+                if (isset($_GET['tb'])) {
+                    echo '<h5 class ="form-text" style="color:red;text-align: center;">' . $_GET['tb'] . '</h5>';
+                }
+
 
                 $detail = $db->query("SELECT sum(unit) as amount FROM cart where cart.u_id = '$u_id';")->fetch();
-
+                $sl = $db->query("SELECT p_id FROM `cart` WHERE cart.u_id ='$u_id'")->rowCount();
                 $provi = $db->query("SELECT sum(product.price*cart.unit) as provi FROM product INNER JOIN cart ON cart.p_id = product.p_id where cart.u_id = '$u_id';")->fetch();
 ?>
+        </ul>
+
 </form>
-<?php
-                if (isset($_GET['tb'])) {
-                    echo '<small class ="form-text" style="color:red;">' . $_GET['tb'] . '</small>';
-                }
-                ?>
+
 <div class="pay_info border-top">
     <input type="hidden" name="provi" value="<?php echo $provi['provi']; ?>">
     <div class="row">
@@ -82,7 +83,7 @@ if (!isset($_SESSION['user'])) {
         <h5>Provisional:
             <span><?php echo $provi['provi']; ?> VND</span>
         </h5>
-        <h5>Transport fee: 35.000 VND</h5>
+        <h5>Transport fee: <?php echo $sl*35000 ?> VND</h5>
     </div>
     <form class="voucher d-flex flex-row " action="process/xl_voucher.php" method="POST">
         <textarea class="form-control" style="height: 30px; margin-right:1em" name="code" aria-label="With textarea" placeholder="Enter discount code"></textarea>
@@ -99,7 +100,7 @@ if (!isset($_SESSION['user'])) {
     } else {
         $discount = 0;
     }
-    $total = $provi['provi'] +35000 - $discount;
+    $total = $provi['provi'] +$sl*35000 - $discount;
     if ($total < 0) {
         $totals = 0;
     } else {
@@ -108,15 +109,16 @@ if (!isset($_SESSION['user'])) {
     ?>
     <h5>Total:<?php echo $totals; ?> VND</h5>
 </div>
+<form action="process/xl_order.php" id="form-info" method="POST">
 <div class="form-check">
-    <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1">
-    <label class="form-check-label" for="exampleRadios1">
-        Payment on Delivery(COD) + deposit(10%) <strong><?php echo $totals * 0.1; ?></strong> VND
+    <input class="form-check-input" type="radio" name="payment" value="COD" checked>
+    <label class="form-check-label" for="">
+        Payment on Delivery(COD) + deposit(10%) <strong><?php echo$provi['provi'] * 0.1; ?></strong> VND
     </label>
 </div>
 <div class="form-check">
-    <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="option2" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample" checked>
-    <label class="form-check-label" for="exampleRadios2">
+    <input class="form-check-input" type="radio" name="payment" value="Banking"  >
+    <label class="form-check-label" for="">
 		Bank transfer 
     </label>
 </div>
@@ -126,7 +128,7 @@ if (!isset($_SESSION['user'])) {
     </div>
 
     <div class="col-md-5">
-        <form action="process/xl_order.php" id="form-info" method="POST">
+
             <?php
             $addr = $db->query("SELECT * from `user`  where `u_id` = $u_id")->fetch();
             ?>

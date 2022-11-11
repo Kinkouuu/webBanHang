@@ -9,7 +9,8 @@ if (isset($_SESSION['user'])) {
 if (isset($_POST['btnLogIn'])) {
     $phone = locdata($_POST['phone']);
     $pass = locdata($_POST['inPass']);
-    $hihi = $db->query("SELECT `u_id` FROM `user` WHERE `phone` = '$phone' AND `pass` = '$pass' ")->fetch(PDO::FETCH_ASSOC);
+    $md5_pass = md5($pass);
+    $hihi = $db->query("SELECT `u_id` FROM `user` WHERE `phone` = '$phone' AND `pass` = '$md5_pass' ")->fetch(PDO::FETCH_ASSOC);
     if ($hihi['u_id'] == null) {
         $message = "Wrong phone number or passwords";
         header("location:../signin.php?message='$message'");

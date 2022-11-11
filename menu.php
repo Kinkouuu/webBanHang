@@ -12,21 +12,18 @@
                 Product
             </button>
             <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                <li>
-                <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile" type="button" role="tab" aria-controls="profile">
-                <a href="index.php?action=kit" style="text-decoration: none">Kit</a>
-            </button>
-                </li>
-                <li>
-                <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile" type="button" role="tab" aria-controls="profile">
-                <a href="index.php?action=keycap" style="text-decoration: none">Keycap</a>
-            </button>
-                </li>
-                <li>
-                <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile" type="button" role="tab" aria-controls="profile">
-                <a href="index.php?action=switch" style="text-decoration: none">Switch</a>
-            </button>
-                </li>
+                <?php
+                $types = $db->query("SELECT * FROM `type` WHERE `type` != '' ORDER BY `t_id` ASC");
+                foreach ($types as $type) {
+                    $t=$type['type'];
+
+                ?>
+                    <li>
+                        <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile" type="button" role="tab" aria-controls="profile">
+                            <a href="index.php?action=<?= $t ?>" style="text-decoration: none"><?= $t ?></a>
+                        </button>
+                    </li>
+                <?php } ?>
             </ul>
         </div>
 

@@ -26,6 +26,7 @@ if (isset($_POST['btnOrder'])) {
 	$suggest = $_POST['suggest'];
     $name = ($f_name.' '.$l_name);
 	$address = ($no.' '.$street.','.$ward.', '.$district.', '.$city);
+    $payment = $_POST['payment'];
 	$check = $db ->query("SELECT * FROM `order` WHERE u_id = $u_id AND s_id = $s_id")->fetch();
     if($check['s_id']==0){
         $check_id = $s_id;
@@ -34,11 +35,12 @@ if (isset($_POST['btnOrder'])) {
         $check_id = null; }
     $detail = $db ->query("SELECT * FROM `cart` WHERE `u_id` = $u_id");
     if($detail->rowCount() == 0){
-        $tb="Please add product in your cart";
+        $tb="Please add product in your cart!";
         header("location: ../cart.php?tb= '$tb'");
     }
     else{
-        $order = $db->query("INSERT INTO `order` (`fee`,`u_id`,`o_phone`,`o_name`,`adress`,`s_id`,`note`,`suggest`) VALUES ('35000','$u_id','$phone','$name','$address','$check_id','$note','$suggest');");
+
+        $order = $db->query("INSERT INTO `order` (`u_id`,`o_phone`,`o_name`,`adress`,`s_id`,`note`,`suggest`,`statuspay`,`status`) VALUES ('$u_id','$phone','$name','$address','$check_id','$note','$suggest','$payment','Đang chờ xác nhận');");
         $o_id = $db->query("SELECT * FROM `order` ORDER BY o_id DESC LIMIT 1;")->fetch();
         $oid = $o_id['o_id'];
     
