@@ -1,6 +1,5 @@
 
-<div class="footer">
-
+<footer class="footer">
         <hr>
         <div class="d-flex justify-content-evenly">
             <span><i class="fa-sharp fa-solid fa-location-dot"></i> TP.HCM</span>
@@ -8,7 +7,7 @@
             <a href="mailto:hotro@ezsupply.app" style="color:black"><i class="fa-solid fa-envelope"></i>Hotro@ezsupply.app</i></a>
         </div>
         </hr>
-</div>
+</footer>
 </body>
 
 
