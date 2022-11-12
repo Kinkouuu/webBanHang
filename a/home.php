@@ -22,7 +22,7 @@
           
           <div class="col-lg-3 col-6">
             <!-- small box -->
-            <div class="small-box bg-warning">
+            <div class="small-box bg-primary">
               <div class="inner">
                 <h3><?php echo $db->query("SELECT * FROM `user`")->rowcount(); ?></h3>
 
@@ -35,13 +35,49 @@
           
 			<div class="col-lg-3 col-6">
             <!-- small box -->
-            <div class="small-box bg-primary">
+            <div class="small-box bg-teal">
               <div class="inner">
                 <h3><?php echo $db->query("SELECT * FROM `order`")->rowcount(); ?></h3>
 
-                <p>Detail Ordered</p>
+                <p>Order</p>
               </div>
-              <a href="detailOrder.php" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+              <a href="order.php" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+            </div>
+          </div>
+
+          <div class="col-lg-3 col-6">
+            <!-- small box -->
+            <div class="small-box bg-pink">
+              <div class="inner">
+                <h3><?php echo $db->query("SELECT * FROM `sale`")->rowcount(); ?></h3>
+
+                <p>Voucher Discount</p>
+              </div>
+              <a href="sale.php" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+            </div>
+          </div>
+
+          <div class="col-lg-3 col-6">
+            <!-- small box -->
+            <div class="small-box bg-purple">
+              <div class="inner">
+
+                <h3><?php echo $db->query("SELECT * FROM `type`")->rowcount(); ?></h3>
+
+                <p>Category Type</p>
+              </div>
+              <a href="cate_type.php" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+            </div>
+          </div>
+          <div class="col-lg-3 col-6">
+            <!-- small box -->
+            <div class="small-box bg-orange">
+              <div class="inner">
+                <h3><?php echo $db->query("SELECT * FROM `factory`")->rowcount(); ?></h3>
+
+                <p>Supply Factory</p>
+              </div>
+              <a href="fact.php" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
             </div>
           </div>
           <!-- ./col -->

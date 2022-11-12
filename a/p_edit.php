@@ -18,15 +18,9 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Add Product</h1>
+            <h1>Edit Product</h1>
           </div>
-          <div class="col-sm-6">
-            <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="#">Home</a></li>
-              <li class="breadcrumb-item active">Edit Product</li>
-            </ol>
-          </div>
-        </div>
+
       </div><!-- /.container-fluid -->
     </section>
 
@@ -35,10 +29,10 @@
         <div class="tab-pane" id="settings">
             <form class="form-horizontal" method="post">
               <div class="form-group row">
-                <label class="col-sm-2 col-form-label">Name Product</label>
+                <label class="col-sm-2 col-form-label">ID Product</label>
                 <div class="col-sm-10">
                   	<div class="form-group">
-						<input type="text" class="form-control" name="name" autocomplete="off" disabled="true" value="<?php echo $qr['p_name']; ?>">
+						<input type="text" class="form-control" name="name" autocomplete="off" disabled="true" value="<?php echo $qr['p_id']; ?>">
   					</div>
                 </div>
               </div>
@@ -46,7 +40,7 @@
                 <label class="col-sm-2 col-form-label">Name Product</label>
                 <div class="col-sm-10">
                   	<div class="form-group">
-						<input type="text" class="form-control" name="name" autocomplete="off" disabled="true" value="<?php echo $qr['p_cat']; ?>">
+						<input type="text" class="form-control" name="name" autocomplete="off" disabled="true" value="<?php echo $qr['p_name']; ?>">
   					</div>
                 </div>
               </div>

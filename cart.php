@@ -11,20 +11,21 @@ if (!isset($_SESSION['user'])) {
 <div class="container mt-5">
     <div class="row">
         <div class="col-md-7 border-end">
-            <form class="list_cart mt-2" id="giohang" action="process/xl_upcart.php" method="POST" style="overflow-y: auto;height:50vh">
+            <form class="list_cart mt-2" id="giohang" action="process/xl_upcart.php" method="POST" >
+            <ul style="overflow-y: scroll; height:50vh">
                 <?php
                 $list = $db->query("SELECT product.p_id,p_name,pics,spec,price,f_id,remain,cart.u_id,unit from product inner join cart on product.p_id = cart.p_id where cart.u_id = '$u_id';");
                 if ($list->rowCount() > 0) {
                     foreach ($list as $product) {
 
                 ?>
-                        <ul>
+
                             <li class="d-flex justify-content-between align-items-center">
                                 <div class="col-md-6">
                                     <input type="hidden" name="p_id" value="<?php echo $product['p_id']; ?>">
                                     <input type="hidden" name="remain" value="<?php echo $product['remain']; ?>">
                                     <a href="cart.php">
-                                        <img src="<?php echo $product['pics'] ?>" alt="cart" class="img-responsive" />
+                                        <img src="a/<?php echo $product['pics'] ?>" alt="cart" class="img-responsive" />
                                     </a>
                                 </div>
 

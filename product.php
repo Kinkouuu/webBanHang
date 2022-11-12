@@ -48,7 +48,7 @@ require_once("template/nav.php");
 			</p>
 			
             </form>
-			<a href="<?= $product['link']; ?>"><strong>Video reviews.</strong></a>
+			<a href="<?= $product['video']; ?>"><strong>Video reviews.</strong></a>
         </div>
     </div>
 

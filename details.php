@@ -48,8 +48,8 @@ if (!isset($_SESSION['user'])) {
 
                 ?>
                     <tr>
-                        <td  style = "width:20%;">
-                            <img src="<?php echo $sp['pics'] ?>" alt="">
+                        <td style = "width:20%;">
+                            <img src="a/<?php echo $sp['pics'] ?>" alt="">
                         </td>
                         
                         <td><?php echo $sp['p_name'] ?></td>
@@ -112,7 +112,7 @@ if (!isset($_SESSION['user'])) {
                     <?php
                         if($info['statuspay'] == 'Đã cọc'){
                             $coc = $details['provi']*0.1;
-                        }elseif($info['statuspay'] == 'Bank full'){
+                        }elseif($info['statuspay'] == 'Bank full' || $info['statuspay'] == 'Đã thanh toán'){
                             $coc = $total;
                         }else{
                             $coc = 0;
