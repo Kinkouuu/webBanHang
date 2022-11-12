@@ -112,7 +112,7 @@ if (!isset($_SESSION['user'])) {
                     <?php
                         if($info['statuspay'] == 'Đã cọc'){
                             $coc = $details['provi']*0.1;
-                        }elseif($info['statuspay'] == 'Bank full'){
+                        }elseif($info['statuspay'] == 'Bank full' || $info['statuspay'] == 'Đã thanh toán'){
                             $coc = $total;
                         }else{
                             $coc = 0;
