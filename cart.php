@@ -25,7 +25,7 @@ if (!isset($_SESSION['user'])) {
                                     <input type="hidden" name="p_id" value="<?php echo $product['p_id']; ?>">
                                     <input type="hidden" name="remain" value="<?php echo $product['remain']; ?>">
                                     <a href="cart.php">
-                                        <img src="<?php echo $product['pics'] ?>" alt="cart" class="img-responsive" />
+                                        <img src="a/<?php echo $product['pics'] ?>" alt="cart" class="img-responsive" />
                                     </a>
                                 </div>
 

@@ -48,8 +48,8 @@ if (!isset($_SESSION['user'])) {
 
                 ?>
                     <tr>
-                        <td  style = "width:20%;">
-                            <img src="<?php echo $sp['pics'] ?>" alt="">
+                        <td style = "width:20%;">
+                            <img src="a/<?php echo $sp['pics'] ?>" alt="">
                         </td>
                         
                         <td><?php echo $sp['p_name'] ?></td>

@@ -1,5 +1,4 @@
 <?php
-
 require_once "template/config.php";
 require_once "template/header.php";
 require_once   "template/nav.php";
@@ -30,7 +29,7 @@ if (!isset($_SESSION['user'])) {
                     <th>&nbsp</th>
                 </tr>
                 <?php
-                $orders = $db->query("SELECT * FROM `order`  WHERE u_id = $u_id ORDER BY o_id ASC");
+                $orders = $db->query("SELECT * FROM `order`  WHERE u_id = $u_id ORDER BY o_id DESC");
                 foreach ($orders as $order) {
                     $o_id = $order['o_id'];
 

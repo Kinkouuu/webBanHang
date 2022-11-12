@@ -87,7 +87,7 @@
           </li>
           <li class="nav-item">
             <a href="cate_type.php" class="nav-link">
-              <i class="nav-icon far fa-circle text-waring"></i>
+              <i class="nav-icon far fa-circle text-purple"></i>
               <p class="text">Category Type</p>
             </a>
           </li>
