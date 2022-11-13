@@ -1,8 +1,8 @@
   <footer class="main-footer">
-    <strong>Copyright &copy; <?= date('Y'); ?> <a href="/">EZSUPPLY.APP</a>.</strong>
+    <strong>Copyright &copy; <?= date('Y'); ?> <a href="/">EZSUPPLY.APP</a>&Kinkou Developer.</strong>
     All rights reserved.
     <div class="float-right d-none d-sm-inline-block">
-      <b>Version</b> 1.0
+      <b>Version</b> 2.2
     </div>
   </footer>
 

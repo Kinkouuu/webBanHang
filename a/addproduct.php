@@ -23,6 +23,11 @@ if (isset($_POST['save'])) {
     $pic = $target_file;
   } else {
     $alert = "This image is not valid. Please try some else.";
+  }    
+  if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
+    echo "The file ". htmlspecialchars( basename( $_FILES["fileToUpload"]["name"])). " has been uploaded.";
+  } else {
+    echo "Sorry, there was an error uploading your file.";
   }
 // echo $name . "," .$type. "," .$code. "," .$pic. "," .$spec. "," .$video. ",".$price."," .$remain. ", " .$f_id ;
 // echo "<img src='$pic'>";
