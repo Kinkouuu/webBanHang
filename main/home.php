@@ -11,7 +11,7 @@ if ($new_pro -> rowCount() > 0){
         $sold = $db->query("SELECT sum(amount) as sold FROM `details` WHERE `p_id` = $p_id")->fetch();
 ?>
 
-    <div class="col-md-3 m-auto">
+    <div class="col-md-2 m-auto">
     
         <a href="./product.php?p_id=<?= $product['p_id']; ?>"  class="product" style="color: #010101;text-decoration: none;text-align: center;">        
             <img src="a/<?= $product['pics']; ?>" alt="" style="width: 100%; height:auto;">

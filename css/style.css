@@ -119,3 +119,27 @@ footer{
     left: 0;
     bottom: 0;
 }
+.form2{
+    margin-top: 15px;
+    margin-bottom: 20px;
+    display: flex;
+	justify-content: space-between;
+}
+.form1{
+    margin-top: 15px;
+    margin-bottom: 20px;
+    display: flex;
+	justify-content: center;
+}
+
+.inf{
+    flex-grow: 1;
+    margin-right: 5px;
+    margin-left: 5px;
+
+}
+.fin{
+    width:-webkit-fill-available;
+    margin-right: 5px;
+    margin-left: 5px;
+}

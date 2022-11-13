@@ -35,7 +35,7 @@
                                 <img class="rounded-circle boder" src="img/HA.png" />
                                 <div class="card-block mt-2">
                                     <h5 class="card-title text-center">
-                                        CEO Le HOANG ANH
+                                        CEO LE HOANG ANH
                                     </h5>
                                     <ul>
                                         <li>Ex-Uber anh Be Group.</li>

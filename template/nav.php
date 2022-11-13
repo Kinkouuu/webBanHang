@@ -23,7 +23,7 @@ session_start();
                 <?php
                 if (isset($_SESSION['user'])) {
                     $name = $db->query("SELECT * FROM `user` WHERE `u_id` = " . $_SESSION['user'] . " ")->fetch(PDO::FETCH_ASSOC);
-                    echo "<li class = 'nav-link link-dark' style ='text-transform: uppercase;'>Welcome: " . $name['f_name'] . ' ' . $name['l_name'] . "</li>";
+                    echo "<li class = 'nav-link link-dark' ><a href='profile.php'style ='text-transform: uppercase; text-decoration: none;'>Welcome: " . $name['f_name'] . ' ' . $name['l_name'] . "</a></li>";
                 ?>
                     <li class="nav-item">
                         <a class="nav-link link-info" aria-current="page" href="cart.php">
