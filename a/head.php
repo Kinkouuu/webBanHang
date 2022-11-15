@@ -97,6 +97,13 @@
               <p class="text">Supply Factory</p>
             </a>
           </li>
+
+          <li class="nav-item">
+            <a href="money.php" class="nav-link">
+              <i class="nav-icon far fa-circle text-indigo"></i>
+              <p class="text">Currency Exchange</p>
+            </a>
+          </li>
           <li class="nav-item">
             <a href="logout.php" class="nav-link">
               <i class="nav-icon far fa-circle text-danger"></i>

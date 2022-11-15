@@ -14,13 +14,13 @@ if (!isset($_SESSION['user'])) {
             <form class="list_cart mt-2" id="giohang" action="process/xl_upcart.php" method="POST" >
             <ul style="overflow-y: scroll; height:50vh">
                 <?php
-                $list = $db->query("SELECT product.p_id,p_name,pics,spec,price,f_id,remain,cart.u_id,unit from product inner join cart on product.p_id = cart.p_id where cart.u_id = '$u_id';");
+                $list = $db->query("SELECT * from (`product` inner join `cart` on product.p_id = cart.p_id) INNER JOIN `money` ON product.m_id = money.m_id where cart.u_id = '$u_id';");
                 if ($list->rowCount() > 0) {
                     foreach ($list as $product) {
 
                 ?>
 
-                            <li class="d-flex justify-content-between align-items-center">
+                            <li class="d-flex justify-content-between align-items-center mb-1">
                                 <div class="col-md-6">
                                     <input type="hidden" name="p_id" value="<?php echo $product['p_id']; ?>">
                                     <input type="hidden" name="remain" value="<?php echo $product['remain']; ?>">
@@ -31,11 +31,22 @@ if (!isset($_SESSION['user'])) {
 
                                 <div class="col-md-4 d-flex flex-column">
 
-                                    <p class="name_product"><?php echo $product['p_name'] ?></p>
+                                    <p class="name_product"><strong>Name: </strong><?php echo $product['p_name'] ?></p>
 
-                                    <p>Price: <?php echo $product['price'] ?> VND</p>
+                                    <p class="price_product"> <strong>Price: </strong>
+                                    <?php
+                                    if($product['sign'] == 'VND'){
+                                        echo $product['price']*$product['ex']. ' VND'; 
 
-                                    <p>Quantity: <?php echo $product['unit'] ?></p>
+                                    }else{
+                                    echo $product['price'] ?>  <?php echo $product['sign']. '≈' .$product['price']*$product['ex']. ' VND'; 
+
+                                    }
+
+                                    ?>
+                </p>
+
+                                    <p><strong>Quantity: </strong> <?php echo $product['unit'] ?></p>
 
                                 </div>
                                 <div class="col-md-2 d-flex flex-column">
@@ -69,7 +80,7 @@ if (!isset($_SESSION['user'])) {
 
                 $detail = $db->query("SELECT sum(unit) as amount FROM cart where cart.u_id = '$u_id';")->fetch();
                 $sl = $db->query("SELECT p_id FROM `cart` WHERE cart.u_id ='$u_id'")->rowCount();
-                $provi = $db->query("SELECT sum(product.price*cart.unit) as provi FROM product INNER JOIN cart ON cart.p_id = product.p_id where cart.u_id = '$u_id';")->fetch();
+                $provi = $db->query("SELECT sum(product.price*money.ex*cart.unit) as provi FROM (`product` INNER JOIN cart ON cart.p_id = product.p_id) INNER JOIN `money` ON product.m_id = money.m_id where cart.u_id = '$u_id';")->fetch();
 ?>
         </ul>
 

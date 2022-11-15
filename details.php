@@ -25,6 +25,8 @@ if (!isset($_SESSION['user'])) {
                     <li>Phone Number: <?php echo $info['o_phone']; ?></li>
                     <li>Adress: <?php echo $info['adress']; ?></li>
 					<li>Note: <?php echo $info['note']; ?> </li>
+                    <li>Suggest: <?php echo $info['suggest']; ?> </li>
+                    <li>Status: <?php echo $info['status']; ?> </li>
                     
                 </b>
             </ul>
@@ -35,12 +37,13 @@ if (!isset($_SESSION['user'])) {
                     <th>Type</th>
                     <th>Catergory</th>
                     <th>Price</th>
+                    <th>Exchange</th>
                     <th>Amount</th>
 
 
                 </tr>
                 <?php
-                $ds  = $db->query("SELECT * FROM (`details` INNER JOIN `product` ON details.p_id = product.p_id) INNER JOIN `type` ON product.type = type.t_id WHERE details.o_id = $o_id;");
+                $ds  = $db->query("SELECT * FROM ((`details` INNER JOIN `product` ON details.p_id = product.p_id) INNER JOIN `type` ON product.t_id = type.t_id) INNER JOIN `money` ON product.m_id = money.m_id WHERE details.o_id = $o_id;");
 
                 foreach ($ds as $sp) {
                     $p_id = $sp['p_id'];
@@ -55,23 +58,24 @@ if (!isset($_SESSION['user'])) {
                         <td><?php echo $sp['p_name'] ?></td>
                         <td><?php echo $sp['type'] ?></td>
                         <td><?php echo $sp['cate'] ?></td>
-                        <td><?php echo $sp['price'] ?></td>
+                        <td><?php echo $sp['price'] ?> <?php echo $sp['sign'] ?> </td>
+                        <td><?php echo $sp['price']*$sp['ex'] ?> VND</td>
                         <td><?php echo $sp['amount'] ?></td>
 
 
                     </tr>
                 <?php }
-                $details = $db->query("SELECT details.o_id,sum(details.amount * product.price ) as provi,sum(details.amount) as amounts from `details` INNER JOIN `product` ON details.p_id = product.p_id WHERE o_id = $o_id;")->fetch();
+                $details = $db->query("SELECT details.o_id,sum(details.amount * product.price * money.ex ) as provi,sum(details.amount) as amounts from (`details` INNER JOIN `product` ON details.p_id = product.p_id) INNER JOIN `money` ON product.m_id = money.m_id WHERE o_id = $o_id;")->fetch();
                 $sl = $db->query("SELECT p_id FROM `details` WHERE o_id ='$o_id'")->rowCount();
                 ?>
                 <tr class="table-warning">
                     <td>Provisional:</td>
-                    <td colspan="4"></td>
+                    <td colspan="5"></td>
                     <td><?php echo $details['provi'] ?> VND</td>
                 </tr>
                 <tr class="table-secondary">
                     <td>Transport fee:</td>
-                    <td colspan="4"></td>
+                    <td colspan="5"></td>
                     <td><?php echo $sl*35000 ?> VND</td>
                 </tr>
                 <?php
@@ -96,34 +100,26 @@ if (!isset($_SESSION['user'])) {
                 ?>
                 <tr class="table-danger">
                     <td>Discount:</td>
-                    <td colspan="4"></td>
+                    <td colspan="5"></td>
                     <td>-<?php echo $discount ?> VND</td>
                 </tr>
                 <tr class="table-light">
                     <td>Total:</td>
-                    <td colspan="3"></td>
+                    <td colspan="4"></td>
 					<td><?php echo $details['amounts'] ?> products</td>
                     <td><?php echo $total ?> VND</td>
                 </tr>
                 <tr class="table-secondary">
                     <td>Payment/Deposited:</td>
-                    <td colspan="3"></td>
+                    <td colspan="4"></td>
 					<td><?php echo $info['statuspay'] ?></td>
-                    <?php
-                        if($info['statuspay'] == 'Đã cọc'){
-                            $coc = $details['provi']*0.1;
-                        }elseif($info['statuspay'] == 'Bank full' || $info['statuspay'] == 'Đã thanh toán'){
-                            $coc = $total;
-                        }else{
-                            $coc = 0;
-                        }
-                    ?>
-                    <td><?php echo $coc ?> VND</td>
+
+                    <td><?php echo $info['deposit']; ?> VND</td>
                 </tr>
                 <tr class="table-sucess">
                     <td>Need to paid:</td>
-                    <td colspan="4"></td>				
-                    <td><?php echo $total - $coc ?> VND</td>
+                    <td colspan="5"></td>				
+                    <td><?php echo $total -$info['deposit']?> VND</td>
                 </tr>
             </table>
 

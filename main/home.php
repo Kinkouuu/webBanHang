@@ -4,7 +4,7 @@
 <h3>New Product</h3>
 <div class="row">
 <?php
-$new_pro = $db->query("SELECT * FROM `product` WHERE remain > 0 ORDER BY p_id DESC ");
+$new_pro = $db->query("SELECT * FROM `product` INNER JOIN `money` ON product.m_id = money.m_id WHERE remain > 0 ORDER BY p_id DESC ");
 if ($new_pro -> rowCount() > 0){
     foreach ($new_pro as $product){
         $p_id = $product['p_id'];
@@ -17,7 +17,7 @@ if ($new_pro -> rowCount() > 0){
             <img src="a/<?= $product['pics']; ?>" alt="" style="width: 100%; height:auto;">
             
             <p class="name_product"><?php echo $product['p_name']?></p>
-            <p class="price_product"><?php echo $product['price']?> VND</p>
+            <p class="price_product"> <?php echo $product['price'] ?> <?php echo $product['sign']?> </p>
             <p>Sold: <?php echo $sold['sold']?></p>
         </a>
         

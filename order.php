@@ -45,7 +45,7 @@ if (!isset($_SESSION['user'])) {
 
                         <?php
                         $sl = $db->query("SELECT p_id FROM `details` WHERE o_id ='$o_id'")->rowCount();
-                        $details = $db->query("SELECT details.o_id,sum(details.amount * product.price ) as provi,sum(details.amount) as amounts from `details` INNER JOIN `product` ON details.p_id = product.p_id WHERE o_id = $o_id;")->fetch();
+                        $details = $db->query("SELECT details.o_id,sum(details.amount * product.price * money.ex ) as provi,sum(details.amount) as amounts from (`details` INNER JOIN `product` ON details.p_id = product.p_id) INNER JOIN `money` ON product.m_id = money.m_id WHERE o_id = $o_id;")->fetch();
                         foreach ($details as $detail) {
                             $provi = $details['provi'];
                         }

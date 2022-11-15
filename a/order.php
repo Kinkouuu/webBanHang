@@ -65,17 +65,17 @@
             <td colspan="6">
 
                 <?php
-                $pros = $db->query("SELECT * FROM (`product` INNER JOIN `type` ON product.type = type.t_id) INNER JOIN `details` ON product.p_id = details.p_id WHERE o_id = '$o_id'");
+                $pros = $db->query("SELECT * FROM ((`details` INNER JOIN `product` ON details.p_id = product.p_id) INNER JOIN `type` ON product.t_id = type.t_id) INNER JOIN `money` ON product.m_id = money.m_id WHERE details.o_id = $o_id;");
                 foreach ($pros as $pro) {
 
                 ?>
                     <table class="">
-                        <td style="width: 10%; padding:0"><?php echo $pro['p_id'] ?></td>
+                        <td style="width: 5%; padding:0"><?php echo $pro['p_id'] ?></td>
                         <td style="width: 40%;padding:0"><?php echo $pro['p_name'] ?></td>
-                        <td style="width: 10%; padding:0"><?php echo $pro['amount'] ?></td>
-                        <td style="width: 20%;padding:0"><?php echo $pro['price'] ?> VND</td>
+                        <td style="width: 5%; padding:0"><?php echo $pro['amount'] ?></td>
+                        <td style="width: 20%;padding:0"><?php echo $pro['price'] ?> <?php echo $pro['sign'] ?> </td>
                         <td style="width: 20%;padding:0"><?php echo $pro['type'] ?></td>
-                        <td style="width: 20%;padding:0"><?php echo $pro['cate'] ?></td>
+                        <td style="width: 10%;padding:0"><?php echo $pro['cate'] ?></td>
                     </table>
 
                 <?php } ?>
@@ -83,7 +83,7 @@
             </td>
             <?php
             $sl = $db->query("SELECT p_id FROM `details` WHERE o_id ='$o_id'")->rowCount();
-            $details = $db->query("SELECT details.o_id,sum(details.amount * product.price ) as provi,sum(details.amount) as amounts from `details` INNER JOIN `product` ON details.p_id = product.p_id WHERE o_id = $o_id;")->fetch();
+            $details =$db->query("SELECT details.o_id,sum(details.amount * product.price * money.ex ) as provi,sum(details.amount) as amounts from (`details` INNER JOIN `product` ON details.p_id = product.p_id) INNER JOIN `money` ON product.m_id = money.m_id WHERE o_id = $o_id;")->fetch();
             foreach ($details as $detail) {
                 $provi = $details['provi'];
             }
@@ -117,28 +117,9 @@
             <td><?php echo $discount ?> VND</td>
             <td><?php echo $total ?> VND</td>
             <td><?php echo $order['status']; ?></td>
-            <?php
-            if ($order['statuspay'] == 'Đã cọc') {
-                $coc = $details['provi'] * 0.1 . 'VND';
-            } elseif ($order['statuspay'] == 'Đã thanh toán') {
-                $coc = $total . 'VND';
-            } else {
-                $coc = '';
-            }
-            ?>
-            <td><?php echo $order['statuspay']; ?><br><?php echo $coc ?></br></td>
-            <?php
-            if ($order['statuspay'] == 'Đã cọc') {
-                $paid = ($total - $details['provi'] * 0.1) . ' VND';
-            } elseif ($order['statuspay'] == 'Đã thanh toán') {
-                $paid = "0 VND";
-            } elseif ($order['statuspay'] == 'COD' || $order['statuspay'] == 'Banking') {
-                $paid = 'Chờ xác thực';
-            } else {
-                $paid = $total . ' VND';
-            }
-            ?>
-            <td><?php echo $paid ?></td>
+            <td><?php echo $order['statuspay']; ?><br><?php echo $order['deposit']. ' VND'; ?></br></td>
+
+            <td><?php echo $total-$order['deposit']. ' VND' ?></td>
             <td class="project-actions text-right">
                 <a class="btn btn-primary btn-sm" href="updateStatus.php?o_id=<?= $o_id; ?>">
                     Update

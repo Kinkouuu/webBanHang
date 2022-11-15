@@ -41,22 +41,22 @@
                       <th style="width: 1%">
                           #
                       </th>
-                      <th style="width: 20%">
+                      <th style="width: 10%">
                           Name
                       </th>
-                      <th style="width: 15%">
+                      <th style="width: 10%">
                           Phone
                       </th>
                       <th style="width: 35%">
                           Address
                       </th>
-					  <th style="width: 35%">
+					  <th style="width: 15%">
                           Number of Orders
                       </th>
-					  <th style="width: 35%">
+					  <th style="width: 25%">
                           Comment
                       </th>
-					  <th style="width: 5%">
+					  <th style="width: 5%">&nbsp;
                       </th>
                      
                   </tr>

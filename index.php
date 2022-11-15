@@ -27,8 +27,8 @@ require_once("template/header.php");
 					$img = "img/product.jpg";
 				}
 			?>
-					<div class="banner" style ="width:100%;height:auto">
-						<img src="<?= $img; ?>" class="d-block w-100" alt="...">
+						<div class="banner" style ="width:100%;height:auto">
+						<img src="<?= $img; ?>" class="d-block w-100" alt="..." style ="height:40vh">
 					</div>
 			<?php ?>
 			<div class="main-content mt-2 ms-5 me-5">

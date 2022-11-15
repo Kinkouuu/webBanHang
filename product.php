@@ -9,46 +9,48 @@ require_once("template/nav.php");
         <div class="col-md-6 ">
             <?php
             $p_id = (int) mget('p_id');
-            $product = $db->query("SELECT * FROM `product` WHERE `p_id` = $p_id")->fetch();
+            $product = $db->query("SELECT * FROM `product`  INNER JOIN `money` ON product.m_id = money.m_id WHERE `p_id` = $p_id")->fetch();
             ?>
 
 
-                    <div class="images">
-                        <img src="<?= $product['pics'] ?>" class="d-block w-100" alt="...">
-                    </div>
+            <div class="images">
+                <img src="a/<?= $product['pics'] ?>" class="d-block w-100" alt="...">
+            </div>
 
         </div>
         <div class="col-md-3 ">
 
             <form action="process/xl_addcart.php" method="POST">
-			<input type="hidden" name="p_id" value="<?php echo $p_id;?>">
-            <input type="hidden" name="remain" value="<?php echo $product['remain'];?>">
+                <input type="hidden" name="p_id" value="<?php echo $p_id; ?>">
+                <input type="hidden" name="remain" value="<?php echo $product['remain']; ?>">
 
-				<p class="name_product"><strong>Name: </strong> <?php echo $product['p_name'] ?></p>
-            <p class="price_product"><strong>Price: </strong><?php echo $product['price'] ?> VND</p>
-            
+                <p class="name_product"><strong>Name: </strong> <?php echo $product['p_name'] ?></p>
+                <p class="price_product"> <strong>Price: </strong>
+                    <?php echo $product['price'] ?> <?php echo $product['sign'] ?>
+                </p>
 
 
-            <div class="d-flex justify-content-start">
-                <p><strong>Amount: </strong></p>
-                <div class="ms-1 me-1">
-                    <input aria-label="quantity" class="quanty_product" max="<?php echo $product['remain'] ?>" min="1" name="unit" type="number" value="1">
+
+                <div class="d-flex justify-content-start">
+                    <p><strong>Amount: </strong></p>
+                    <div class="ms-1 me-1">
+                        <input aria-label="quantity" class="quanty_product" max="<?php echo $product['remain'] ?>" min="1" name="unit" type="number" value="1">
+                    </div>
+                    <p> / <?php echo $product['remain'] ?></p>
                 </div>
-                <p> / <?php echo $product['remain'] ?></p>
-            </div>
-            <input type="submit" name = "addCart" class="btn btn-outline-primary" value="Add to cart">
-            <p><strong>Specifications: </strong>
-				<?php
-					$str = $product['spec'];
-					$dump = explode('-', $str);
-					for ($x = 0; $x < sizeof($dump); $x++){
-						echo $dump[$x] . "<br />";	
-					}
-				?>
-			</p>
-			
+                <input type="submit" name="addCart" class="btn btn-outline-primary" value="Add to cart">
+                <p><strong>Specifications: </strong>
+                    <?php
+                    $str = $product['spec'];
+                    $dump = explode('-', $str);
+                    for ($x = 0; $x < sizeof($dump); $x++) {
+                        echo $dump[$x] . "<br />";
+                    }
+                    ?>
+                </p>
+
             </form>
-			<a href="<?= $product['video']; ?>"><strong>Video reviews.</strong></a>
+            <a href="<?= $product['video']; ?>"><strong>Video reviews.</strong></a>
         </div>
     </div>
 

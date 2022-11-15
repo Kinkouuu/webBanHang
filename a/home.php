@@ -81,6 +81,17 @@
             </div>
           </div>
           <!-- ./col -->
+          <div class="col-lg-3 col-6">
+            <!-- small box -->
+            <div class="small-box bg-indigo">
+              <div class="inner">
+                <h3><?php echo $db->query("SELECT * FROM `factory`")->rowcount(); ?></h3>
+
+                <p>Currency Exchange</p>
+              </div>
+              <a href="money.php" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+            </div>
+          </div>
         </div>
         <!-- /.row -->
       </div><!-- /.container-fluid -->

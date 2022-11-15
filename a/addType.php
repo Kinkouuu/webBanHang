@@ -5,7 +5,7 @@
         $cate=$_POST['cate'];
         $type = $_POST['type'];
 
-        $db->query("INSERT INTO `type` (`cate`, `type`) VALUES ($cate, $type)");
+        $db->query("INSERT INTO `type` (`cate`, `type`) VALUES ('$cate', '$type')");
         if($type == ''){
             echo '<script>alert("Đã thêm danh mục ' . $cate . '"); window.location = "cate_type.php";</script>';
         }else{

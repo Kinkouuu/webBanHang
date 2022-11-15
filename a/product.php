@@ -30,19 +30,19 @@ if (isset($_GET['del'])) {
                   <th style="width: 1%">
                      #
                   </th>
-                  <th style="width: 20%">
+                  <th style="width: 15%">
                      Picture
                   </th>
-                  <th style="width: 20%">
+                  <th style="width: 10%">
                      Name
                   </th>
-                  <th style="width: 5%">
+                  <th style="width: 3%">
                      Category
                   </th>
-                  <th style="width: 5%">
+                  <th style="width: 3%">
                      Type
                   </th>
-                  <th style="width: 5%">
+                  <th style="width: 3%">
                      Code
                   </th>
                   <th style="width: 15%">
@@ -51,20 +51,23 @@ if (isset($_GET['del'])) {
                   <th style="width: 15%">
                      Price
                   </th>
+                  <th style="width: 15%">
+                  Exchange
+               </th>
                   <th style="width: 5%">
                      Remain
                   </th>
-                  <th style="width: 20%">
+                  <th style="width: 15%">
                      Factory
                   </th>
-                  <th style="width: 25%">
+                  <th style="width: 20%">
                      Review
                   </th>
                </tr>
             </thead>
             <tbody>
                <?php
-               $product = $db->query("SELECT * FROM `product` INNER JOIN `type` ON product.type = type.t_id ORDER BY `p_id` DESC");
+               $product = $db->query("SELECT * FROM (`product` INNER JOIN `type` ON product.t_id = type.t_id) INNER JOIN `money` ON product.m_id = money.m_id ORDER BY `p_id` DESC");
                foreach ($product as $pro) {
                   $id = $pro['f_id'];
                ?>
@@ -92,7 +95,10 @@ if (isset($_GET['del'])) {
                         <?= $pro['spec']; ?>
                      </td>
                      <td>
-                        <?= $pro['price']; ?> VND
+                        <?= $pro['price'];  ?> <?= $pro['sign']; ?>
+                     </td>
+                     <td>
+                        <?= $pro['price']*$pro['ex'] ; ?> VND
                      </td>
                      <td>
                         <?= $pro['remain']; ?>
