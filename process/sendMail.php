@@ -3,7 +3,6 @@ use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 use PHPMailer\PHPMailer\SMTP;
 
-
 require '../PHPMailer/Exception.php';
 require '../PHPMailer/PHPMailer.php';
 require '../PHPMailer/SMTP.php';
@@ -32,7 +31,7 @@ if(isset($_POST['btnSend'])){
         $mail->SMTPAuth = true;// Enable SMTP authentication
         $mail->Username = 'chucvu2610@gmail.com';// SMTP username
         $mail->Password = 'lcmhllpmqyqprfkr'; // SMTP password
-        $mail->SMTPSecure = 'ssl';// Enable TLS encryption; `PHPMailer::ENCRYPTION_SMTPS` a;lso accepted
+        $mail->SMTPSecure = 'ssl';// Enable TLS encryption; `PHPMailer::ENCRYPTION_SMTPS` also accepted
 		$mail->Mailer = "smtp"; 
         $mail->Port = 465; // TCP port to connect to
 		$mail->SMTPOptions = array(
@@ -45,7 +44,8 @@ if(isset($_POST['btnSend'])){
         $mail->CharSet = 'UTF-8'; // SMTP charset
         //Recipients
         $mail->setFrom('StartSoucing@gmail.com', 'CSKH');
-        $mail->addAddress('hotro@ezsupply.app', 'EZSUPPLY'); // Add a recipient
+        // $mail->addAddress('hotro@ezsupply.app', 'EZSUPPLY'); // Add a recipient
+        $mail->addAddress('chuckinkou2k1@gmail.com', 'EZSUPPLY');
         // $mail->addAddress('ellen@example.com'); // Name is optional
         // $mail->addReplyTo('info@example.com', 'Information');
         // $mail->addCC('cc@example.com');
@@ -58,13 +58,22 @@ if(isset($_POST['btnSend'])){
         // Content
         $mail->isHTML(true);   // Set email format to HTML
         $mail->Subject = 'GB REQUEST';
-        $mail->Body = 'Customer Name:' .$customer. '<br>Phone number: ' .$phone.'</br><br>Email: ' .$email.'</br><br>Name product: '
-        .$n_product.'</br><br>Brand: ' .$brand. '</br><br>Specifications: '.$spec. '</br><br> Product inquiry: ' .$inquiry. '</br><br>Desired price: ' .$price. '</br><br>Number of product: ' .$number. '</br><br>Products have deposited: ' .$deposit. '</br><br>Desired opening time: ' .$time. '</br><br>Link image: '.$link;
+        $mail->Body = 'Customer Name:' .$customer. 
+        '<br>Phone number: ' .$phone.
+        '</br><br>Email: ' .$email.'
+        </br><br>Name product: '.$n_product.
+        '</br><br>Brand: ' .$brand. 
+        '</br><br>Specifications: '.$spec. 
+        '</br><br> Product inquiry: ' .$inquiry. 
+        '</br><br>Desired price: ' .$price. 
+        '</br><br>Number of product: ' .$number. 
+        '</br><br>Products have deposited: ' .$deposit. 
+        '</br><br>Desired opening time: ' .$time. 
+        '</br><br>Link image: ' .$link;
         // $mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
                 if ($mail->send()){
             echo"Message send successfully! <a href='../index.php'>Click here</a> to turn back";
         }
-
     } catch (Exception $e) {
         echo"Message send failed! <a href='../index.php?action=whole'>Click here</a> to send again.";
     }

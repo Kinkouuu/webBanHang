@@ -15,6 +15,11 @@ if (!isset($_SESSION['user'])) {
 <div class="col-md-8 m-auto d-flex align-items-center" style="width: 100%">
 <form action="process/xl_change.php" method="POST" style="height: 90vh; width: 100%">
             <h1 class="text-center">YOUR ACCOUNT INFORMATION</h1>
+            <?php
+    if (isset($_GET['fail'])) {
+        echo '<p class ="form-text text-center" style="color:blue;">' . $_GET['fail'] . '</p>';
+    }
+    ?>
             <h3>Customer Infomation:</h3>
             <div class="form2">
             <label for="phone">ID customer: </label>
@@ -50,8 +55,34 @@ if (!isset($_SESSION['user'])) {
             <label for="no">Building/No: </label>
                 <input type="text" class="fin" name="no" placeholder="Building/No." value="<?= $in4['no'] ?>" required >
             </div>
-            <input type="submit" value="CHANGE" class="btn btn-info" name ="btnChange">
+            <!-- <input type="submit" value="CHANGE" class="btn btn-info" name ="btnChange"> -->
 
+            <!-- Button trigger modal -->
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+  CHANGE
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title" id="exampleModalLabel">Account verification:</h4>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+
+            <input type="password" class="form-control" name = "pass" placeholder="Enter your password">
+      </div>
+      <div class="modal-footer d-flex justify-content-center">
+        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">CANCEL</button>
+        <input type="submit" value="SUBMIT" class="btn btn-info" name ="btnChange">
+
+      </div>
+    </div>
+  </div>
+</div>
+<!-- end -->
         </form>
 </div>
 </div>

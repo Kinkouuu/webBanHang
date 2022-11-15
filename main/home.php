@@ -17,7 +17,17 @@ if ($new_pro -> rowCount() > 0){
             <img src="a/<?= $product['pics']; ?>" alt="" style="width: 100%; height:auto;">
             
             <p class="name_product"><?php echo $product['p_name']?></p>
-            <p class="price_product"> <?php echo $product['price'] ?> <?php echo $product['sign']?> </p>
+            <p class="price_product">
+            <?php
+                                    if($product['sign'] == 'VND'){
+                                        echo $product['price']*$product['ex']. ' VND'; 
+
+                                    }else{
+                                    echo $product['price'] ?>  <?php echo $product['sign']. '≈' .$product['price']*$product['ex']. ' VND'; 
+
+                                    }
+
+                                    ?> </p>
             <p>Sold: <?php echo $sold['sold']?></p>
         </a>
         

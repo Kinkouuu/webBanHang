@@ -26,7 +26,14 @@ require_once("template/nav.php");
 
                 <p class="name_product"><strong>Name: </strong> <?php echo $product['p_name'] ?></p>
                 <p class="price_product"> <strong>Price: </strong>
-                    <?php echo $product['price'] ?> <?php echo $product['sign'] ?>
+                    <?php
+                    if ($product['sign'] == 'VND') {
+                        echo $product['price'] * $product['ex'] . ' VND';
+                    } else {
+                        echo $product['price'] ?> <?php echo $product['sign'] . '≈' . $product['price'] * $product['ex'] . ' VND';
+                                                            }
+
+                                                                ?>
                 </p>
 
 

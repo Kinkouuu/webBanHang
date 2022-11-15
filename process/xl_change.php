@@ -15,8 +15,17 @@ if (isset($_POST['btnChange'])) {
     $ward = $_POST['ward'];
     $street = $_POST['street'];
     $no = $_POST['no'];
+    $pass = md5($_POST['pass']);
     }
 
+    $check = $db->query("SELECT * FROM `user` WHERE `u_id` = '$u_id' AND `pass` = '$pass'")->rowCount();
+    if($check >0){
         $db->exec("UPDATE `user` SET `f_name` = '$f_name', `l_name` = '$l_name',`email` = '$email',`city` = '$city',`district` = '$district',`ward` = '$ward',`street` = '$street',`no` = '$no' WHERE `u_id` = '$u_id'");
-        header('Location:../profile.php');
+        $fail = 'Change your infomation successfully'; 
+        header("location: ../profile.php?fail='$fail'");
+    }else{
+        $fail = 'Wrong password. Please try again'; 
+        header("location: ../profile.php?fail='$fail'");
+    }
+        
 ?>
