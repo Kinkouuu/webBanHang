@@ -38,7 +38,7 @@
                                         CEO LE HOANG ANH
                                     </h5>
                                     <ul>
-                                        <li>Ex-Uber anh Be Group.</li>
+                                        <li>Ex-Uber&Be Group.</li>
                                         <li>Ex-McDonald Manager.</li>
                                         <li>Expertise in P&l, growth and Company setup.</li>
                                         <li>Wide range of experiences(Hospitality, Logistics, Services, Entertainment.</li>

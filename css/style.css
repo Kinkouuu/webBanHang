@@ -143,3 +143,23 @@ footer{
     margin-right: 5px;
     margin-left: 5px;
 }
+
+.inp{
+    width: 85%;
+    margin-bottom: 5px;
+}
+.ip{
+    width: 60%;
+    margin-top: 5px;
+}
+.form-label{
+    margin-right: 5px;
+}
+
+.inpt{
+    width: 100%;
+}
+.txtara{
+    margin-top: 5px;
+    width: 100%;
+}

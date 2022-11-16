@@ -1,5 +1,8 @@
 <?php
 session_start();
+if(isset($_SESSION['user'])){
+    $u_id = $_SESSION['user'];
+}
 ?>
 <nav class="navbar navbar-expand-lg navbar-white bg-white bg-gradient sticky-top">
     <div class="container-fluid ">
@@ -22,7 +25,7 @@ session_start();
             <ul class="nav justify-content-end">
                 <?php
                 if (isset($_SESSION['user'])) {
-                    $name = $db->query("SELECT * FROM `user` WHERE `u_id` = " . $_SESSION['user'] . " ")->fetch(PDO::FETCH_ASSOC);
+                    $name = $db->query("SELECT * FROM `user` WHERE `u_id` = '$u_id'")->fetch();
                     echo "<li class = 'nav-link link-dark' ><a href='profile.php'style ='text-transform: uppercase; text-decoration: none;'>Welcome: " . $name['f_name'] . ' ' . $name['l_name'] . "</a></li>";
                 ?>
                     <li class="nav-item">

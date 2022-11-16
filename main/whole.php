@@ -1,86 +1,246 @@
-<h1>Start Soucing</h1>
-<style>
-    .inp{
-    width: 85%;
-    margin-bottom: 5px;
-}
-.ip{
-    width: 60%;
-    margin-top: 5px;
-}
-.form-label{
-    margin-right: 5px;
-}
-</style>
-<form action="./process/sendMail.php" id="soucing" method="POST">
+<?php
+require_once 'process/upload.php';
+?>
+
+<div class="text-center">
+    <h1>Start Sourcing</h1>
+    <?php
+    if (!empty($statusMsg)) { ?>
+        <div class="alert-alert" style="color: red;"><?php echo $statusMsg; ?></div>
+    <?php }
+    ?>
+</div>
+<!-- <form action="./process/sendMail.php" method="POST" enctype="multipart/form-data"> -->
+<form action="" method="POST" enctype="multipart/form-data">
     <h4>Product infomation: </h4>
-    <div class="col-md-12">
-        <div class="row">
-            <div class="col-md-4">
-                <label for="n_product" class="form-label">Name: </label>
-                <input type="text" class="inp" name="n_product" id="n_product" required>
-            </div>
-            <div class="col-md-4 ">
-                <label for="brand" class="form-label">Brand: </label>
-                <input type="text" class="inp" name="brand" id="brand" required>
-            </div>
-            <div class="col-md-4 d-flex">
-                <label for="upfile" class="form-label">Link image: </label>
-                <input type="text" class="inp" name="link" style ="width:75%;" required>
-            </div>
-        </div>
-        <div class="col-12 d-flex align-items-center">
-            <label class="form-label">Specifications:</label>
-            <textarea class="form-control1" style="width: 90%; margin:5px" name="spec" rows="3"></textarea>
-        </div>
-        <div class="col-12 d-flex align-items-center">
-            <label class="form-label">Product inquiry:</label>
-            <textarea class="form-control1" style="width: 90%; margin:5px" name="inquiry" rows="3"></textarea>
-        </div>
-    </div>
-
     <div class="row">
-    <div class="col-md-3">
-            <label class="form-label" for="">Desired price: </label>
-            <input type="text" class="ip" name="price" required>
-        </div>
-        <div class="col-md-3">
-            <label class="form-label" for="">Number of product: </label>
-            <input type="text" class="ip" name="number" required>
-        </div>
-        <div class="col-md-3">
-            <label class="form-label" for="">Products have deposited: </label>
-            <input type="text" class="ip" name="deposit" style="width:50%;" required>
-        </div>
-        <div class="col-md-3">
-            <label class="form-label" for="">Desired opening time: </label>
-            <input type="date" class="ip" name="time" style="width:50%;">
+        <div class="col-md-12">
+            <div class="row">
+                <div class="col-md-4 d-flex align-items-center">
+                    <div class="col-sm-3">
+                        <label for="n_product" class="form-label">Name: </label>
+                    </div>
+                    <div class="col-sm-9">
+                        <input type="text" class="inpt" name="n_product" id="n_product" required>
+                    </div>
+                </div>
+
+                <div class="col-md-4 d-flex align-items-center ">
+                    <div class="col-sm-3">
+                        <label for="brand" class="form-label">Brand: </label>
+                    </div>
+                    <div class="col-sm-9">
+                        <input type="text" class="inpt" name="brand" id="brand" required>
+                    </div>
+                </div>
+
+                <div class="col-md-4 d-flex align-items-center">
+                    <div class="col-sm-3">
+                        <label>Image</label>
+                    </div>
+                    <div class="col-sm-9">
+                        <input type="file" name="image" class="inpt">
+                    </div>
+                </div>
+            </div>
+
         </div>
 
-    </div>
 
-    <h4>Customers Information: </h4>
-    <div class="row">
-        <div class="col-3">
-            <label class="form-label" for="">First name: </label>
-            <input type="text" class="ip" name="f-name" required>
-        </div>
-        <div class="col-3">
-            <label class="form-label" for="">Last name: </label>
-            <input type="text" class="ip" name="l-name" required>
-        </div>
-        <div class="col-3">
-            <label class="form-label" for="">Email: </label>
-            <input type="email" class="ip" name="email" required>
-        </div>
-        <div class="col-3">
-            <label class="form-label" for="">Phone number: </label>
-            <input type="text" class="ip" name="phone" required>
-        </div>
-    </div>
+        <div class="row ">
+            <div class="col-md-6 d-flex align-items-center">
+                <div class="col-sm-2">
+                    <label class="form-label">Specifications:</label>
+                </div>
+                <div class="col-sm-10">
+                    <textarea  class="txtara"  name="spec" rows="3"></textarea>
+                </div>
+            </div>
 
 
-    <div class="me-0">
-        <input type="submit" class="btn btn-success" value="SUBMIT" class="" name="btnSend">
+            <div class="col-md-6 d-flex align-items-center">
+                <div class="col-sm-2">
+                    <label class="form-label">Product inquiry:</label>
+                </div>
+                <div class="col-sm-10">
+                    <textarea  class="txtara" name="inquiry" rows="3"></textarea>
+                </div>
+            </div>
+
+
+            <div class="row">
+                <div class="col-md-3 d-flex align-items-center">
+                    <div class="col-sm-4">
+                        <label class="form-label" for="">Desired price: </label>
+                    </div>
+                    <div class="col-sm-8">
+                        <input type="text" class="inpt" name="price" required>
+                    </div>
+
+                </div>
+                <div class="col-md-3 d-flex align-items-center">
+                    <div class="col-sm-4">
+                        <label class="form-label" for="">Number of product: </label>
+                    </div>
+                    <div class="col-sm-8">
+                        <input type="text" class="inpt" name="number" required>
+                    </div>
+
+                </div>
+                <div class="col-md-3 d-flex align-items-center">
+                    <div class="col-sm-4">
+                        <label class="form-label" for="">Products have deposited: </label>
+                    </div>
+                    <div class="col-sm-8">
+                        <input type="text" class="inpt" name="deposit" required>
+                    </div>
+
+                </div>
+                <div class="col-md-3 d-flex align-items-center">
+                    <div class="col-sm-4">
+                        <label class="form-label" for="">Desired opening time: </label>
+                    </div>
+                    <div class="col-sm-8">
+                        <input type="date" class="inpt" name="time">
+                    </div>
+
+                </div>
+
+            </div>
+
+            <h4>Customers Information: </h4>
+            <div class="row">
+                <div class="col-md-3 d-flex align-items-center">
+                    <div class="col-sm-4">
+                        <label class="form-label" for="">First name: </label>
+                    </div>
+
+                    <div class="col-sm-8">
+                        <input type="text" class="inpt" name="f-name" required>
+                    </div>
+
+                </div>
+                <div class="col-md-3 d-flex align-items-center">
+                    <div class="col-sm-4">
+                        <label class="form-label" for="">Last name: </label>
+                    </div>
+
+                    <div class="col-sm-8">
+                        <input type="text" class="inpt" name="l-name" required>
+                    </div>
+
+                </div>
+                <div class="col-md-3 d-flex align-items-center">
+                    <div class="col-sm-4">
+                        <label class="form-label" for="">Email: </label>
+                    </div>
+
+                    <div class="col-sm-8">
+                        <input type="email" class="inpt" name="email" required>
+                    </div>
+
+                </div>
+                <div class="col-md-3 d-flex align-items-center">
+                    <div class="col-sm-4">
+                        <label class="form-label" for="">Phone number: </label>
+                    </div>
+
+                    <div class="col-sm-8">
+                        <input type="text" class="inpt" name="phone" required>
+                    </div>
+
+                </div>
+            </div>
+            <?php if (!empty($imgurData)) {
+                $link =  $imgurData->data->link;
+            }
+
+            use PHPMailer\PHPMailer\PHPMailer;
+            use PHPMailer\PHPMailer\Exception;
+            use PHPMailer\PHPMailer\SMTP;
+
+            require 'PHPMailer/Exception.php';
+            require 'PHPMailer/PHPMailer.php';
+            require 'PHPMailer/SMTP.php';
+
+
+            if (isset($_POST['btnSend'])) {
+                $n_product = $_POST['n_product'];
+                $brand = $_POST['brand'];
+                $spec = $_POST['spec'];
+                $inquiry = $_POST['inquiry'];
+                $price = $_POST['price'];
+                $number = $_POST['number'];
+                $deposit = $_POST['deposit'];
+                $time = $_POST['time'];
+                $f_name = $_POST['f-name'];
+                $l_name = $_POST['l-name'];
+                $email = $_POST['email'];
+                $phone = $_POST['phone'];
+                $customer = ($f_name . ' ' . $l_name);
+                $mail = new PHPMailer(true);
+                if (!empty($link)) {
+                    try {
+                        //Server settings
+                        $mail->SMTPDebug = 0; // Enable verbose debug output
+                        $mail->isSMTP(); // gửi mail SMTP
+                        $mail->Host = 'smtp.gmail.com'; // Set the SMTP server to send through
+                        $mail->SMTPAuth = true; // Enable SMTP authentication
+                        $mail->Username = 'startsourcingEzsupply@gmail.com'; // SMTP username
+                        $mail->Password = 'jwwyujfymapywkin'; // SMTP password
+                        $mail->SMTPSecure = 'ssl'; // Enable TLS encryption; `PHPMailer::ENCRYPTION_SMTPS` also accepted
+                        $mail->Mailer = "smtp";
+                        $mail->Port = 465; // TCP port to connect to
+                        $mail->SMTPOptions = array(
+                            'ssl' => array(
+                                'verify_peer' => false,
+                                'verify_peer_name' => false,
+                                'allow_self_signed' => true
+                            )
+                        );
+                        $mail->CharSet = 'UTF-8'; // SMTP charset
+                        //Recipients
+                        $mail->setFrom('startsourcingEzsupply@gmail.com', 'EZSUPPLY');
+                        $mail->addAddress('hotro@ezsupply.app'); // Add a recipient
+                        // $mail->addAddress('chuckinkou2k1@gmail.com'); // Add a recipient
+                        $mail->addCC($email);
+                        $mail->addCC('cedric.mquangtr@gmail.com@gmail.com'); // Add a recipient
+
+
+                        // $mail->addAttachment(''); // Add attachments
+
+                        // $mail->addAttachment('/tmp/image.jpg', 'new.jpg'); // Optional name
+                        // Content
+                        $mail->isHTML(true);   // Set email format to HTML
+                        $mail->Subject = 'GB REQUEST';
+                        $mail->Body = 'Customer Name:' . $customer .
+                            '<br>Phone number: ' . $phone .
+                            '</br><br>Email: ' . $email . '
+            </br><br>Name product: ' . $n_product .
+                            '</br><br>Brand: ' . $brand .
+                            '</br><br>Specifications: ' . $spec .
+                            '</br><br> Product inquiry: ' . $inquiry .
+                            '</br><br>Desired price: ' . $price .
+                            '</br><br>Number of product: ' . $number .
+                            '</br><br>Products have deposited: ' . $deposit .
+                            '</br><br>Desired opening time: ' . $time .
+                            '</br><br>Link image: ' . $link;
+                        // $mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
+                        if ($mail->send()) {
+                            echo "<small style='color:blue;'>Your request has been sent!</small>";
+                        }
+                    } catch (Exception $e) {
+                        echo "<small style='color:yellow;'>Some thing wrong! Please try again</small>";
+                    }
+                } else {
+                    echo "<small style='color:red;'>Your product's image file not valid!</small> ";
+                }
+            }
+
+            ?>
+            <div class="me-0">
+                <input type="submit" class="btn btn-success" value="SUBMIT" class="" name="btnSend">
+            </div>
+        </div>
     </div>
 </form>

@@ -15,7 +15,6 @@ if(isset($_POST['btnSend'])){
     $price = $_POST['price'];
     $number = $_POST['number'];
     $deposit = $_POST['deposit'];
-	$link = $_POST['link'];
     $time = $_POST['time'];
     $f_name = $_POST['f-name'];
     $l_name = $_POST['l-name'];
@@ -46,11 +45,7 @@ if(isset($_POST['btnSend'])){
         $mail->setFrom('StartSoucing@gmail.com', 'CSKH');
         // $mail->addAddress('hotro@ezsupply.app', 'EZSUPPLY'); // Add a recipient
         $mail->addAddress('chuckinkou2k1@gmail.com', 'EZSUPPLY');
-        // $mail->addAddress('ellen@example.com'); // Name is optional
-        // $mail->addReplyTo('info@example.com', 'Information');
-        // $mail->addCC('cc@example.com');
-        // $mail->addBCC('bcc@example.com');
-        // Attachments
+
     
         // $mail->addAttachment(''); // Add attachments
     
