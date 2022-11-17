@@ -52,26 +52,46 @@ if (!isset($_SESSION['user'])) {
                 ?>
                     <tr>
                         <td style = "width:20%;">
-                            <img src="a/<?php echo $sp['pics'] ?>" alt="">
+                            <img src="<?php echo $sp['pics'] ?>" alt="">
                         </td>
                         
                         <td><?php echo $sp['p_name'] ?></td>
                         <td><?php echo $sp['type'] ?></td>
                         <td><?php echo $sp['cate'] ?></td>
                         <td><?php echo $sp['price'] ?> <?php echo $sp['sign'] ?> </td>
-                        <td><?php echo $sp['price']*$sp['ex'] ?> VND</td>
+                        <td>
+                            <?php
+                                $ss = $db->query("SELECT `product`.p_id,`product`.price,`money`.ex,`details`.d_price,`details`.o_id FROM (`product` INNER JOIN `money` ON `product`.m_id = `money`.m_id) INNER JOIN `details` ON `details`.p_id = `product`.p_id WHERE `product`.p_id='$p_id' AND o_id = $o_id;")->fetch();
+                                if($ss['price']*$ss['ex'] > $ss['d_price']){
+                                    $price = $ss['price']*$ss['ex'];
+                                }else{
+                                    $price = $ss['d_price'];
+                                }
+                                echo $price. ' VND';
+                            ?>
+
+                        </td>
                         <td><?php echo $sp['amount'] ?></td>
 
 
                     </tr>
                 <?php }
-                $details = $db->query("SELECT details.o_id,sum(details.amount * product.price * money.ex ) as provi,sum(details.amount) as amounts from (`details` INNER JOIN `product` ON details.p_id = product.p_id) INNER JOIN `money` ON product.m_id = money.m_id WHERE o_id = $o_id;")->fetch();
+            $sl = $db->query("SELECT p_id FROM `details` WHERE o_id ='$o_id'")->rowCount();
+                $details =$db->query("SELECT details.o_id,sum(details.amount * product.price * money.ex ) as gmoi,sum(details.amount * details.d_price ) as gcu,sum(details.amount) as amounts from (`details` INNER JOIN `product` ON details.p_id = product.p_id) INNER JOIN `money` ON product.m_id = money.m_id WHERE o_id = $o_id;")->fetch();
+            foreach ($details as $detail) {
+                if($details['gmoi']>$details['gcu']){
+                    $provi = $details['gmoi'];
+                }else{
+                    $provi = $details['gcu'];
+                }
+            }
+               
                 $sl = $db->query("SELECT p_id FROM `details` WHERE o_id ='$o_id'")->rowCount();
                 ?>
                 <tr class="table-warning">
                     <td>Provisional:</td>
                     <td colspan="5"></td>
-                    <td><?php echo $details['provi'] ?> VND</td>
+                    <td><?php echo $provi ?> VND</td>
                 </tr>
                 <tr class="table-secondary">
                     <td>Transport fee:</td>
@@ -91,7 +111,7 @@ if (!isset($_SESSION['user'])) {
                         }
                     }
                 }
-                $total0 = $details['provi'] - $discount + $sl*35000;
+                $total0 = $provi - $discount + $sl*35000;
                         if ($total0 <0){
                             $total = 0;
                         }else{

@@ -50,8 +50,13 @@ require_once("template/nav.php");
                 <div class="">
                 <p><strong>Odered:</strong> <?php echo $sold['sold']?></p>       
                 </div>
-
+<?php
+if($product['remain']>0){
+?>
                 <input type="submit" name="addCart" class="btn btn-outline-primary" value="Add to cart">
+               <?php }else{?>
+				<input type="disable" name="" class="btn btn-outline-danger" value="Sold Out">
+                <?php }?>
                 <p><strong>Specifications: </strong>
                     <?php
                     $str = $product['spec'];

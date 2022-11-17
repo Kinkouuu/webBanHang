@@ -5,6 +5,7 @@ if (isset($_GET['del'])) {
    $db->exec("DELETE FROM `order` WHERE `o_id` = '$iddel'");
    echo '<script>alert("Đã xoá đơn hàng' . $iddel . '"); window.location = "order.php";</script>';
 }
+$gmv = 0;
 ?>
 
 <table class="table table-light table-striped table-hover">
@@ -75,10 +76,10 @@ if (isset($_GET['del'])) {
                 foreach ($pros as $pro) {
 
                 ?>
-                    <table class="">
+                    <table class="table table-bordered">
                         <td style="width: 5%; padding:0"><?php echo $pro['p_id'] ?></td>
-                        <td style="width: 40%;padding:0"><?php echo $pro['p_name'] ?></td>
-                        <td style="width: 5%; padding:0"><?php echo $pro['amount'] ?></td>
+                        <td style="width: 35%;padding:0"><?php echo $pro['p_name'] ?></td>
+                        <td style="width: 10%; padding:0"><?php echo $pro['amount'] ?></td>
                         <td style="width: 20%;padding:0"><?php echo $pro['price'] ?> <?php echo $pro['sign'] ?> </td>
                         <td style="width: 20%;padding:0"><?php echo $pro['type'] ?></td>
                         <td style="width: 10%;padding:0"><?php echo $pro['cate'] ?></td>
@@ -88,10 +89,17 @@ if (isset($_GET['del'])) {
 
             </td>
             <?php
+            
             $sl = $db->query("SELECT p_id FROM `details` WHERE o_id ='$o_id'")->rowCount();
-            $details =$db->query("SELECT details.o_id,sum(details.amount * product.price * money.ex ) as provi,sum(details.amount) as amounts from (`details` INNER JOIN `product` ON details.p_id = product.p_id) INNER JOIN `money` ON product.m_id = money.m_id WHERE o_id = $o_id;")->fetch();
+
+                $details =$db->query("SELECT details.o_id,sum(details.amount * product.price * money.ex ) as gmoi,sum(details.amount * details.d_price ) as gcu,sum(details.amount) as amounts from (`details` INNER JOIN `product` ON details.p_id = product.p_id) INNER JOIN `money` ON product.m_id = money.m_id WHERE o_id = $o_id;")->fetch();
+
             foreach ($details as $detail) {
-                $provi = $details['provi'];
+                if($details['gmoi']>$details['gcu']){
+                    $provi = $details['gmoi'];
+                }else{
+                    $provi = $details['gcu'];
+                }
             }
 
             ?>
@@ -102,6 +110,7 @@ if (isset($_GET['del'])) {
 
             <?php
             $check_sale = $db->query("SELECT o_id,s_id FROM `order` WHERE o_id = $o_id;")->fetch();
+            
             foreach ($check_sale as $check) {
                 $s_id = $check_sale['s_id'];
                 if ($s_id == 0) {
@@ -118,6 +127,7 @@ if (isset($_GET['del'])) {
                 $total = 0;
             } else {
                 $total = $total0;
+                
             }
             ?>
             <td><?php echo $discount ?> VND</td>
@@ -131,15 +141,20 @@ if (isset($_GET['del'])) {
                     Update
                 </a>
                 <a class="btn btn-danger btn-sm" href="?del=<?= $o_id; ?>">
-                           Delete
+                        Delete
                 </a>
             </td>
-        <?php } ?>
+        <?php
+        $gmv = $gmv + $total; } 
+        ?>
 
         </tr>
-
+        <?php
+    echo "GMV = ". $gmv . " VND";
+?>
 </table>
 
 
 </div>
+
 <?php require_once 'end.php'; ?>
