@@ -27,7 +27,7 @@
                 ?>
                     <tr>
                         <td><?= $sale['s_id'] ?></td>
-                        <td><?= $sale['voucher'] ?></td>
+                        <td><?= $sale['code'] ?></td>
                         <td><?= $sale['discount'] ?></td>
                     </tr>
                 <?php } ?>

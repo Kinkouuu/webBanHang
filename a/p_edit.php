@@ -1,64 +1,16 @@
-<?php require_once 'head.php'; ?>
+<?php 
+require_once 'head.php'; 
+?>
 <?php
-
 $id = mget('p_id');
 $qr = $db->query("SELECT * FROM (`product` INNER JOIN `type` ON product.t_id = type.t_id) INNER JOIN `money` ON product.m_id = money.m_id WHERE `p_id` = '$id'")->fetch();
-
 $p_name = $qr['p_name'];
-if (isset($_POST['save'])) {
-  $spec = mpost('spec');
-  $price = mpost('price');
-  $money = mpost('money');
-  $remain = mpost('remain');
-  $f_id = mpost('f_id');
-  $video = mpost('video');
-  $p_code = mpost('p_code');
-
-  //up file
-  $target_dir = "uploads/";
-  $target_file = $target_dir . basename($_FILES["fileUpload"]["name"]);
-  $uploadOk = 1;
-  $imageFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
-  // Check if image file is a actual image or fake image
-  if (isset($_POST["save"])) {
-
-    if (basename($_FILES["fileUpload"]["name"]) != '') {
-      $uploadOk = 1;
-      $pic = $target_file;
-    } else {
-      echo "File is not an image.";
-      $uploadOk = 0;
-      $pic = mpost('pic');
-    }
-
-  }
-  if (move_uploaded_file($_FILES["fileUpload"]["tmp_name"], $target_file)) {
-    echo "The file " . htmlspecialchars(basename($_FILES["fileUpload"]["name"])) . " has been uploaded.";
-  } else {
-    echo "Sorry, there was an error uploading your file.";
-  }
-  // echo $price;
-  // echo $money;
-  $db->exec("UPDATE `product` SET `pics`='$pic',`product_code` = '$p_code', `spec` = '$spec',`m_id`='$money', `price` = '$price', `remain` = '$remain', `f_id` = '$f_id', `video` = '$video'  WHERE `p_id` = '$id'");
-  echo '<script>alert("Đã sửa sản phẩm' . $p_name . '-' . $id . ' "); window.location = "product.php";</script>';
-}
 ?>
-<!-- Content Header (Page header) -->
-<section class="content-header">
-  <div class="container-fluid">
-    <div class="row mb-2">
-      <div class="col-sm-6">
-        <h1>Edit Product</h1>
-      </div>
 
-    </div><!-- /.container-fluid -->
-</section>
 
-<!-- Main content -->
-<section class="content">
-  <div class="tab-pane" id="settings">
-    <form class="form-horizontal" method="post" enctype="multipart/form-data">
-      <div class="form-group row">
+<form method="post" action="" class="form" enctype="multipart/form-data">
+
+    <div class="form-group row">
         <label class="col-sm-2 col-form-label">ID Product</label>
         <div class="col-sm-10">
           <div class="form-group">
@@ -75,7 +27,8 @@ if (isset($_POST['save'])) {
         </div>
       </div>
 
-      <div class="form-group row">
+
+    <div class="form-group row">
         <label class="col-sm-2 col-form-label">Type</label>
         <div class="col-sm-10">
           <div class="form-group">
@@ -89,17 +42,12 @@ if (isset($_POST['save'])) {
         <div class="col-sm-10">
           <div class="form-group d-flex align-items-center ">
             <input name="pic" type="text" class="form-control" value="<?php echo $qr['pics']; ?>" style="width:50%;margin-right:1em" readonly>
-            <input type="file" name="fileUpload" id="fileUpload">
-
-            <?php
-            if (isset($_GET['alert'])) {
-              echo '<small class ="form-text" style="color:red;">' . $_GET['alert'] . '</small>';
-            }
-            ?>
+            <div class="form-group">
+        <input type="file" name="image">
+    </div>
           </div>
         </div>
       </div>
-  </div>
   <div class="form-group row">
     <label class="col-sm-2 col-form-label">Product Code</label>
     <div class="col-sm-10">
@@ -180,16 +128,104 @@ if (isset($_POST['save'])) {
       </div>
     </div>
   </div>
-
-  <div class="form-group row">
-    <div class="offset-sm-2 col-sm-10">
-      <button type="submit" name="save" class="btn btn-danger">ADD</button>
+  <div class="text-center" style="width: 20%;margin-left:2em">
+        <input type="submit" class="form-control btn-primary"  name="submit" value="UPDATE"/>
     </div>
-  </div>
-  </form>
-  </div>
-</section>
-<!-- /.content -->
+</form>
+<?php 
+// Client ID of Imgur App 
+$IMGUR_CLIENT_ID = "21cc7d2a74b1ed5"; 
+ 
+$statusMsg = $valErr = ''; 
+$status = 'danger'; 
+$imgurData = array(); 
+ 
+// If the form is submitted 
+if(isset($_POST['submit'])){ 
+     
+    // Validate form input fields 
+    if(empty($_FILES["image"]["name"])){ 
+        $valErr .= 'Please select a file to upload.<br/>'; 
+    } 
+     
+    // Check whether user inputs are empty 
+    if(empty($valErr)){ 
+        // Get file info 
+        $fileName = basename($_FILES["image"]["name"]); 
+        $fileType = pathinfo($fileName, PATHINFO_EXTENSION); 
+         
+        // Allow certain file formats 
+        $allowTypes = array('jpg','png','jpeg','gif'); 
+        if(in_array($fileType, $allowTypes)){ 
+            // Source image 
+            $image_source = file_get_contents($_FILES['image']['tmp_name']); 
+             
+            // API post parameters 
+            $postFields = array('image' => base64_encode($image_source)); 
+             
+            if(!empty($_POST['title'])){ 
+                $postFields['title'] = $_POST['title']; 
+            } 
+             
+            if(!empty($_POST['description'])){ 
+                $postFields['description'] = $_POST['description']; 
+            } 
+             
+            // Post image to Imgur via API 
+            $ch = curl_init(); 
+            curl_setopt($ch, CURLOPT_URL, 'https://api.imgur.com/3/image'); 
+            curl_setopt($ch, CURLOPT_POST, TRUE); 
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE); 
+            curl_setopt($ch, CURLOPT_HTTPHEADER, array('Authorization: Client-ID ' . $IMGUR_CLIENT_ID)); 
+            curl_setopt($ch, CURLOPT_POSTFIELDS, $postFields); 
+            $response = curl_exec($ch); 
+            curl_close($ch); 
+             
+            // Decode API response to array 
+            $responseArr = json_decode($response); 
+             
+            // Check image upload status 
+            if(!empty($responseArr->data->link)){ 
+                $imgurData = $responseArr; 
+                 
+                $status = 'success'; 
+                $statusMsg = 'The image has been uploaded to Imgur successfully.'; 
+            }else{ 
+                $statusMsg = 'Image upload failed, please try again after some time.'; 
+            } 
+        }else{ 
+            $statusMsg = 'Sorry, only an image file is allowed to upload.'; 
+        } 
+    }else{ 
+        $statusMsg = '<p>Please fill all the mandatory fields:</p>'.trim($valErr, '<br/>'); 
+    } 
+} 
+ 
+?>
+
+
+
+<?php
+
+
+if (isset($_POST['submit'])) {
+  if(!empty($imgurData)){
+    $pic = $imgurData->data->link;
+  }else{
+   $pic = mpost('pic');
+  }
+    $spec = mpost('spec');
+    $price = mpost('price');
+    $money = mpost('money');
+    $remain = mpost('remain');
+    $f_id = mpost('f_id');
+    $video = mpost('video');
+    $p_code = mpost('p_code');
+    $db->exec("UPDATE `product` SET `pics`='$pic',`product_code` = '$p_code', `spec` = '$spec',`m_id`='$money', `price` = '$price', `remain` = '$remain', `f_id` = '$f_id', `video` = '$video'  WHERE `p_id` = '$id'");
+  echo '<script>alert("Đã sửa sản phẩm' . $p_name . '-' . $id . ' "); window.location = "product.php";</script>';
+}
+?>
+
 </div>
-<!-- /.content-wrapper -->
+
 <?php require_once 'end.php'; ?>

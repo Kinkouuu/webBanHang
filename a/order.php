@@ -1,5 +1,11 @@
 <?php require_once 'head.php'; ?>
-
+<?php
+if (isset($_GET['del'])) {
+   $iddel = mget('del');
+   $db->exec("DELETE FROM `order` WHERE `o_id` = '$iddel'");
+   echo '<script>alert("Đã xoá đơn hàng' . $iddel . '"); window.location = "order.php";</script>';
+}
+?>
 
 <table class="table table-light table-striped table-hover">
     <tr>
@@ -123,6 +129,9 @@
             <td class="project-actions text-right">
                 <a class="btn btn-primary btn-sm" href="updateStatus.php?o_id=<?= $o_id; ?>">
                     Update
+                </a>
+                <a class="btn btn-danger btn-sm" href="?del=<?= $o_id; ?>">
+                           Delete
                 </a>
             </td>
         <?php } ?>

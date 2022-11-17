@@ -60,6 +60,7 @@ if (isset($_POST['save'])) {
         <div class="col-sm-10">
           <div class="form-group">
             <select class="form-select" name="stt">
+            <option value="Xác nhận đặt hàng" <?php echo $qr['status'] == 'Xác nhận đặt hàng' ? ' selected ' : ''; ?>>Xác nhận đặt hàng</option>
               <option value="Đóng order" <?php echo $qr['status'] == 'Đóng order' ? ' selected ' : ''; ?>>Đóng order</option>
               <option value="Đặt hàng" <?php echo $qr['status'] == 'Đặt hàng' ? ' selected ' : ''; ?>>Đặt hàng</option>
               <option value="Thanh toán" <?php echo $qr['status'] == 'Thanh toán' ? ' selected ' : ''; ?>>Thanh toán</option>
@@ -69,7 +70,6 @@ if (isset($_POST['save'])) {
               <option value="vận chuyển nội địa" <?php echo $qr['status'] == 'vận chuyển nội địa' ? ' selected ' : ''; ?>>vận chuyển nội địa</option>
               <option value="Đến TP HCM" <?php echo $qr['status'] == 'Đến TP HCM' ? ' selected ' : ''; ?>>Đến TP HCM</option>
               <option value="Vận chuyển đến tay khách hàng" <?php echo $qr['status'] == 'Vận chuyển đến tay khách hàng' ? ' selected ' : ''; ?>>Vận chuyển đến tay khách hàng</option>
-              <option value="Đã hủy đơn" <?php echo $qr['status'] == 'Đã hủy đơn' ? ' selected ' : ''; ?>>Đã hủy đơn</option>
             </select>
           </div>
         </div>

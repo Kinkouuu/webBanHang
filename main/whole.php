@@ -112,21 +112,21 @@ require_once 'process/upload.php';
             <div class="row">
                 <div class="col-md-3 d-flex align-items-center">
                     <div class="col-sm-4">
-                        <label class="form-label" for="">First name: </label>
+                        <label class="form-label" for="">Name: </label>
                     </div>
 
                     <div class="col-sm-8">
-                        <input type="text" class="inpt" name="f-name" required>
+                        <input type="text" class="inpt" name="name" required>
                     </div>
 
                 </div>
                 <div class="col-md-3 d-flex align-items-center">
                     <div class="col-sm-4">
-                        <label class="form-label" for="">Last name: </label>
+                        <label class="form-label" for="">Facebook: </label>
                     </div>
 
                     <div class="col-sm-8">
-                        <input type="text" class="inpt" name="l-name" required>
+                        <input type="text" class="inpt" name="fb" required>
                     </div>
 
                 </div>
@@ -173,11 +173,10 @@ require_once 'process/upload.php';
                 $number = $_POST['number'];
                 $deposit = $_POST['deposit'];
                 $time = $_POST['time'];
-                $f_name = $_POST['f-name'];
-                $l_name = $_POST['l-name'];
+                $name = $_POST['name'];
+                $fb = $_POST['fb'];
                 $email = $_POST['email'];
                 $phone = $_POST['phone'];
-                $customer = ($f_name . ' ' . $l_name);
                 $mail = new PHPMailer(true);
                 if (!empty($link)) {
                     try {
@@ -201,10 +200,13 @@ require_once 'process/upload.php';
                         $mail->CharSet = 'UTF-8'; // SMTP charset
                         //Recipients
                         $mail->setFrom('startsourcingEzsupply@gmail.com', 'EZSUPPLY');
-                        $mail->addAddress('hotro@ezsupply.app'); // Add a recipient
+                        // $mail->addAddress('hotro@ezsupply.app'); // Add a recipient
+                        $mail->addAddress('cedric.mquangtr@gmail.com@gmail.com'); // Add a recipient
+                        // $mail->addReplyTo('hotro@ezsupply.app', 'CSKH');
+                        $mail->addReplyTo('cedric.mquangtr@gmail.com@gmail.com', 'CSKH');
                         // $mail->addAddress('chuckinkou2k1@gmail.com'); // Add a recipient
                         $mail->addCC($email);
-                        $mail->addCC('cedric.mquangtr@gmail.com@gmail.com'); // Add a recipient
+
 
 
                         // $mail->addAttachment(''); // Add attachments
@@ -213,10 +215,11 @@ require_once 'process/upload.php';
                         // Content
                         $mail->isHTML(true);   // Set email format to HTML
                         $mail->Subject = 'GB REQUEST';
-                        $mail->Body = 'Customer Name:' . $customer .
+                        $mail->Body = 'Customer Name:' . $name .
                             '<br>Phone number: ' . $phone .
-                            '</br><br>Email: ' . $email . '
-            </br><br>Name product: ' . $n_product .
+                            '</br><br>Email: ' . $email . 
+                            '</br><br>Email: ' . $fb.
+                            '</br><br>Name product: ' . $n_product .
                             '</br><br>Brand: ' . $brand .
                             '</br><br>Specifications: ' . $spec .
                             '</br><br> Product inquiry: ' . $inquiry .
@@ -230,7 +233,7 @@ require_once 'process/upload.php';
                             echo "<small style='color:blue;'>Your request has been sent!</small>";
                         }
                     } catch (Exception $e) {
-                        echo "<small style='color:yellow;'>Some thing wrong! Please try again</small>";
+                        echo "<small style='color:red;'>Some thing wrong! Please try again</small>";
                     }
                 } else {
                     echo "<small style='color:red;'>Your product's image file not valid!</small> ";

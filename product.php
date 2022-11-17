@@ -10,11 +10,12 @@ require_once("template/nav.php");
             <?php
             $p_id = (int) mget('p_id');
             $product = $db->query("SELECT * FROM `product`  INNER JOIN `money` ON product.m_id = money.m_id WHERE `p_id` = $p_id")->fetch();
+            $sold = $db->query("SELECT sum(amount) as sold FROM `details` WHERE `p_id` = $p_id")->fetch();
             ?>
 
 
             <div class="images">
-                <img src="a/<?= $product['pics'] ?>" class="d-block w-100" alt="...">
+                <img src="<?= $product['pics'] ?>" class="d-block w-100" alt="...">
             </div>
 
         </div>
@@ -41,10 +42,15 @@ require_once("template/nav.php");
                 <div class="d-flex justify-content-start">
                     <p><strong>Amount: </strong></p>
                     <div class="ms-1 me-1">
-                        <input aria-label="quantity" class="quanty_product" max="<?php echo $product['remain'] ?>" min="1" name="unit" type="number" value="1">
+                        <input aria-label="quantity" class="quanty_product" max="99999" min="1" name="unit" type="number" value="1">
                     </div>
-                    <p> / <?php echo $product['remain'] ?></p>
+                    <!-- <p> / <?php echo $product['remain'] ?></p> -->
+
                 </div>
+                <div class="">
+                <p><strong>Odered:</strong> <?php echo $sold['sold']?></p>       
+                </div>
+
                 <input type="submit" name="addCart" class="btn btn-outline-primary" value="Add to cart">
                 <p><strong>Specifications: </strong>
                     <?php

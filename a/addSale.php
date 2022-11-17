@@ -4,7 +4,7 @@
     if (isset($_POST['save'])) {
         $code = mpost('code');
         $discount = mpost('discount');
-        $db->exec("INSERT INTO `sale`  (`voucher`,`discount`) VALUES ( '$code','$discount');");
+        $db->exec("INSERT INTO `sale`  (`code`,`discount`) VALUES ( '$code','$discount');");
         echo '<script>alert("Đã thêm ' . $code . '"); window.location = "sale.php";</script>';
     }
 ?>
