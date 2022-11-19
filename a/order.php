@@ -33,7 +33,7 @@ $gmv = 0;
         <th>&nbsp</th>
     </tr>
     <?php
-    $orders = $db->query("SELECT * FROM `order`  ORDER BY o_id ASC");
+    $orders = $db->query("SELECT * FROM `order`  ORDER BY o_id DESC");
     foreach ($orders as $order) {
         $o_id = $order['o_id'];
 
@@ -46,7 +46,7 @@ $gmv = 0;
             <td><?php echo $order['o_phone']; ?></td>
 
             <?php
-            $orders = $db->query("SELECT * FROM `order` WHERE `o_id` = '$o_id' LIMIT 1");
+            $orders = $db->query("SELECT * FROM `order` WHERE `o_id` = '$o_id' ");
             foreach ($orders as $order) {
                 $s_id = $order['s_id'];
                 $name = $order['o_name'];
@@ -136,6 +136,11 @@ $gmv = 0;
             <td><?php echo $order['statuspay']; ?><br><?php echo $order['deposit']. ' VND'; ?></br></td>
 
             <td><?php echo $total-$order['deposit']. ' VND' ?></td>
+            <?php
+                if($order['status'] != 'Đã giao hàng'){
+
+                
+            ?>
             <td class="project-actions text-right">
                 <a class="btn btn-primary btn-sm" href="updateStatus.php?o_id=<?= $o_id; ?>">
                     Update
@@ -144,13 +149,14 @@ $gmv = 0;
                         Delete
                 </a>
             </td>
-        <?php
+            
+        <?php }
         $gmv = $gmv + $total; } 
         ?>
 
         </tr>
         <?php
-    echo "GMV = ". $gmv . " VND";
+    echo "GMV = " .number_format($gmv ) . " VND";
 ?>
 </table>
 

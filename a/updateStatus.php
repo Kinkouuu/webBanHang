@@ -62,14 +62,13 @@ if (isset($_POST['save'])) {
             <select class="form-select" name="stt">
             <option value="Xác nhận đặt hàng" <?php echo $qr['status'] == 'Xác nhận đặt hàng' ? ' selected ' : ''; ?>>Xác nhận đặt hàng</option>
               <option value="Đóng order" <?php echo $qr['status'] == 'Đóng order' ? ' selected ' : ''; ?>>Đóng order</option>
-              <option value="Đặt hàng" <?php echo $qr['status'] == 'Đặt hàng' ? ' selected ' : ''; ?>>Đặt hàng</option>
-              <option value="Thanh toán" <?php echo $qr['status'] == 'Thanh toán' ? ' selected ' : ''; ?>>Thanh toán</option>
+              <option value="Đặt hàng nhà máy" <?php echo $qr['status'] == 'Đặt hàng nhà máy' ? ' selected ' : ''; ?>>Đặt hàng nhà máy</option>
               <option value="Hàng ra khỏi nhà máy" <?php echo $qr['status'] == 'Hàng ra khỏi nhà máy' ? ' selected ' : ''; ?>>Hàng ra khỏi nhà máy</option>
               <option value="Chuyển đến đơn vị vận chuyển" <?php echo $qr['status'] == 'Chuyển đến đơn vị vận chuyển' ? ' selected ' : ''; ?>>Chuyển đến đơn vị vận chuyển</option>
               <option value="Thông quan" <?php echo $qr['status'] == 'Thông quan' ? ' selected ' : ''; ?>>Thông quan</option>
-              <option value="vận chuyển nội địa" <?php echo $qr['status'] == 'vận chuyển nội địa' ? ' selected ' : ''; ?>>vận chuyển nội địa</option>
+              <option value="vận chuyển nội địa" <?php echo $qr['status'] == 'vận chuyển nội địa' ? ' selected ' : ''; ?>>Vận chuyển nội địa</option>
               <option value="Đến TP HCM" <?php echo $qr['status'] == 'Đến TP HCM' ? ' selected ' : ''; ?>>Đến TP HCM</option>
-              <option value="Vận chuyển đến tay khách hàng" <?php echo $qr['status'] == 'Vận chuyển đến tay khách hàng' ? ' selected ' : ''; ?>>Vận chuyển đến tay khách hàng</option>
+              <option value="Đã giao hàng" <?php echo $qr['status'] == 'Đã giao hàng' ? ' selected ' : ''; ?>>Đã giao hàng</option>
             </select>
           </div>
         </div>

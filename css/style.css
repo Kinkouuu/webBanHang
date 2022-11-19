@@ -163,3 +163,14 @@ footer{
     margin-top: 5px;
     width: 100%;
 }
+a.num_page{
+    width: 30px;
+    color: black;
+    border-style: double;
+    border-color: black;
+    padding: 4px;
+    text-decoration: none;
+    margin: 3px;
+    text-align: center;
+
+}
