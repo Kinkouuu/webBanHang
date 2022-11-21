@@ -187,12 +187,12 @@ if (!isset($_SESSION['user'])) {
                     <label for="floatingTextarea">Suggest a friend </label>
                 </div>
             </div>
+            <input type="text" name="o_date" hidden value="<?= time();?>">
             <input type="submit" name="btnOrder" class="btn btn-outline-primary" value="ORDER">
             </form>
 
         </div>
     </div>
-
     <?php
     require_once 'template/footer.php';
     ?>

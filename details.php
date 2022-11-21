@@ -24,9 +24,16 @@ if (!isset($_SESSION['user'])) {
                     <li style="text-transform: capitalize;">Customer Name: <?php echo $info['o_name']; ?></li>
                     <li>Phone Number: <?php echo $info['o_phone']; ?></li>
                     <li>Adress: <?php echo $info['adress']; ?></li>
+                    <?php
+                        if($info['note'] != '' ){?>
 					<li>Note: <?php echo $info['note']; ?> </li>
+                    <?php }?>
+                    <?php
+                        if($info['suggest'] != '' ){?>
                     <li>Suggest: <?php echo $info['suggest']; ?> </li>
+                    <?php }?>
                     <li>Status: <?php echo $info['status']; ?> </li>
+                    <li>Order date: <?php echo $info['o_date']; ?> </li>
                     
                 </b>
             </ul>
@@ -51,7 +58,7 @@ if (!isset($_SESSION['user'])) {
 
                 ?>
                     <tr>
-                        <td style = "width:20%;">
+                        <td style = "width:15%;">
                             <img src="<?php echo $sp['pics'] ?>" alt="">
                         </td>
                         
@@ -85,7 +92,6 @@ if (!isset($_SESSION['user'])) {
                     $provi = $details['gcu'];
                 }
             }
-               
                 $sl = $db->query("SELECT p_id FROM `details` WHERE o_id ='$o_id'")->rowCount();
                 ?>
                 <tr class="table-warning">

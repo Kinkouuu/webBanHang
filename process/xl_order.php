@@ -1,6 +1,9 @@
 <?php
 session_start();  
 require_once "../template/core.php";
+require_once "../carbon/autoload.php";
+// use Carbon\Carbon;
+// $now = Carbon::now('Asia/Ho_Chi_Minh');
 if(!isset($_SESSION['user'])) {
     header("Location:../signin.php");
 }else{
@@ -27,6 +30,8 @@ if (isset($_POST['btnOrder'])) {
     $name = ($f_name.' '.$l_name);
 	$address = ($no.' '.$street.','.$ward.', '.$district.', '.$city);
     $payment = $_POST['payment'];
+    // $o_date = $_POST['o_date'];
+
 if(isset($_SESSION['s_id'])){
     $s_id = $_SESSION['s_id'];
 }else{

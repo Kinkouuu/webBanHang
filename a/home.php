@@ -92,6 +92,18 @@
               <a href="money.php" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
             </div>
           </div>
+
+          <div class="col-lg-3 col-6">
+            <!-- small box -->
+            <div class="small-box bg-green">
+              <div class="inner">
+                <h3><?php echo $db->query("SELECT * FROM `factory`")->rowcount(); ?></h3>
+
+                <p>Statisticial</p>
+              </div>
+              <a href="statist.php" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+            </div>
+          </div>
         </div>
         <!-- /.row -->
       </div><!-- /.container-fluid -->

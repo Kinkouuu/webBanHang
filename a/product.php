@@ -23,7 +23,7 @@ if (isset($_GET['del'])) {
             </button>
          </div>
       </div>
-      <div class="card-body p-0">
+      <div class="card-body p-0 overflow-auto">
          <table class="table table-striped projects">
             <thead>
                <tr>
@@ -45,22 +45,22 @@ if (isset($_GET['del'])) {
                   <th style="width: 3%">
                      Code
                   </th>
-                  <th style="width: 15%">
+                  <th style="width: 35%">
                      Specification
                   </th>
-                  <th style="width: 15%">
+                  <th style="width: 10%">
                      Price
                   </th>
-                  <th style="width: 15%">
+                  <th style="width: 10%">
                   Exchange
                </th>
                   <th style="width: 5%">
                      Remain
                   </th>
-                  <th style="width: 15%">
+                  <th style="width: 5%">
                      Factory
                   </th>
-                  <th style="width: 20%">
+                  <th style="width: 10%">
                      Review
                   </th>
                </tr>
@@ -91,7 +91,7 @@ if (isset($_GET['del'])) {
                         <?= $pro['product_code']; ?>
                      </td>
 
-                     <td>
+                     <td style="line-height: 1 ;">
                         <?= $pro['spec']; ?>
                      </td>
                      <td>

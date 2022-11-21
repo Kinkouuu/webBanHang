@@ -27,6 +27,8 @@
   <link rel="stylesheet" href="plugins/daterangepicker/daterangepicker.css">
   <!-- summernote -->
   <link rel="stylesheet" href="plugins/summernote/summernote-bs4.min.css">
+  <!-- chart js -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.css">
   <script>
         if (window.history.replaceState) {
             window.history.replaceState(null, null, window.location.href);
@@ -102,6 +104,12 @@
             <a href="money.php" class="nav-link">
               <i class="nav-icon far fa-circle text-indigo"></i>
               <p class="text">Currency Exchange</p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="statist.php" class="nav-link">
+              <i class="nav-icon far fa-circle text-green"></i>
+              <p class="text">Revenue statistics</p>
             </a>
           </li>
           <li class="nav-item">

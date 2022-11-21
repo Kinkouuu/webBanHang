@@ -1,4 +1,13 @@
-<?php require_once 'head.php'; ?>
+<?php 
+require_once 'head.php';
+require_once("../carbon/autoload.php");
+
+use Carbon\Carbon;
+use Carbon\CarbonInterval;
+
+$today = Carbon::today('Asia/Ho_Chi_Minh')->toDateString();
+
+ ?>
 <?php
 $id = mget('o_id');
 $qr = $db->query("SELECT * FROM `order` WHERE `o_id` = '$id'")->fetch();
@@ -9,7 +18,56 @@ if (isset($_POST['save'])) {
   $deposit = mpost('deposit');
   $db->exec("UPDATE `order` SET `status`='$status', `statuspay` = '$statuspay' ,`deposit` = '$deposit' WHERE `o_id` = '$id'");
   echo '<script>alert("Đã sửa ' . $id . '"); window.location = "order.php";</script>';
+
+  if($status == "Đã giao hàng"){
+
+    $sl = $db->query("SELECT p_id FROM `details` WHERE o_id ='$id'")->rowCount(); //so luong san pham
+// tinh gia san pham
+    $details =$db->query("SELECT details.o_id,sum(details.amount * product.price * money.ex ) as gmoi,sum(details.amount * details.d_price ) as gcu,sum(details.amount) as amounts from (`details` INNER JOIN `product` ON details.p_id = product.p_id) INNER JOIN `money` ON product.m_id = money.m_id WHERE o_id = $id;")->fetch();
+
+foreach ($details as $detail) {
+    if($details['gmoi']>$details['gcu']){
+        $provi = $details['gmoi'];
+    }else{
+        $provi = $details['gcu'];
+    }
 }
+//giam gia
+$check_sale = $db->query("SELECT o_id,s_id FROM `order` WHERE o_id = $id;")->fetch();
+            
+foreach ($check_sale as $check) {
+    $s_id = $check_sale['s_id'];
+    if ($s_id == 0) {
+        $discount = 0;
+    } else {
+        $sale = $db->query("SELECT sale.s_id,discount,order.o_id FROM `order`,`sale` WHERE order.s_id = sale.s_id AND o_id = $id;")->fetch();
+        foreach ($sale as $sales) {
+            $discount = $sale['discount'];
+        }
+    }
+}
+//tinh tong tien
+$total0 = $provi - $discount + $sl * 35000;
+if ($total0 < 0) {
+    $total = 0;
+} else {
+    $total = $total0;
+    
+}
+$them = $db->query("SELECT * FROM `statist` WHERE `o_date` = '$today'")->rowCount();
+if ($them > 0 ){
+  $db ->exec("UPDATE `statist` SET `sl_o`= sl_o + 1, `stt` = stt + $total, `sl_p` = sl_p + $sl");
+}else{
+  $db->exec("INSERT INTO `statist` (`o_date`,`sl_o`, `stt`, `sl_p`) VALUES ( '$today', '1', '$total','$sl')");
+}
+// echo $today;
+// echo $total;
+// echo $sl;
+  }
+
+}
+
+
 ?>
 <!-- Content Header (Page header) -->
 <section class="content-header">
@@ -40,8 +98,7 @@ if (isset($_POST['save'])) {
             <select class="form-select" name="sttpay">
               <option value="COD" <?php echo $qr['statuspay'] == 'COD' ? ' selected ' : ''; ?>>COD</option>
               <option value="Banking" <?php echo $qr['statuspay'] == 'Banking' ? ' selected ' : ''; ?>>Banking</option>
-              <!-- <option value="Đã cọc" <?php echo $qr['statuspay'] == 'Đã cọc' ? ' selected ' : ''; ?>>Đã cọc</option>
-  								<option value="Đã thanh toán" <?php echo $qr['statuspay'] == 'Đã thanh toán' ? ' selected ' : ''; ?>>Đã thanh toán</option> -->
+
             </select>
           </div>
         </div>
@@ -65,8 +122,8 @@ if (isset($_POST['save'])) {
               <option value="Đặt hàng nhà máy" <?php echo $qr['status'] == 'Đặt hàng nhà máy' ? ' selected ' : ''; ?>>Đặt hàng nhà máy</option>
               <option value="Hàng ra khỏi nhà máy" <?php echo $qr['status'] == 'Hàng ra khỏi nhà máy' ? ' selected ' : ''; ?>>Hàng ra khỏi nhà máy</option>
               <option value="Chuyển đến đơn vị vận chuyển" <?php echo $qr['status'] == 'Chuyển đến đơn vị vận chuyển' ? ' selected ' : ''; ?>>Chuyển đến đơn vị vận chuyển</option>
-              <option value="Thông quan" <?php echo $qr['status'] == 'Thông quan' ? ' selected ' : ''; ?>>Thông quan</option>
-              <option value="vận chuyển nội địa" <?php echo $qr['status'] == 'vận chuyển nội địa' ? ' selected ' : ''; ?>>Vận chuyển nội địa</option>
+              <option value="Đã thông quan" <?php echo $qr['status'] == 'Đa thông quan' ? ' selected ' : ''; ?>>Đã thông quan</option>
+              <option value="Vận chuyển nội địa" <?php echo $qr['status'] == 'Vận chuyển nội địa' ? ' selected ' : ''; ?>>Vận chuyển nội địa</option>
               <option value="Đến TP HCM" <?php echo $qr['status'] == 'Đến TP HCM' ? ' selected ' : ''; ?>>Đến TP HCM</option>
               <option value="Đã giao hàng" <?php echo $qr['status'] == 'Đã giao hàng' ? ' selected ' : ''; ?>>Đã giao hàng</option>
             </select>
