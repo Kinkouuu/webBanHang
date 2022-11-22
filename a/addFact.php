@@ -1,4 +1,6 @@
-<?php require_once 'head.php';
+<?php 
+require_once 'view/head.php';
+
 ?>
 <?php
     if (isset($_POST['save'])) {
@@ -26,8 +28,6 @@
   					</div>
                 </div>
               </div>
-				
-			
               <div class="form-group row">
                 <div class="offset-sm-2 col-sm-10">
                     <button type="submit" name="save" class="btn btn-success">ADD</button>
@@ -39,4 +39,4 @@
     <!-- /.content -->
 </div>
   <!-- /.content-wrapper -->
-<?php require_once 'end.php'; ?>
+<?php require_once 'view/end.php'; ?>

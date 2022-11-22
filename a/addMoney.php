@@ -1,4 +1,4 @@
-<?php require_once 'head.php';
+<?php require_once 'view/head.php';
 ?>
 <?php
     if (isset($_POST['save'])) {
@@ -57,4 +57,4 @@
     <!-- /.content -->
 </div>
   <!-- /.content-wrapper -->
-<?php require_once 'end.php'; ?>
+<?php require_once 'view/end.php'; ?>

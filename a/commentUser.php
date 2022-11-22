@@ -1,4 +1,4 @@
-<?php require_once 'head.php'; ?>
+<?php require_once 'view/head.php'; ?>
 <?php
     $id = mget('u_id');
     $qr = $db->query("SELECT * FROM `user` WHERE `u_id` = '$id'")->fetch();
@@ -48,4 +48,4 @@
     <!-- /.content -->
 </div>
   <!-- /.content-wrapper -->
-<?php require_once 'end.php'; ?>
+<?php require_once 'view/end.php'; ?>

@@ -4,12 +4,12 @@
 
 
     <!-- Main content -->
-    <section class="content">
+    <section class="container">
 
       <!-- Default box -->
       <div class="card">
         <div class="card-header">
-          <h3 class="card-title">Users</h3>
+          <h3 class="card-title">Start Sourcing | <a href="addSourcing.php">ADD</a></h3>
 
           <div class="card-tools">
             <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
@@ -31,16 +31,13 @@
                           Name
                       </th>
                       <th style="width: 10%">
-                          Phone
+                          Start day
                       </th>
                       <th style="width: 35%">
-                          Address
+                          End day
                       </th>
 					  <th style="width: 15%">
-                          Number of Orders
-                      </th>
-					  <th style="width: 25%">
-                          Comment
+                          Number of product
                       </th>
 					  <th style="width: 5%">&nbsp;
                       </th>
@@ -49,37 +46,35 @@
               </thead>
               <tbody>
                   <?php 
-                  $users = $db->query("SELECT * FROM `user` ORDER BY `u_id` DESC");
-                  foreach ($users as $user) {
-				  	$id = $user['u_id'];
+                  $gbs = $db->query("SELECT * FROM `gb` ORDER BY `g_id` DESC");
+                  foreach ($gbs as $gb) {
+				  	$g_id = $gb['g_id'];
 				  ?>
                       <tr>
                           <td>
-                              <?= $user['u_id']; ?>
+                              <?= $gb['g_id']; ?>
                           </td>
                           <td>
-                                <?= $user['f_name'] . " " . $user['l_name']; ?>
+                                <?= $gb['g_name'] ?>
                           </td>
                           <td>
-                                <?= $user['phone']; ?>
+                                <?= $gb['s_date']; ?>
                           </td>
                           <td>
-                                <?= $user['city'] . ", " . $user['district'] . ", " . $user['ward'] . ", " . $user['street'] . ", " . $user['no']; ?>
+                                <?= $gb['e_date'] ?>
                           </td>
 						  <td>
                                 <?php 
-								  $a = $db->query("SELECT COUNT(u_id) AS count FROM `order` WHERE `u_id` = '$id';");	
-								  foreach ($a as $A) {
-									  echo $A['count'];
+								  $ssp = $db->query("SELECT COUNT(p_id) AS count FROM `gb_list` WHERE `g_id` = '$g_id';");	
+								  foreach ($ssp as $l) {
+									  echo $l['count'];
 								  }
 					  			?>
                           </td>
-						  <td>
-                                <?= $user['comment']; ?>
-                          </td>
+
 						  <td class="project-actions text-right">
-							 <a class="btn btn-primary btn-sm" href="commentUser.php?u_id=<?=$user['u_id']; ?>">
-               ✒
+							 <a class="btn btn-primary btn-sm" href="addList.php?g_id=<?=$gb['g_id']; ?>">
+								UPDATE 
 							</a>
                      	  </td>
                       </tr>

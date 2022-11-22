@@ -1,5 +1,5 @@
 <?php 
-require_once 'head.php'; 
+require_once 'view/head.php'; 
 ?>
 <?php
 $id = mget('p_id');
@@ -228,4 +228,4 @@ if (isset($_POST['submit'])) {
 
 </div>
 
-<?php require_once 'end.php'; ?>
+<?php require_once 'view/end.php'; ?>

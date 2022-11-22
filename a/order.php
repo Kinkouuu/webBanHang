@@ -1,4 +1,4 @@
-<?php require_once 'head.php'; ?>
+<?php require_once 'view/head.php'; ?>
 <?php
 if (isset($_GET['del'])) {
    $iddel = mget('del');
@@ -143,10 +143,10 @@ $gmv = 0;
             ?>
             <td class="project-actions text-right">
                 <a class="btn btn-primary btn-sm" href="updateStatus.php?o_id=<?= $o_id; ?>">
-                    Update
+                ✎
                 </a>
                 <a class="btn btn-danger btn-sm" href="?del=<?= $o_id; ?>">
-                        Delete
+                ✖
                 </a>
             </td>
             
@@ -156,11 +156,11 @@ $gmv = 0;
 
         </tr>
         <?php
-    echo "GMV = " .number_format($gmv ) . " VND";
+    // echo "GMV = " .number_format($gmv ) . " VND";
 ?>
 </table>
 
 
 </div>
 
-<?php require_once 'end.php'; ?>
+<?php require_once 'view/end.php'; ?>

@@ -2,10 +2,10 @@
 
     date_default_timezone_set("Asia/Ho_Chi_Minh");
     set_time_limit(0);
-    if (!isset($_SESSION)) {
-        ini_set('session.gc_maxlifetime', 30*24*60*60); 
-        ini_set('session.cookie_lifetime', 30*24*60*60); 
-    }
+    // if (!isset($_SESSION)) {
+    //     ini_set('session.gc_maxlifetime', 30*24*60*60); 
+    //     ini_set('session.cookie_lifetime', 30*24*60*60); 
+    // }
     
     // $titleconfig = "";
     //ket noi db

@@ -1,5 +1,5 @@
 <?php 
-require_once 'head.php';
+require_once 'view/head.php';
 require_once("../carbon/autoload.php");
 
 use Carbon\Carbon;
@@ -7,7 +7,7 @@ use Carbon\CarbonInterval;
 
 $today = Carbon::today('Asia/Ho_Chi_Minh')->toDateString();
 
- ?>
+?>
 <?php
 $id = mget('o_id');
 $qr = $db->query("SELECT * FROM `order` WHERE `o_id` = '$id'")->fetch();
@@ -141,4 +141,4 @@ if ($them > 0 ){
 <!-- /.content -->
 </div>
 <!-- /.content-wrapper -->
-<?php require_once 'end.php'; ?>
+<?php require_once 'view/end.php'; ?>

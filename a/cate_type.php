@@ -1,4 +1,4 @@
-<?php require_once 'head.php'; ?>
+<?php require_once 'view/head.php'; ?>
 <div class="container">
     <div class="card">
         <div class="card-header">
@@ -39,4 +39,4 @@
     </div>
 </div>
 </div>
-<?php require_once 'end.php'; ?>
+<?php require_once 'view/end.php'; ?>

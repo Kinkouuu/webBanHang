@@ -1,4 +1,4 @@
-<?php require_once 'head.php';
+<?php require_once 'view/head.php';
 ?>
 
 <!-- Content Header (Page header) -->
@@ -233,4 +233,4 @@ if (isset($_POST['save'])) {
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 <!-- /.content-wrapper -->
-<?php require_once 'end.php'; ?>
+<?php require_once 'view/end.php'; ?>

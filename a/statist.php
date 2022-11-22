@@ -1,5 +1,5 @@
 <?php
-require_once "head.php";
+require_once "view/head.php";
 // require_once "thongke.php";
 ?>
 <body>
@@ -13,6 +13,12 @@ require_once "head.php";
   <option value="365">A year</option>
 </select>
 <div id="chart" style="height: 500px;"></div>
+<?php
+$gmv = $db->query("SELECT sum(stt) as stt, sum(sl_o) as sl_o, sum(sl_p) as sl_p  FROM `statist`")->fetch();
+?>
+<h3>Total orders: <?php echo $gmv['sl_o']?> orders</h3>
+<h3>Total product sold: <?php echo $gmv['sl_p']?> products</h3>
+<h3>Total revenue: <?php echo number_format($gmv['stt'])?> VND</h3>
 
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
@@ -75,5 +81,5 @@ function thongke(){
 
 </div>
 <?php
-require_once "end.php";
+require_once "view/end.php";
 ?>

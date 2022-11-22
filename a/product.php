@@ -1,9 +1,9 @@
-<?php require_once 'head.php'; ?>
+<?php require_once 'view/head.php'; ?>
 <?php
 if (isset($_GET['del'])) {
    $iddel = mget('del');
    $db->exec("UPDATE `product` SET `remain` = '0' WHERE `p_id` = '$iddel'");
-   echo '<script>alert("Đã xoá ' . $iddel . '"); window.location = "product.php";</script>';
+   echo '<script>alert("Đã reset sản phẩm ' . $iddel . '"); window.location = "product.php";</script>';
 }
 ?>
 <!-- Content Header (Page header) -->
@@ -116,10 +116,10 @@ if (isset($_GET['del'])) {
                      </td>
                      <td class="project-actions text-center">
                         <a class="btn btn-primary btn-sm" href="p_edit.php?p_id=<?= $pro['p_id']; ?>">
-                           Edit
+                        ✎
                         </a>
                         <a class="btn btn-danger btn-sm" href="?del=<?= $pro['p_id']; ?>">
-                           Delete
+                        ✖
                         </a>
                      </td>
                   </tr>
@@ -134,4 +134,4 @@ if (isset($_GET['del'])) {
 <!-- /.content -->
 </div>
 <!-- /.content-wrapper -->
-<?php require_once 'end.php'; ?>
+<?php require_once 'view/end.php'; ?>

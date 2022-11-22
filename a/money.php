@@ -1,4 +1,4 @@
-<?php require_once 'head.php'; ?>
+<?php require_once 'view/head.php'; ?>
 
 <?php
 if (isset($_POST['save'])) {
@@ -47,7 +47,7 @@ if (isset($_POST['save'])) {
                             </td>
                                 <td> <input type="text" name="ex" value="<?= $tien['ex'] ?>"> VND</td>
                                 <td>
-                                <button type="submit" name="save" class="btn btn-info">UPDATE</button>
+                                <button type="submit" name="save" class="btn btn-info">✔</button>
                                 </td>
 
                             </form>
@@ -64,4 +64,4 @@ if (isset($_POST['save'])) {
     </div>
 </div>
 </div>
-<?php require_once 'end.php'; ?>
+<?php require_once 'view/end.php'; ?>

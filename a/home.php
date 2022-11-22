@@ -1,7 +1,5 @@
-<?php
-    require_once '../template/core.php';
-?>
-<?php require_once 'head.php'; ?>
+
+<?php require_once 'view/head.php'; ?>
     <!-- Main content -->
     <section class="content">
       <div class="container-fluid">
@@ -85,7 +83,7 @@
             <!-- small box -->
             <div class="small-box bg-indigo">
               <div class="inner">
-                <h3><?php echo $db->query("SELECT * FROM `factory`")->rowcount(); ?></h3>
+                <h3><?php echo $db->query("SELECT * FROM `money`")->rowcount(); ?></h3>
 
                 <p>Currency Exchange</p>
               </div>
@@ -97,11 +95,23 @@
             <!-- small box -->
             <div class="small-box bg-green">
               <div class="inner">
-                <h3><?php echo $db->query("SELECT * FROM `factory`")->rowcount(); ?></h3>
+                <h3><?php echo $db->query("SELECT * FROM `statist`")->rowCount(); ?></h3>
 
                 <p>Statisticial</p>
               </div>
               <a href="statist.php" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+            </div>
+          </div>
+
+          <div class="col-lg-3 col-6">
+            <!-- small box -->
+            <div class="small-box bg-yellow">
+              <div class="inner">
+                <h3><?php echo $db->query("SELECT * FROM `gb`")->rowcount(); ?></h3>
+
+                <p>Start Sourcing</p>
+              </div>
+              <a href="sourcing.php" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
             </div>
           </div>
         </div>
@@ -111,4 +121,4 @@
     <!-- /.content -->
   </div>
   <!-- /.content-wrapper -->
-<?php require_once 'end.php'; ?>
+<?php require_once 'view/end.php'; ?>
