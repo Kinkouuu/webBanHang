@@ -9,15 +9,25 @@ if(!isset($_SESSION['user'])) {
 if (isset($_POST['addCart'])) {
     $p_id = $_POST['p_id'];
     $unit = $_POST['unit'];
-    $remain = $_POST['remain'];
+    $book = $_POST['book'];
+
     }
-    $check = $db->query("SELECT * FROM `cart` WHERE `u_id` = '$u_id' AND `p_id` = '$p_id'")->rowcount();
+
+    // check so luong !=0
+    if($unit == 0 && $book == 0){
+
+        $ktra = 'Product quantity must more than 0';
+        header("location: ../product.php?p_id=$p_id&ktra=$ktra");
+    }else{
+            $check = $db->query("SELECT * FROM `cart` WHERE `u_id` = '$u_id' AND `p_id` = '$p_id'")->rowcount();
     if($check !=0) {
-        $update = $db->query("UPDATE `cart` SET `unit` = '$unit' WHERE `u_id` = '$u_id' AND `p_id` = '$p_id'");
+        $update = $db->query("UPDATE `cart` SET `unit` = '$unit',`book` = '$book'  WHERE `u_id` = '$u_id' AND `p_id` = '$p_id'");
         header('Location:../cart.php');
     }
     else{
-        $add = $db->exec("INSERT INTO `cart` (`u_id`,`p_id`, `unit`) values ('$u_id','$p_id','$unit')");
+        $add = $db->exec("INSERT INTO `cart` (`u_id`,`p_id`, `unit`,`book`) values ('$u_id','$p_id','$unit','$book')");
         header('Location:../cart.php');
     }
+    }
+
 ?>

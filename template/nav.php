@@ -4,6 +4,21 @@ if(isset($_SESSION['user'])){
     $u_id = $_SESSION['user'];
 }
 ?>
+<?php
+if(isset($_POST['btnSearch'])){
+    $text = $_POST['text'];
+    if($text !=''){
+        $info = $db->query("SELECT * from `product` where p_id = '$text' OR p_name LIKE '%$text%'");
+        if ($info->rowCount() == 0) {
+;
+            $alert = 'No product found';
+            header("location: ?alert= $alert");
+    }else{
+        header("Location: ./search.php?text=".$text);
+    }
+}
+}
+?>
 <nav class="navbar navbar-expand-lg navbar-white bg-white bg-gradient sticky-top">
     <div class="container-fluid ">
         <a class="navbar-brand" href="./index.php">
@@ -11,7 +26,7 @@ if(isset($_SESSION['user'])){
             Home
         </a>
         <div class="col-5">
-            <form class="d-flex" action="./search.php" method="POST">
+            <form class="d-flex" action="" method="POST">
                 <input class="form-control me-2" type="search" name = "text" placeholder="Search ID or Name products" aria-label="Search">
                 <button class="btn btn-success" type="submit" name = "btnSearch">Search</button>
             </form>

@@ -19,44 +19,110 @@ require_once("template/nav.php");
             </div>
 
         </div>
-        <div class="col-md-3 ">
-
+        <div class="col-md-6 ">
+        <?php
+    if (isset($_GET['ktra'])) {
+        echo '<small class ="form-text" style="color:red;">' . $_GET['ktra'] . '</small>';
+    }
+    ?>
             <form action="process/xl_addcart.php" method="POST">
                 <input type="hidden" name="p_id" value="<?php echo $p_id; ?>">
-                <input type="hidden" name="remain" value="<?php echo $product['remain']; ?>">
 
-                <p class="name_product"><strong>Name: </strong> <?php echo $product['p_name'] ?></p>
-                <p class="price_product"> <strong>Price: </strong>
-                    <?php
+<div class="d-flex">
+    <div class="col-sm-3">
+    <p class="name_product"><strong>Name: </strong> 
+    </div>
+<div class="col-sm-6">
+<?php echo $product['p_name'] ?></p>
+</div>
+                
+</div>
+                <div class="d-flex">
+                    <div class="col-sm-3">
+                    <p class="price_product"> <strong>Price: </strong>
+                    </div>
+                    <div class="col-sm-6">
+                        <p>
+                        <?php
                     if ($product['sign'] == 'VND') {
                         echo $product['price'] * $product['ex'] . ' VND';
                     } else {
                         echo $product['price'] ?> <?php echo $product['sign'] . '≈' . $product['price'] * $product['ex'] . ' VND';
-                                                            }
+                            }
 
-                                                                ?>
+                ?>
                 </p>
 
+                    </div>
+                </div>
 
+
+
+<!-- dat hang cos san  -->
+
+                <?php
+                if ($product['remain'] > 0) {
+                ?>
+            <div class="d-flex ">
+                <div class="col-sm-3">
+                <p><strong>Order quantity: </strong></p>
+                </div>
+                    
+<div class="col-sm-9 d-flex justify-content-start">
+<div class="ms-1 me-1" >
+                        <input aria-label="quantity" class="quanty_product" max="<?= $product['remain']?>" min="0" name="unit" type="number" value="0" >
+                    </div>
+                    <p> / <?php echo $product['remain'] ?></p>
+</div>
+                </div>
+                    
+                <?php }  ?>
+
+
+<!-- dat hang group by -->
+<?php 
+$today = strtotime(date('Y-m-d H:i:s'));
+    $product1 = $db->query("SELECT * FROM (( `product` INNER JOIN `money` ON `product`.m_id = `money`.m_id) INNER JOIN `gb_list` ON `product`.p_id = `gb_list`.p_id) INNER JOIN `gb` ON `gb_list`.g_id = `gb`.g_id WHERE '$today' BETWEEN `gb`.s_date AND `gb`.e_date AND `product`.p_id = $p_id");
+    if($product1->rowCount() > 0){
+        $product2 = $product1 ->fetch();
+
+
+?>
+<div class="d-flex">
+    <div class="col-sm-3">
+    <p><strong>Pre-order quantity: </strong></p>
+    </div>
+    <div class="col-sm-9">
+    <div class="ms-1 me-1">
+                        <input aria-label="quantity" class="quanty_product" min="0" name="book" type="number" value="0">
+                    
+                    </div>
+    </div>
+
+                    
+</div>
+<p style="color:red">Group by close at: <?php echo date("d-m-Y",$product2['e_date'])?></p>
+<?php
+    }
+?>
+<?php
+    if($product['remain'] == 0 && $product1->rowCount() == 0) {
+        ?>
+        <input type="submit" class="btn btn-outline-danger" disabled value="SOLD OUT">
+        <?php
+    } else{
+
+        ?>
+        <button type="submit" name="addCart" class="btn btn-outline-primary" >
+        <i class="fa-solid fa-cart-plus"></i> Add to cart
+        </button>
+        <?php
+    }
+?>
 
                 <div class="d-flex justify-content-start">
-                    <p><strong>Amount: </strong></p>
-                    <div class="ms-1 me-1">
-                        <input aria-label="quantity" class="quanty_product" max="99999" min="1" name="unit" type="number" value="1">
-                    </div>
-                    <!-- <p> / <?php echo $product['remain'] ?></p> -->
-
+                    <p><strong>Sold:</strong> <?php echo $sold['sold'] ?></p>
                 </div>
-                <div class="">
-                <p><strong>Odered:</strong> <?php echo $sold['sold']?></p>       
-                </div>
-<?php
-if($product['remain']>0){
-?>
-                <input type="submit" name="addCart" class="btn btn-outline-primary" value="Add to cart">
-               <?php }else{?>
-				<input type="disable" name="" class="btn btn-outline-danger" value="Sold Out">
-                <?php }?>
                 <p><strong>Specifications: </strong>
                     <?php
                     $str = $product['spec'];

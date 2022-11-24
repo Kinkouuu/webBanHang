@@ -8,22 +8,21 @@ if (!isset($_SESSION['user'])) {
     $u_id = $_SESSION['user'];
 }
 ?>
-<div class="container mt-5">
+<div class="container mt-3">
     <div class="row">
         <div class="col-md-7 border-end">
-            <form class="list_cart mt-2" id="giohang" action="process/xl_upcart.php" method="POST">
+            <div class="list_cart mt-2" id="giohang" action="" method="POST">
                 <ul style="overflow-y: scroll; height:50vh">
                     <?php
                     $list = $db->query("SELECT * from (`product` inner join `cart` on product.p_id = cart.p_id) INNER JOIN `money` ON product.m_id = money.m_id where cart.u_id = '$u_id';");
                     if ($list->rowCount() > 0) {
                         foreach ($list as $product) {
-
+                        $p_id = $product['p_id'];
                     ?>
 
                             <li class="d-flex justify-content-between align-items-center mb-1">
-                                <div class="col-md-6">
-                                    <input type="hidden" name="p_id" value="<?php echo $product['p_id']; ?>">
-                                    <input type="hidden" name="remain" value="<?php echo $product['remain']; ?>">
+                                <div class="col-md-6 col-sm-12">
+                                    <input type="hidden" name="p_id" value="<?= $p_id ?>">
                                     <a href="cart.php">
                                         <img src="<?php echo $product['pics'] ?>" alt="cart" class="img-responsive" />
                                     </a>
@@ -43,19 +42,33 @@ if (!isset($_SESSION['user'])) {
 
                                                                 ?>
                                     </p>
+                                <?php
+                                $od = $db->query("SELECT * FROM `cart` WHERE `u_id` = '$u_id' AND `p_id` = '$p_id' ")->fetch();
+                                if($od['unit'] > 0){ ?>
+                                <p><strong>Order amount: </strong> <?php echo $product['unit'] ?></p>
 
-                                    <p><strong>Quantity: </strong> <?php echo $product['unit'] ?></p>
+                           <?php     }
+                           if($od['book'] > 0){ ?>
+                           <p><strong>Pre-order amount: </strong> <?php echo $product['book'] ?></p>
+                           <?php
+
+                           } 
+                                ?>
+                                    
+                                    
 
                                 </div>
                                 <div class="col-md-2 d-flex flex-column">
                                     <button style="height: 30px;border:none;background-color:white">
-                                        <a class="btn btn-info btn-sm" href="./product.php?p_id=<?= $product['p_id']; ?>">Change</a>
+                                        <a class="btn btn-info btn-sm" href="product.php?p_id=<?= $product['p_id']; ?>">
+                                        <i class="fa-sharp fa-solid fa-pen-to-square"></i>
+                                    </a>
                                     </button>
 
                                     <button name="delCart" style="height: 30px;border:none;background-color:white">
                                         <a class="btn btn-danger btn-sm" href="?del=<?= $product['p_id']; ?>">
-                                            Delete
-                                        </a>
+                                        <i class="fa-sharp fa-solid fa-trash"></i>
+                                    </a>
                                         <?php
                                         if (isset($_GET['del'])) {
                                             $iddel = mget('del');
@@ -82,7 +95,7 @@ if (!isset($_SESSION['user'])) {
                     ?>
                 </ul>
 
-            </form>
+            </div>
 
             <div class="pay_info border-top">
                 <input type="hidden" name="provi" value="<?php echo $provi['provi']; ?>">

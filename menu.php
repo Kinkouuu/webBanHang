@@ -1,10 +1,13 @@
 <div class="container-fluid ">
-
-
     <ul class="nav nav-tabs d-flex justify-content-evenly" id="myTab" role="tablist">
         <li class="nav-item" role="presentation">
             <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile" type="button" role="tab" aria-controls="profile">
                 <a href="index.php" style="text-decoration: none">Home</a>
+            </button>
+        </li>
+        <li class="nav-item" role="presentation">
+            <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile" type="button" role="tab" aria-controls="profile">
+                <a href="index.php?action=onGB" style="text-decoration: none">Group By</a>
             </button>
         </li>
         <div class="dropdown">

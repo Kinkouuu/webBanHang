@@ -2,14 +2,7 @@
 require_once "./template/config.php";
 ?>
 
-<?php
-if (isset($_GET['action'])) {
-    $tam = $_GET['action'];
-} else {
-    $tam = '';
-}
-?>
-<h3>Product Category: <?= $tam ?></h3>
+<h3>Product Type: <?= $tam ?></h3>
 <div class="row">
     <?php
     $new_pro = $db->query("SELECT * FROM (`product` INNER JOIN `money` ON product.m_id = money.m_id) INNER JOIN `type` ON product.t_id = type.t_id WHERE product.t_id = type.t_id AND type.type = '$tam' ORDER BY p_id DESC");
@@ -33,8 +26,7 @@ if (isset($_GET['action'])) {
                         } else {
                             echo $product['price'] ?> <?php echo $product['sign'] . '≈' . $product['price'] * $product['ex'] . ' VND';
                                                             }
-
-                                                                ?> </p>
+?> </p>
                     <p>Sold: <?php echo $sold['sold'] ?></p>
                 </a>
             </div>

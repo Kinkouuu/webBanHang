@@ -49,6 +49,8 @@
                   $gbs = $db->query("SELECT * FROM `gb` ORDER BY `g_id` DESC");
                   foreach ($gbs as $gb) {
 				  	$g_id = $gb['g_id'];
+            $s_day = date("d-m-Y", $gb['s_date']); 
+            $e_day = date("d-m-Y", $gb['e_date']); 
 				  ?>
                       <tr>
                           <td>
@@ -58,10 +60,10 @@
                                 <?= $gb['g_name'] ?>
                           </td>
                           <td>
-                                <?= $gb['s_date']; ?>
+                                <?= $s_day ?>
                           </td>
                           <td>
-                                <?= $gb['e_date'] ?>
+                                <?= $e_day?>
                           </td>
 						  <td>
                                 <?php 

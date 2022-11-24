@@ -4,11 +4,15 @@
     if (isset($_POST['save'])) {
         $g_name = mpost('g_name');
         $s_day = mpost('s_day');
+        $s_date = DateTime::createFromFormat('d-m-Y', $s_day)-> getTimestamp();
         $e_day = mpost('e_day');
+        $e_date = DateTime::createFromFormat('d-m-Y', $e_day)-> getTimestamp();
 
-        // echo $s_day."-" .$e_day;
+        // echo $s_day."-" .$e_day ;
+        // echo "CONVERT = " ;
+        // echo $s_date."-" .$e_date;
 
-        $db->exec("INSERT INTO `gb`  (`g_name`,`s_date`,`e_date`) VALUES ( '$g_name','$s_day','$e_day');");
+        $db->exec("INSERT INTO `gb`  (`g_name`,`s_date`,`e_date`) VALUES ( '$g_name','$s_date','$e_date');");
         echo '<script>alert("Đã thêm đợt ' . $g_name . '"); window.location = "sourcing.php";</script>';
     }
 ?>
@@ -20,7 +24,7 @@
 
 
     <!-- Main content -->
-    <div class="container">
+ <div class="container">
         <div class="tab-pane" id="settings">
             <form class="form-horizontal" method="post">
               <div class="form-group row">
@@ -56,9 +60,9 @@
             </form>
                   </div>
     </div>
-    <!-- /.content -->
+
 </div>
-  <!-- /.content-wrapper -->
+
 
 
 <?php require_once 'view/end.php'; ?>
@@ -87,6 +91,5 @@ $('#date_picker2').change(function() {
 endDate = $(this).datepicker('getDate');
 $("#date_picker1").datepicker("option", "maxDate", endDate );
 })
-////////////////
 })
 </script>
