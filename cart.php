@@ -73,6 +73,7 @@ if (!isset($_SESSION['user'])) {
                                         if (isset($_GET['del'])) {
                                             $iddel = mget('del');
                                             $db->exec("DELETE FROM `cart` WHERE `p_id` = '$iddel'");
+                                            echo '<script> window.location = "cart.php"; </script>';
                                         }
                                         ?>
                                     </button>
@@ -89,9 +90,9 @@ if (!isset($_SESSION['user'])) {
                     }
 
 
-                    $detail = $db->query("SELECT sum(unit) as amount FROM cart where cart.u_id = '$u_id';")->fetch();
+                    $detail = $db->query("SELECT sum(unit + book) as amount FROM cart where cart.u_id = '$u_id';")->fetch();
                     $sl = $db->query("SELECT p_id FROM `cart` WHERE cart.u_id ='$u_id'")->rowCount();
-                    $provi = $db->query("SELECT sum(product.price*money.ex*cart.unit) as provi FROM (`product` INNER JOIN cart ON cart.p_id = product.p_id) INNER JOIN `money` ON product.m_id = money.m_id where cart.u_id = '$u_id';")->fetch();
+                    $provi = $db->query("SELECT sum(product.price*money.ex*(cart.unit+cart.book)) as provi FROM (`product` INNER JOIN cart ON cart.p_id = product.p_id) INNER JOIN `money` ON product.m_id = money.m_id where cart.u_id = '$u_id';")->fetch();
                     ?>
                 </ul>
 

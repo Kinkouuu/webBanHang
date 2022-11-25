@@ -17,10 +17,17 @@ if (!isset($_SESSION['user'])) {
             <?php
             $o_id = (int) mget('o_id');
             $GLOBALS['info']  = $db->query("SELECT * FROM `order` WHERE  o_id = '$o_id'")->fetch();
+            $haha = $db->query("SELECT `g_id` FROM `details` WHERE o_id = '$o_id'")->fetch();
+            if($haha['g_id'] == 0){
+                $loai ='Stock in trade';
+            }else{
+                $loai = 'Pre-order group by';
+            }
             ?>
             <ul class="customer-in4">
                 <b>
-                    <li>ID Order : <?php echo $info['o_id']; ?></li>
+                    <li>Order type: <?php echo $loai?></li>
+                    <li>ID Order: <?php echo $info['o_id']; ?></li>
                     <li style="text-transform: capitalize;">Customer Name: <?php echo $info['o_name']; ?></li>
                     <li>Phone Number: <?php echo $info['o_phone']; ?></li>
                     <li>Adress: <?php echo $info['adress']; ?></li>
@@ -34,7 +41,6 @@ if (!isset($_SESSION['user'])) {
                     <?php }?>
                     <li>Status: <?php echo $info['status']; ?> </li>
                     <li>Order date: <?php echo $info['o_date']; ?> </li>
-                    
                 </b>
             </ul>
             <table class="table table-info table-hover">

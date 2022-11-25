@@ -36,10 +36,15 @@ $gmv = 0;
     $orders = $db->query("SELECT * FROM `order`  ORDER BY o_id DESC");
     foreach ($orders as $order) {
         $o_id = $order['o_id'];
-
+        $haha = $db->query("SELECT `g_id` FROM `details` WHERE o_id = '$o_id'")->fetch();
+        if($haha['g_id'] == 0){
+            $loai ='Hàng sẵn';
+        }else{
+            $loai = 'Group by';
+        }
     ?>
         <tr>
-            <td><?php echo $o_id; ?></td>
+            <td><?php echo $o_id. '<br>'.$loai ; ?></td>
 
             <td><?php echo $order['o_name']; ?></td>
 

@@ -16,6 +16,7 @@ if (!isset($_SESSION['user'])) {
             <table class="table table-striped table-hover">
                 <tr>
                     <th>ID orders</th>
+                    <th>Order date</th>
                     <th>Customer name</th>
                     <th>Phone number</th>
                     <th>Adress</th>
@@ -36,7 +37,7 @@ if (!isset($_SESSION['user'])) {
                 ?>
                     <tr>
                         <td><?php echo $o_id; ?></td>
-
+                        <td><?php echo $order['o_date']; ?></td>
                         <td><?php echo $order['o_name']; ?></td>
 
                         <td><?php echo $order['o_phone']; ?></td>
@@ -85,17 +86,7 @@ if (!isset($_SESSION['user'])) {
                         <td><?php echo $discount?> VND</td>
                         <td><?php echo $total?> VND</td>
                         <td><?php echo $order['status']; ?></td>
-                        <?php
-                        if($order['statuspay'] == 'Đã cọc'){
-                            $coc = $details['provi']*0.1. 'VND';
-                        }elseif($order['statuspay'] == 'Đã thanh toán'){
-                            $coc = $total. 'VND';
-                        }else{
-                            $coc = '';
-                        }
-                    ?>
-                        <td><?php echo $order['statuspay']; ?><br><?php echo $coc ?></br></td>
-
+                        <td><?php echo $order['statuspay']; ?></td>
                         <td><a href="details.php?o_id=<?= $o_id;?>">See more</a></td>
                         <?php } ?>
                     </tr>
