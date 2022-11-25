@@ -2,7 +2,13 @@
 require_once("template/header.php");
 require_once("template/nav.php");
 
+if (!isset($_SESSION['user'])) {
+    $u_id = 0;
+} else {
+    $u_id = $_SESSION['user'];
+}
 ?>
+
 <div class="container mt-5">
 
     <div class="row">
@@ -59,9 +65,9 @@ require_once("template/nav.php");
 
 
 <!-- dat hang cos san  -->
-
+<!-- //con hang  hay ko -->
                 <?php
-                if ($product['remain'] > 0) {
+                if ($product['remain'] > 0) { 
                 ?>
             <div class="d-flex ">
                 <div class="col-sm-3">
@@ -70,7 +76,18 @@ require_once("template/nav.php");
                     
 <div class="col-sm-9 d-flex justify-content-start">
 <div class="ms-1 me-1" >
-                        <input aria-label="quantity" class="quanty_product" max="<?= $product['remain']?>" min="0" name="unit" type="number" value="0" >
+                    <?php
+                    $sl = $db->query("SELECT * FROM `cart` WHERE `u_id` = '$u_id' AND `p_id` = '$p_id'"); 
+                    if($sl->rowCount() > 0){
+                        $sll = $sl ->fetch();
+                        $unit = $sll['unit'];
+                        $book = $sll['book'];
+                    }else{
+                        $unit = 0;
+                    }
+                    
+                    ?>
+                        <input aria-label="quantity" class="quanty_product" max="<?= $product['remain']?>" min="0" name="unit" type="number" value="<?= $unit ?>" >
                     </div>
                     <p> / <?php echo $product['remain'] ?></p>
 </div>
@@ -80,13 +97,13 @@ require_once("template/nav.php");
 
 
 <!-- dat hang group by -->
+<!-- // co nam trong danh sach group by ko -->
 <?php 
 $today = strtotime(date('Y-m-d H:i:s'));
     $product1 = $db->query("SELECT * FROM (( `product` INNER JOIN `money` ON `product`.m_id = `money`.m_id) INNER JOIN `gb_list` ON `product`.p_id = `gb_list`.p_id) INNER JOIN `gb` ON `gb_list`.g_id = `gb`.g_id WHERE '$today' BETWEEN `gb`.s_date AND `gb`.e_date AND `product`.p_id = $p_id");
     if($product1->rowCount() > 0){
         $product2 = $product1 ->fetch();
-
-
+        $g_id = $product2['g_id'];
 ?>
 <div class="d-flex">
     <div class="col-sm-3">
@@ -94,7 +111,7 @@ $today = strtotime(date('Y-m-d H:i:s'));
     </div>
     <div class="col-sm-9">
     <div class="ms-1 me-1">
-                        <input aria-label="quantity" class="quanty_product" min="0" name="book" type="number" value="0">
+                        <input aria-label="quantity" class="quanty_product" min="0" name="book" type="number" value="<?= $book ?>">
                     
                     </div>
     </div>
@@ -102,6 +119,10 @@ $today = strtotime(date('Y-m-d H:i:s'));
                     
 </div>
 <p style="color:red">Group by close at: <?php echo date("d-m-Y",$product2['e_date'])?></p>
+<?php 
+$pre = $db->query("SELECT sum(amount) as tong FROM `details` WHERE `g_id` = '$g_id'")->fetch();
+?>
+<p style="color:blue"><?php echo $pre['tong'] ?> products has been pre-order</p>
 <?php
     }
 ?>
