@@ -27,40 +27,40 @@ if (isset($_GET['del'])) {
          <table class="table table-striped projects">
             <thead>
                <tr>
-                  <th style="width: 1%">
+                  <th style="width: 1% ;">
                      #
                   </th>
-                  <th style="width: 15%">
+                  <th style="width: 15% ;">
                      Picture
                   </th>
-                  <th style="width: 10%">
+                  <th style="width: 3% ;">
                      Name
                   </th>
-                  <th style="width: 3%">
+                  <th style="width: 3% ;">
                      Category
                   </th>
-                  <th style="width: 3%">
+                  <th style="width: 3% ;">
                      Type
                   </th>
-                  <th style="width: 3%">
+                  <!-- <th>
                      Code
-                  </th>
-                  <th style="width: 35%">
+                  </th> -->
+                  <th style="width: 46% ;">
                      Specification
                   </th>
-                  <th style="width: 10%">
-                     Price
+                  <th style="width: 10% ;">
+                     GB price
                   </th>
-                  <th style="width: 10%">
-                  Exchange
-               </th>
-                  <th style="width: 5%">
+                  <th style="width: 10% ;">
+                     Stock price
+                  </th>
+                  <th style="width: 3% ;">
                      Remain
                   </th>
-                  <th style="width: 5%">
+                  <th style="width: 3% ;">
                      Factory
                   </th>
-                  <th style="width: 10%">
+                  <th style="width: 3% ;">
                      Review
                   </th>
                </tr>
@@ -87,9 +87,9 @@ if (isset($_GET['del'])) {
                      <td>
                         <?= $pro['type']; ?>
                      </td>
-                     <td>
+                     <!-- <td>
                         <?= $pro['product_code']; ?>
-                     </td>
+                     </td> -->
 
                      <td style="line-height: 1 ;">
                         <?= $pro['spec']; ?>
@@ -98,7 +98,23 @@ if (isset($_GET['del'])) {
                         <?= $pro['price'];  ?> <?= $pro['sign']; ?>
                      </td>
                      <td>
-                        <?= $pro['price']*$pro['ex'] ; ?> VND
+                        <table>
+                           <tr>
+                              <td>
+                                 <?= $pro['s_price']; ?> VND
+                              </td>
+                           </tr>
+                           <tr>
+                              <td>
+                                 +<?= $pro['5_price']; ?> VND
+                              </td>
+                           </tr>
+                           <tr>
+                              <td>
+                                 +<?= $pro['1_price']; ?> VND
+                              </td>
+                           </tr>
+                        </table>
                      </td>
                      <td>
                         <?= $pro['remain']; ?>
@@ -112,14 +128,16 @@ if (isset($_GET['del'])) {
                         ?>
                      </td>
                      <td>
-                        <?= $pro['video']; ?>
+                        <div style="width: 150px">
+                           <?= $pro['video']; ?>
+                        </div>
                      </td>
                      <td class="project-actions text-center">
                         <a class="btn btn-primary btn-sm" href="p_edit.php?p_id=<?= $pro['p_id']; ?>">
-                        ✎
+                           ✎
                         </a>
                         <a class="btn btn-danger btn-sm" href="?del=<?= $pro['p_id']; ?>">
-                        ✖
+                           ✖
                         </a>
                      </td>
                   </tr>
