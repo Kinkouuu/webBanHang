@@ -2,13 +2,14 @@
 require_once 'view/head.php';
 require_once("../carbon/autoload.php");
 
+
+?>
+<?php
 use Carbon\Carbon;
 use Carbon\CarbonInterval;
 
 $today = Carbon::today('Asia/Ho_Chi_Minh')->toDateString();
 
-?>
-<?php
 $id = mget('o_id');
 $qr = $db->query("SELECT * FROM `order` WHERE `o_id` = '$id'")->fetch();
 $payment = $qr['statuspay'];
@@ -20,11 +21,10 @@ if (isset($_POST['save'])) {
   echo '<script>alert("Đã sửa ' . $id . '"); window.location = "order.php";</script>';
 
   if($status == "Đã giao hàng"){
-
     $sl = $db->query("SELECT p_id FROM `details` WHERE o_id ='$id'")->rowCount(); //so luong san pham
 // tinh gia san pham
     $details =$db->query("SELECT details.o_id,sum(details.amount * product.price * money.ex ) as gmoi,sum(details.amount * details.d_price ) as gcu,sum(details.amount) as amounts from (`details` INNER JOIN `product` ON details.p_id = product.p_id) INNER JOIN `money` ON product.m_id = money.m_id WHERE o_id = $id;")->fetch();
-
+    $amount = $details['amounts'];
 foreach ($details as $detail) {
     if($details['gmoi']>$details['gcu']){
         $provi = $details['gmoi'];
@@ -54,21 +54,20 @@ if ($total0 < 0) {
     $total = $total0;
     
 }
+
 $them = $db->query("SELECT * FROM `statist` WHERE `o_date` = '$today'")->rowCount();
 if ($them > 0 ){
-  $db ->exec("UPDATE `statist` SET `sl_o`= sl_o + 1, `stt` = stt + $total, `sl_p` = sl_p + $sl");
+  $db ->exec("UPDATE `statist` SET `sl_o`= sl_o + 1, `stt` = stt + $total, `sl_p` = sl_p + $amount WHERE `o_date` = '$today'");
 }else{
   $db->exec("INSERT INTO `statist` (`o_date`,`sl_o`, `stt`, `sl_p`) VALUES ( '$today', '1', '$total','$sl')");
 }
-// echo $today;
-// echo $total;
-// echo $sl;
   }
 
 }
 
 
 ?>
+
 <!-- Content Header (Page header) -->
 <section class="content-header">
   <div class="container-fluid">

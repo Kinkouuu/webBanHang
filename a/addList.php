@@ -173,6 +173,6 @@ if (isset($_GET['rmv'])) {
             endDate = $(this).datepicker('getDate');
             $("#date_picker1").datepicker("option", "maxDate", endDate);
         })
-        ////////////////
+
     });
 </script>

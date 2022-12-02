@@ -156,12 +156,13 @@ $gmv = 0;
             </td>
             
         <?php }
-        $gmv = $gmv + $total; } 
+        //$gmv = $gmv + $total;
+    } 
         ?>
 
         </tr>
         <?php
-    // echo "GMV = " .number_format($gmv ) . " VND";
+    echo "GMV = " .number_format($gmv ) . " VND";
 ?>
 </table>
 

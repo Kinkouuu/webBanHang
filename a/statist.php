@@ -13,12 +13,27 @@ require_once "view/head.php";
   <option value="365">A year</option>
 </select>
 <div id="chart" style="height: 500px;"></div>
-<?php
+<div class="col-md-12">
+  <div class="row">
+    <div class="col-md-6">
+      <?php
+    $total = $db->query("SELECT count(distinct `order`.o_id) as sdh, sum(`details`.amount) as ssp,sum(`details`.amount*`details`.d_price) as st FROM `order`,`details` WHERE `order`.o_id = `details`.o_id")->fetch();
+      ?>
+      <h3>Total orders: <?php echo $total['sdh']?> orders</h3>
+      <h3>Total products sold: <?php echo $total['ssp']?> products</h3>
+      <h3>Total revenue: <?php echo number_format($total['st']+ 35000*$total['sdh']) ?> VND</h3>
+    </div>
+    <div class="col-md-6">
+    <?php
 $gmv = $db->query("SELECT sum(stt) as stt, sum(sl_o) as sl_o, sum(sl_p) as sl_p  FROM `statist`")->fetch();
 ?>
-<h3>Total orders: <?php echo $gmv['sl_o']?> orders</h3>
-<h3>Total product sold: <?php echo $gmv['sl_p']?> products</h3>
-<h3>Total revenue: <?php echo number_format($gmv['stt'])?> VND</h3>
+  <h3>Completed orders: <?php echo $gmv['sl_o']?> orders</h3>
+  <h3>Actual products sold: <?php echo $gmv['sl_p']?> products</h3>
+  <h3>Actual revenue: <?php echo number_format($gmv['stt'])?> VND</h3>
+    </div>
+  </div>
+</div>
+
 
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>

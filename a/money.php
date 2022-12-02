@@ -6,8 +6,8 @@ if (isset($_POST['save'])) {
     $cur = mpost('cur');
     $ex = mpost('ex');
 
-       $db->exec("UPDATE `money` SET `ex` = '$ex' WHERE `m_id` = '$m_id'");
-       echo '<script>alert("Đã cập nhật tỉ giá 1' . $cur . ' = '. $ex .' VND"); window.location = "money.php";</script>';
+        $db->exec("UPDATE `money` SET `ex` = '$ex' WHERE `m_id` = '$m_id'");
+        echo '<script>alert("Đã cập nhật tỉ giá 1' . $cur . ' = '. $ex .' VND"); window.location = "money.php";</script>';
 }
 ?>
 <div class="container">
