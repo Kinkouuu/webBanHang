@@ -49,10 +49,10 @@ if (isset($_GET['del'])) {
                      Specification
                   </th>
                   <th style="width: 10% ;">
-                     GB price
+                     Price
                   </th>
                   <th style="width: 10% ;">
-                     Stock price
+                     Increase
                   </th>
                   <th style="width: 3% ;">
                      Remain
@@ -95,23 +95,31 @@ if (isset($_GET['del'])) {
                         <?= $pro['spec']; ?>
                      </td>
                      <td>
-                        <?= $pro['price'];  ?> <?= $pro['sign']; ?>
-                     </td>
-                     <td>
                         <table>
                            <tr>
                               <td>
-                                 <?= $pro['s_price']; ?> VND
+                                 GB: <br> <?= $pro['price'];  ?> <?= $pro['sign']; ?> </br>
                               </td>
                            </tr>
                            <tr>
                               <td>
-                                 +<?= $pro['5_price']; ?> VND
+                                 Stock: <br><?= $pro['s_price']; ?> VND</br>
+                              </td>
+                           </tr>
+                        </table>
+                        
+                     </td>
+                     <td>
+                        <table>
+
+                           <tr>
+                              <td>
+                                 50%: <br>+<?= $pro['5_price']; ?> VND</br>
                               </td>
                            </tr>
                            <tr>
                               <td>
-                                 +<?= $pro['1_price']; ?> VND
+                                 10%: <br>+<?= $pro['1_price']; ?> VND</br>
                               </td>
                            </tr>
                         </table>

@@ -7,11 +7,12 @@
             <h1 class="form-heading">Sign in your account</h1>
             <div class="form-group">
             
-                <input type="text" class="form-input" name ="phone" placeholder="Phone number" require >
+            <input type="text" class="form-input" name="phone"  id ="phone" placeholder="Phone number" required >
+            <small id="phoneHelp" class="form-text"></small>
             </div>
             <div class="form-group">
                 
-                <input type="password" class="form-input" name = "inPass" placeholder="Password" require>
+                <input type="password" class="form-input" name = "inPass" placeholder="Password" required>
                 <div class ="eye">
                     <i class="fa-solid fa-eye" style="color: white;"></i>
                 </div>

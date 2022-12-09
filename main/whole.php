@@ -12,13 +12,13 @@ require_once 'process/upload.php';
 </div>
 <!-- <form action="./process/sendMail.php" method="POST" enctype="multipart/form-data"> -->
 <form action="" method="POST" enctype="multipart/form-data">
-    <h4>Product infomation: </h4>
+    <h4>Thông tin sản phẩm: </h4>
     <div class="row">
         <div class="col-md-12">
             <div class="row">
                 <div class="col-md-4 d-flex align-items-center">
                     <div class="col-sm-3">
-                        <label for="n_product" class="form-label">Name: </label>
+                        <label for="n_product" class="form-label">Tên sản phẩm: </label>
                     </div>
                     <div class="col-sm-9">
                         <input type="text" class="inpt" name="n_product" id="n_product" required>
@@ -27,7 +27,7 @@ require_once 'process/upload.php';
 
                 <div class="col-md-4 d-flex align-items-center ">
                     <div class="col-sm-3">
-                        <label for="brand" class="form-label">Brand: </label>
+                        <label for="brand" class="form-label">Nhãn hiệu: </label>
                     </div>
                     <div class="col-sm-9">
                         <input type="text" class="inpt" name="brand" id="brand" required>
@@ -36,7 +36,7 @@ require_once 'process/upload.php';
 
                 <div class="col-md-4 d-flex align-items-center">
                     <div class="col-sm-3">
-                        <label>Image</label>
+                        <label>Ảnh minh họa</label>
                     </div>
                     <div class="col-sm-9">
                         <input type="file" name="image" class="inpt">
@@ -50,7 +50,7 @@ require_once 'process/upload.php';
         <div class="row ">
             <div class="col-md-6 d-flex align-items-center">
                 <div class="col-sm-2">
-                    <label class="form-label">Specifications:</label>
+                    <label class="form-label">Mô tả sản phẩm: </label>
                 </div>
                 <div class="col-sm-10">
                     <textarea  class="txtara"  name="spec" rows="3"></textarea>
@@ -60,7 +60,7 @@ require_once 'process/upload.php';
 
             <div class="col-md-6 d-flex align-items-center">
                 <div class="col-sm-2">
-                    <label class="form-label">Product inquiry:</label>
+                    <label class="form-label">Yêu cầu về sản phẩm: </label>
                 </div>
                 <div class="col-sm-10">
                     <textarea  class="txtara" name="inquiry" rows="3"></textarea>
@@ -71,7 +71,7 @@ require_once 'process/upload.php';
             <div class="row">
                 <div class="col-md-3 d-flex align-items-center">
                     <div class="col-sm-4">
-                        <label class="form-label" for="">Desired price: </label>
+                        <label class="form-label" for="">Giá khuyến nghị: </label>
                     </div>
                     <div class="col-sm-8">
                         <input type="text" class="inpt" name="price" required>
@@ -80,7 +80,7 @@ require_once 'process/upload.php';
                 </div>
                 <div class="col-md-3 d-flex align-items-center">
                     <div class="col-sm-4">
-                        <label class="form-label" for="">Number of product: </label>
+                        <label class="form-label" for="">Số lượng bán: </label>
                     </div>
                     <div class="col-sm-8">
                         <input type="text" class="inpt" name="number" required>
@@ -89,7 +89,7 @@ require_once 'process/upload.php';
                 </div>
                 <div class="col-md-3 d-flex align-items-center">
                     <div class="col-sm-4">
-                        <label class="form-label" for="">Products have deposited: </label>
+                        <label class="form-label" for="">Số lượng sản phẩm đã cọc: </label>
                     </div>
                     <div class="col-sm-8">
                         <input type="text" class="inpt" name="deposit" required>
@@ -98,7 +98,7 @@ require_once 'process/upload.php';
                 </div>
                 <div class="col-md-3 d-flex align-items-center">
                     <div class="col-sm-4">
-                        <label class="form-label" for="">Desired opening time: </label>
+                        <label class="form-label" for="">Ngày mở bán: </label>
                     </div>
                     <div class="col-sm-8">
                         <input type="date" class="inpt" name="time">
@@ -108,11 +108,11 @@ require_once 'process/upload.php';
 
             </div>
 
-            <h4>Customers Information: </h4>
+            <h4>Thông tin khách hàng: </h4>
             <div class="row">
                 <div class="col-md-3 d-flex align-items-center">
                     <div class="col-sm-4">
-                        <label class="form-label" for="">Name: </label>
+                        <label class="form-label" for="">Họ Tên: </label>
                     </div>
 
                     <div class="col-sm-8">
@@ -142,7 +142,7 @@ require_once 'process/upload.php';
                 </div>
                 <div class="col-md-3 d-flex align-items-center">
                     <div class="col-sm-4">
-                        <label class="form-label" for="">Phone number: </label>
+                        <label class="form-label" for="">Số điện thoại: </label>
                     </div>
 
                     <div class="col-sm-8">

@@ -14,10 +14,11 @@ if(isset($_POST['tgian'])){
 
 if($tgian == '365'){
     $subdays = Carbon::now('Asia/Ho_Chi_Minh')->subdays(365)->toDateString();
-}else if($tgian == '30'){
-    $subdays = Carbon::now('Asia/Ho_Chi_Minh')->subdays(30)->toDateString();
+
 }else if($tgian == '180'){
     $subdays = Carbon::now('Asia/Ho_Chi_Minh')->subdays(180)->toDateString();
+}else if($tgian == '30'){
+    $subdays = Carbon::now('Asia/Ho_Chi_Minh')->subdays(30)->toDateString();
 }else{
     $subdays = Carbon::now('Asia/Ho_Chi_Minh')->subdays(7)->toDateString();
 }

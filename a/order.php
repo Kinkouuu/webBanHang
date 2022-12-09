@@ -22,7 +22,6 @@ $gmv = 0;
         <th>price</th>
         <th>Type</th>
         <th>Category</th>
-        <th>Product quantity</th>
         <th>Provisional</th>
         <th>Ship fee</th>
         <th>Discount</th>
@@ -82,36 +81,30 @@ $gmv = 0;
 
                 ?>
                     <table class="table table-bordered">
-                        <td style="width: 5%; padding:0"><?php echo $pro['p_id'] ?></td>
+<tr>
+<td style="width: 5%; padding:0"><?php echo $pro['p_id'] ?></td>
                         <td style="width: 35%;padding:0"><?php echo $pro['p_name'] ?></td>
                         <td style="width: 10%; padding:0"><?php echo $pro['amount'] ?></td>
-                        <td style="width: 20%;padding:0"><?php echo $pro['price'] ?> <?php echo $pro['sign'] ?> </td>
+                        <td style="width: 20%;padding:0"><?php echo $pro['d_price'] ?> VND</td>
                         <td style="width: 20%;padding:0"><?php echo $pro['type'] ?></td>
                         <td style="width: 10%;padding:0"><?php echo $pro['cate'] ?></td>
+</tr>
                     </table>
-
+                    <?php 
+                    if($order['note'] != null) {?>
+<div>Customer-note: <?php echo $order['note'] ?></div>
+<?php }
+if(($order['suggest'] != null)){
+    ?>
+<div>Admin-note: <?php echo $order['suggest'] ?></div>
+<?php } ?>
                 <?php } ?>
 
             </td>
-            <?php
-            
-            $sl = $db->query("SELECT p_id FROM `details` WHERE o_id ='$o_id'")->rowCount();
 
-                $details =$db->query("SELECT details.o_id,sum(details.amount * product.price * money.ex ) as gmoi,sum(details.amount * details.d_price ) as gcu,sum(details.amount) as amounts from (`details` INNER JOIN `product` ON details.p_id = product.p_id) INNER JOIN `money` ON product.m_id = money.m_id WHERE o_id = $o_id;")->fetch();
+            <td><?php echo $pro['amount'] * $pro['d_price'] ?> VND</td>
 
-            foreach ($details as $detail) {
-                if($details['gmoi']>$details['gcu']){
-                    $provi = $details['gmoi'];
-                }else{
-                    $provi = $details['gcu'];
-                }
-            }
-
-            ?>
-            <td><?php echo $details['amounts'] ?></td>
-            <td><?php echo $provi ?> VND</td>
-
-            <td><?php echo $sl * 35000 ?> VND</td>
+            <td>40000 VND</td>
 
             <?php
             $check_sale = $db->query("SELECT o_id,s_id FROM `order` WHERE o_id = $o_id;")->fetch();
@@ -127,7 +120,7 @@ $gmv = 0;
                     }
                 }
             }
-            $total0 = $provi - $discount + $sl * 35000;
+            $total0 =$pro['amount'] * $pro['d_price'] - $discount + 40000;
             if ($total0 < 0) {
                 $total = 0;
             } else {
@@ -156,13 +149,13 @@ $gmv = 0;
             </td>
             
         <?php }
-        //$gmv = $gmv + $total;
+        $gmv = $gmv + $total;
     } 
         ?>
 
         </tr>
         <?php
-    echo "GMV = " .number_format($gmv ) . " VND";
+    //echo "GMV = " .number_format($gmv ) . " VND";
 ?>
 </table>
 

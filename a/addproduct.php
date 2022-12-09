@@ -107,7 +107,7 @@
         </div>
         <div class="col-sm-3">
           <div class="input-group">
-            <input type="text" class="form-control" name="s_price" placeholder="Product's price in stock">
+            <input type="text" class="form-control" name="s_price" placeholder="Product's price in stock" required>
             <span class="input-group-text">VND</span>
           </div>
         </div>

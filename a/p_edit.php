@@ -18,25 +18,26 @@ $p_name = $qr['p_name'];
       </div>
     </div>
   </div>
-  <div class="form-group row">
-    <label class="col-sm-2 col-form-label">Name Product</label>
-    <div class="col-sm-10">
-      <div class="form-group">
-        <?php echo $qr['p_name']; ?>
-      </div>
-    </div>
-  </div>
-
 
   <div class="form-group row">
     <label class="col-sm-2 col-form-label">Type</label>
     <div class="col-sm-10">
       <div class="form-group">
-        <input name="type" type="text" hidden value="<?= $qr['t_id']; ?>">
+
         <?php echo $qr['type']; ?>
       </div>
     </div>
   </div>
+
+  <div class="form-group row">
+    <label class="col-sm-2 col-form-label">Name Product</label>
+    <div class="col-sm-10">
+      <div class="form-group">
+      <input name="p_name" type="text" value="<?= $qr['p_name']; ?>">
+      </div>
+    </div>
+  </div>
+
   <div class="form-group row">
     <label class="col-sm-2 col-form-label">Picture</label>
     <div class="col-sm-10">
@@ -234,7 +235,7 @@ if (isset($_POST['submit'])) {
   } else {
     $pic = mpost('pic');
   }
-
+  $p_name = mpost('p_name');
   $spec = mpost('spec');
   $price = mpost('price');
   $s_price = mpost('s_price');
@@ -245,7 +246,7 @@ if (isset($_POST['submit'])) {
   $f_id = mpost('f_id');
   $video = mpost('video');
   $p_code = mpost('p_code');
-  $db->exec("UPDATE `product` SET `pics`='$pic',`product_code` = '$p_code', `spec` = '$spec',`m_id`='$money', `price` = '$price',`s_price`= '$s_price',`5_price`='$price_5',`1_price`='$price_1', `remain` = '$remain', `f_id` = '$f_id', `video` = '$video'  WHERE `p_id` = '$id'");
+  $db->exec("UPDATE `product` SET `p_name` = '$p_name', `pics`='$pic',`product_code` = '$p_code', `spec` = '$spec',`m_id`='$money', `price` = '$price',`s_price`= '$s_price',`5_price`='$price_5',`1_price`='$price_1', `remain` = '$remain', `f_id` = '$f_id', `video` = '$video'  WHERE `p_id` = '$id'");
   echo '<script>alert("Đã sửa sản phẩm' .  $id  . '-' . $p_name . ' "); window.location = "product.php";</script>';
 }
 ?>

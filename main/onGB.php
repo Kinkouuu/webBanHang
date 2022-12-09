@@ -1,7 +1,7 @@
 <?php
     require_once "./template/config.php";
 ?>
-<h3>ON OPENING GROUPBY</h3>
+<h3>Đang mở bán Groupby</h3>
 <div class="row">
 <?php
 $today = strtotime(date('Y-m-d H:i:s'));
@@ -34,7 +34,7 @@ if ($new_pro -> rowCount() > 0){
                                     echo $product['price'] ?>  <?php echo $product['sign']. '≈' .$product['price']*$product['ex']. ' VND'; 
                                     }
                                     ?> </p>
-            <p>Odered: <?php echo $book['book']?></p>
+            <p>Đã được đặt: <?php echo $book['book']?> sản phẩm</p>
         </a>
         
     </div>

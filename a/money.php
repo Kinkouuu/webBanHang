@@ -6,8 +6,8 @@ if (isset($_POST['save'])) {
     $cur = mpost('cur');
     $ex = mpost('ex');
 
-        $db->exec("UPDATE `money` SET `ex` = '$ex' WHERE `m_id` = '$m_id'");
-        echo '<script>alert("Đã cập nhật tỉ giá 1' . $cur . ' = '. $ex .' VND"); window.location = "money.php";</script>';
+    $db->exec("UPDATE `money` SET `ex` = '$ex' WHERE `m_id` = '$m_id'");
+    echo '<script>alert("Đã cập nhật tỉ giá 1' . $cur . ' = ' . $ex . ' VND"); window.location = "money.php";</script>';
 }
 ?>
 <div class="container">
@@ -39,15 +39,17 @@ if (isset($_POST['save'])) {
                     ?>
                         <tr>
                             <form action="" method="POST">
-                                <td >
-                                    <input type="text" name ="m_id" hidden value="<?=$m_id?>"><?= $tien['m_id'] ?>
+                                <td>
+                                    <input type="text" name="m_id" hidden value="<?= $m_id ?>"><?= $tien['m_id'] ?>
                                 </td>
                                 <td>
-                                <input type="text" name ="cur" hidden value="<?= $tien['cur']?>"><?= $tien['cur'] ?>(<?= $tien['sign'] ?>)
-                            </td>
+                                    <input type="text" name="cur" hidden value="<?= $tien['cur'] ?>"><?= $tien['cur'] ?>(<?= $tien['sign'] ?>)
+                                </td>
                                 <td> <input type="text" name="ex" value="<?= $tien['ex'] ?>"> VND</td>
                                 <td>
-                                <button type="submit" name="save" class="btn btn-info">✔</button>
+                                    <button type="submit" name="save" class="btn btn-success">
+                                        <i class="fas fa-solid fa-check"></i>
+                                    </button>
                                 </td>
 
                             </form>

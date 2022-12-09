@@ -4,7 +4,9 @@
     if (isset($_POST['save'])) {
         $code = mpost('code');
         $discount = mpost('discount');
-        $db->exec("INSERT INTO `sale`  (`code`,`discount`) VALUES ( '$code','$discount');");
+        $max = mpost('max');
+
+        $db->exec("INSERT INTO `sale`  (`code`,`discount`,`max`) VALUES ( '$code','$discount','$max');");
         echo '<script>alert("Đã thêm ' . $code . '"); window.location = "sale.php";</script>';
     }
 ?>
@@ -32,10 +34,21 @@
                 <label class="col-sm-2 col-form-label">Discount</label>
                 <div class="col-sm-8">
                   	<div class="form-group">
-    					<input name="discount" type="text" class="form-control" placeholder="Enter discount" required>
+    					<input name="discount" type="number" min = "0" class="form-control" placeholder="Enter discount" required>
   					</div>
                 </div>
               </div>
+
+              <div class="form-group row">
+                <label class="col-sm-2 col-form-label">Number of uses</label>
+                <div class="col-sm-8">
+                  	<div class="form-group">
+    					<input name="max" type="number" min ="0" class="form-control" placeholder="Enter number of uses" required>
+  					</div>
+                </div>
+              </div>
+
+              
 			
               <div class="form-group row">
                 <div class="offset-sm-2 col-sm-10">

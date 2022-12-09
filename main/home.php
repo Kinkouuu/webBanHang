@@ -1,7 +1,7 @@
 <?php
     require_once "./template/config.php";
 ?>
-<h3>NEW PRODUCT</h3>
+<h3>Sản phẩm mới</h3>
 <div class="row">
 <?php
 $items = !empty($_GET['items'])?$_GET['items']:6;
@@ -25,16 +25,8 @@ if ($new_pro -> rowCount() > 0){
             <img src="<?= $product['pics']; ?>" alt="" style="width: 100%; height:auto;">
             
             <p class="name_product"><?php echo $product['p_name']?></p>
-            <p class="price_product">
-            <?php
-                                    if($product['sign'] == 'VND'){
-                                        echo $product['price']*$product['ex']. ' VND'; 
-
-                                    }else{
-                                    echo $product['price'] ?>  <?php echo $product['sign']. '≈' .$product['price']*$product['ex']. ' VND'; 
-                                    }
-                                    ?> </p>
-            <p>Sold: <?php echo $sold['sold']?></p>
+            <p class="price_product"><?php echo $product['s_price']?> VND</p>
+            <p>Đã bán: <?php echo $sold['sold']?> sản phẩm</p>
         </a>
         
     </div>

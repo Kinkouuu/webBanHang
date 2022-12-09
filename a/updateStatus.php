@@ -17,43 +17,22 @@ if (isset($_POST['save'])) {
   $status = mpost('stt');
   $statuspay = mpost('sttpay');
   $deposit = mpost('deposit');
-  $db->exec("UPDATE `order` SET `status`='$status', `statuspay` = '$statuspay' ,`deposit` = '$deposit' WHERE `o_id` = '$id'");
+  $suggest = mpost('suggest');
+  $db->exec("UPDATE `order` SET `status`='$status', `statuspay` = '$statuspay' ,`deposit` = '$deposit',`suggest`='$suggest' WHERE `o_id` = '$id'");
   echo '<script>alert("Đã sửa ' . $id . '"); window.location = "order.php";</script>';
 
   if($status == "Đã giao hàng"){
-    $sl = $db->query("SELECT p_id FROM `details` WHERE o_id ='$id'")->rowCount(); //so luong san pham
 // tinh gia san pham
-    $details =$db->query("SELECT details.o_id,sum(details.amount * product.price * money.ex ) as gmoi,sum(details.amount * details.d_price ) as gcu,sum(details.amount) as amounts from (`details` INNER JOIN `product` ON details.p_id = product.p_id) INNER JOIN `money` ON product.m_id = money.m_id WHERE o_id = $id;")->fetch();
-    $amount = $details['amounts'];
-foreach ($details as $detail) {
-    if($details['gmoi']>$details['gcu']){
-        $provi = $details['gmoi'];
-    }else{
-        $provi = $details['gcu'];
-    }
+$tinh = $db->query("SELECT * FROM `order` INNER JOIN `details` ON `order`.o_id = `details`.o_id WHERE `order`.o_id = '$id'")->fetch();
+$amount = $tinh['amount'];
+if($tinh['s_id'] == 0){
+  $total = $tinh['d_price'] * $amount + 40000;
+}else{
+  $s_id = $tinh['s_id'];
+  $discount = $db->query("SELECT * FROM `sale` WHERE `s_id` = '$s_id'")->fetch();
+  $total = $tinh['d_price'] * $amount - $discount['discount'] + 40000;
 }
-//giam gia
-$check_sale = $db->query("SELECT o_id,s_id FROM `order` WHERE o_id = $id;")->fetch();
-            
-foreach ($check_sale as $check) {
-    $s_id = $check_sale['s_id'];
-    if ($s_id == 0) {
-        $discount = 0;
-    } else {
-        $sale = $db->query("SELECT sale.s_id,discount,order.o_id FROM `order`,`sale` WHERE order.s_id = sale.s_id AND o_id = $id;")->fetch();
-        foreach ($sale as $sales) {
-            $discount = $sale['discount'];
-        }
-    }
-}
-//tinh tong tien
-$total0 = $provi - $discount + $sl * 35000;
-if ($total0 < 0) {
-    $total = 0;
-} else {
-    $total = $total0;
-    
-}
+
 
 $them = $db->query("SELECT * FROM `statist` WHERE `o_date` = '$today'")->rowCount();
 if ($them > 0 ){
@@ -102,6 +81,7 @@ if ($them > 0 ){
           </div>
         </div>
       </div>
+
       <div class="form-group row">
         <label class="col-sm-2 col-form-label">Deposited </label>
         <div class="col-sm-10">
@@ -111,6 +91,7 @@ if ($them > 0 ){
           </div>
         </div>
       </div>
+
       <div class="form-group row">
         <label class="col-sm-2 col-form-label">Status</label>
         <div class="col-sm-10">
@@ -129,6 +110,16 @@ if ($them > 0 ){
           </div>
         </div>
       </div>
+
+      <div class="form-group row">
+        <label class="col-sm-2 col-form-label">Admin-note </label>
+        <div class="col-sm-10">
+          <div class="input-group mb-3">
+          <textarea name="suggest" type="text" class="form-control" placeholder="Admin's note" style="height: calc(5rem + 2px);" required> <?php echo $qr['suggest']; ?> </textarea>
+          </div>
+        </div>
+      </div>
+
       <div class="form-group row">
         <div class="offset-sm-2 col-sm-10">
           <button type="submit" name="save" class="btn btn-success">SAVE</button>

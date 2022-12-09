@@ -16,7 +16,7 @@ if (isset($_POST['addCart'])) {
     // check so luong !=0
     if($unit == 0 && $book == 0){
 
-        $ktra = 'Product quantity must more than 0';
+        $ktra = 'Số lượng đặt hàng phải lớn hơn 0';
         header("location: ../product.php?p_id=$p_id&ktra=$ktra");
     }else{
             $check = $db->query("SELECT * FROM `cart` WHERE `u_id` = '$u_id' AND `p_id` = '$p_id'")->rowcount();

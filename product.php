@@ -14,7 +14,7 @@ if (!isset($_SESSION['user'])) {
     <div class="row">
         <div class="col-md-6 ">
             <?php
-            $p_id = (int) mget('p_id');
+            $p_id = mget('p_id');
             $product = $db->query("SELECT * FROM `product`  INNER JOIN `money` ON product.m_id = money.m_id WHERE `p_id` = $p_id")->fetch();
             $sold = $db->query("SELECT sum(amount) as sold FROM `details` WHERE `p_id` = $p_id")->fetch();
             ?>
@@ -36,42 +36,40 @@ if (!isset($_SESSION['user'])) {
 
 <div class="d-flex">
     <div class="col-sm-3">
-    <p class="name_product"><strong>Name: </strong> 
+    <p class="name_product"><strong>Tên sản phẩm: </strong> 
     </div>
 <div class="col-sm-6">
 <?php echo $product['p_name'] ?></p>
 </div>
                 
 </div>
-                <div class="d-flex">
+
+
+
+
+<!-- dat hang co san  -->
+<!-- //con hang  hay ko -->
+                <?php
+                if ($product['remain'] > 0) { 
+                ?>
+                                <div class="d-flex">
                     <div class="col-sm-3">
-                    <p class="price_product"> <strong>Price: </strong>
+                    <p class="price_product"> <strong>Giá hàng có sẵn: </strong>
                     </div>
                     <div class="col-sm-6">
                         <p>
                         <?php
-                    if ($product['sign'] == 'VND') {
-                        echo $product['price'] * $product['ex'] . ' VND';
-                    } else {
-                        echo $product['price'] ?> <?php echo $product['sign'] . '≈' . $product['price'] * $product['ex'] . ' VND';
-                            }
+                        echo $product['s_price']. ' VND';
+
 
                 ?>
                 </p>
 
                     </div>
                 </div>
-
-
-
-<!-- dat hang cos san  -->
-<!-- //con hang  hay ko -->
-                <?php
-                if ($product['remain'] > 0) { 
-                ?>
             <div class="d-flex ">
                 <div class="col-sm-3">
-                <p><strong>Order quantity: </strong></p>
+                <p><strong>Số lượng đặt hàng: </strong></p>
                 </div>
                     
 <div class="col-sm-9 d-flex justify-content-start">
@@ -105,9 +103,27 @@ $today = strtotime(date('Y-m-d H:i:s'));
         $product2 = $product1 ->fetch();
         $g_id = $product2['g_id'];
 ?>
+                <div class="d-flex">
+                    <div class="col-sm-3">
+                    <p class="price_product"> <strong>Giá hàng GB: </strong>
+                    </div>
+                    <div class="col-sm-6">
+                        <p>
+                        <?php
+                    if ($product['sign'] == 'VND') {
+                        echo $product['price'] * $product['ex'] . ' VND';
+                    } else {
+                        echo $product['price'] ?> <?php echo $product['sign'] . '≈' . $product['price'] * $product['ex'] . ' VND';
+                            }
+
+                ?>
+                </p>
+
+                    </div>
+                </div>
 <div class="d-flex">
     <div class="col-sm-3">
-    <p><strong>Pre-order quantity: </strong></p>
+    <p><strong>Số lượng đặt trước: </strong></p>
     </div>
     <div class="col-sm-9">
     <div class="ms-1 me-1">
@@ -118,11 +134,11 @@ $today = strtotime(date('Y-m-d H:i:s'));
 
                     
 </div>
-<p style="color:red">Group by close at: <?php echo date("d-m-Y",$product2['e_date'])?></p>
+<p style="color:red">Group by sẽ đóng vào ngày: <?php echo date("d-m-Y",$product2['e_date'])?></p>
 <?php 
 $pre = $db->query("SELECT sum(amount) as tong FROM `details` WHERE `g_id` = '$g_id'")->fetch();
 ?>
-<p style="color:blue"><?php echo $pre['tong'] ?> products has been pre-order</p>
+<p style="color:blue"><?php echo $pre['tong'] ?> sản phẩm đã được đặt trước</p>
 <?php
     }
 ?>
@@ -135,16 +151,16 @@ $pre = $db->query("SELECT sum(amount) as tong FROM `details` WHERE `g_id` = '$g_
 
         ?>
         <button type="submit" name="addCart" class="btn btn-outline-primary" >
-        <i class="fa-solid fa-cart-plus"></i> Add to cart
+        <i class="fa-solid fa-cart-plus"></i> Thêm vào giỏ hàng
         </button>
         <?php
     }
 ?>
 
                 <div class="d-flex justify-content-start">
-                    <p><strong>Sold:</strong> <?php echo $sold['sold'] ?></p>
+                    <p><strong>Đã bán: </strong> <?php echo $sold['sold'] ?> sản phẩm</p>
                 </div>
-                <p><strong>Specifications: </strong>
+                <p><strong>Mô tả sản phẩm: </strong>
                     <?php
                     $str = $product['spec'];
                     $dump = explode('-', $str);

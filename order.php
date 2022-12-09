@@ -9,28 +9,28 @@ if (!isset($_SESSION['user'])) {
 }
 ?>
 
-<h3>ORDER MANAGER</h3>
+<h3>Quản lý đơn hàng</h3>
 <div class="container-fluid">
     <div class="row">
         <div class="col-md-12">
             <table class="table table-striped table-hover">
                 <tr>
-                    <th>ID orders</th>
-                    <th>Order date</th>
-                    <th>Customer name</th>
-                    <th>Phone number</th>
-                    <th>Adress</th>
-                    <th>Product quantity</th>
-                    <th>Provisional</th>
-                    <th>Ship fee</th>
-                    <th>Discount</th>
-                    <th>Total money</th>
-                    <th>Status</th>
-                    <th>Payment</th>
+                    <th>Mã đơn hàng</th>
+                    <th>Ngày đặt</th>
+                    <th>Tên khách hàng</th>
+                    <th>Số điện thoại</th>
+                    <th>Địa chỉ</th>
+                    <th>Số lượng</th>
+                    <th>Đơn giá</th>
+                    <th>Phí VC&DV</th>
+                    <th>Giảm giá</th>
+                    <th>Tổng tiền</th>
+                    <th>Trạng thái</th>
+                    <th>Phương thức thanh toán</th>
                     <th>&nbsp</th>
                 </tr>
                 <?php
-                $orders = $db->query("SELECT * FROM `order`  WHERE u_id = $u_id ORDER BY o_id DESC");
+                $orders = $db->query("SELECT * FROM `order`  WHERE `u_id` = $u_id ORDER BY o_id DESC");
                 foreach ($orders as $order) {
                     $o_id = $order['o_id'];
 
@@ -42,49 +42,22 @@ if (!isset($_SESSION['user'])) {
 
                         <td><?php echo $order['o_phone']; ?></td>
                         <td><?php echo $order['adress']; ?></td>
-
-
                         <?php
-            $sl = $db->query("SELECT p_id FROM `details` WHERE o_id ='$o_id'")->rowCount();
-
-            $details =$db->query("SELECT details.o_id,sum(details.amount * product.price * money.ex ) as gmoi,sum(details.amount * details.d_price ) as gcu,sum(details.amount) as amounts from (`details` INNER JOIN `product` ON details.p_id = product.p_id) INNER JOIN `money` ON product.m_id = money.m_id WHERE o_id = $o_id;")->fetch();
-
-        foreach ($details as $detail) {
-            if($details['gmoi']>$details['gcu']){
-                $provi = $details['gmoi'];
-            }else{
-                $provi = $details['gcu'];
-            }
-        }
-
-                        ?>
-                        <td><?php echo $details['amounts'] ?></td>
-                        <td><?php echo $provi ?> VND</td>
-
-                        <td><?php echo $sl*35000 ?> VND</td>
-                        
-                        <?php
-                        $check_sale = $db->query("SELECT o_id,s_id FROM `order` WHERE o_id = $o_id;")->fetch();
-                        foreach ($check_sale as $check) {
-                            $s_id = $check_sale['s_id'];
-                            if ($s_id == 0) {
-                                $discount = 0;
-                            } else {
-                                $sale = $db->query("SELECT sale.s_id,discount,order.o_id FROM `order`,`sale` WHERE order.s_id = sale.s_id AND o_id = $o_id;")->fetch();
-                                foreach ($sale as $sales) {
-                                    $discount = $sale['discount'];
-                                }
-                            }
-                        }
-                        $total0 = $provi - $discount + $sl*35000;
-					    if ($total0 <0){
-                            $total = 0;
+                        $details =$db->query("SELECT * FROM `details` INNER JOIN `order` ON `details`.o_id = `order`.o_id WHERE `order`.o_id = '$o_id'")->fetch();
+                        if($details['s_id'] == 0) {
+                            $discount = 0;
                         }else{
-                            $total = $total0;
+                            $sale = $db->query("SELECT * FROM `sale`,`order` WHERE `order`.s_id = `sale`.s_id AND `order`.o_id = '$o_id'")->fetch();
+                            $discount = $sale['discount'];
                         }
-                        ?>
-                        <td><?php echo $discount?> VND</td>
-                        <td><?php echo $total?> VND</td>
+
+                            ?>
+                            <td><?php echo $details['amount'] ?></td>
+                            <td><?php echo $details['d_price']?> VND</td>
+                            <td>75000 VND</td>
+                            <td><?php echo $discount ?> VND</td>
+                            <td><?php echo $details['d_price']  * $details['amount'] +75000 - $discount?> VND</td>
+                        
                         <td><?php echo $order['status']; ?></td>
                         <td><?php echo $order['statuspay']; ?></td>
                         <td><a href="details.php?o_id=<?= $o_id;?>">See more</a></td>
