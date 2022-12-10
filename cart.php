@@ -360,7 +360,7 @@ if (isset($_GET['gdel'])) { //xoa sp gb
 
 
 
- <?php
+<?php
 
                             if ($payment == '100%') {
                                 $provi = $db->query("SELECT (sum(`product`.price * `money`.ex * `cart`.book) + sum(`product`.s_price*`cart`.unit)) as provi FROM (`product` INNER JOIN cart ON cart.p_id = product.p_id) INNER JOIN `money` ON product.m_id = money.m_id where cart.u_id = '$u_id';")->fetch();
@@ -387,7 +387,7 @@ if (isset($_GET['gdel'])) { //xoa sp gb
                                 <div class="col-md-12">
                                     <?php
                                     if ($payment == '100%') {
-                                        echo '<span style="color:blue"> Thanh toán toàn bộ đơn hàng ' . number_format($tong) . ' VND</span>';
+                                        echo '<span style="color:blue"> Thanh toán toàn bộ đơn hàng ' . number_format($tong + 35000) . ' VND</span>';
                                     } else if ($payment == '50%') {
                                         echo '<span style="color:blue">COD & cọc 50% tổng giá trị sản phẩm  ' . number_format($coc) . ' VND</span>';
                                     } else {
@@ -465,43 +465,43 @@ if (isset($_GET['gdel'])) { //xoa sp gb
                                                     $addr = $db->query("SELECT * from `user`  where `u_id` = $u_id")->fetch();
                                                     ?>
                                                     <div class="form-group">
-                                                        <strong>Fist Name: </strong>
+                                                        <strong>Họ & Tên đệm: </strong>
                                                         <input type="text" class="" name="f_name" placeholder="" value="<?php echo $addr['f_name']; ?>" required>
                                                     </div>
                                                     <div class="form-group">
-                                                        <strong>Last Name: </strong>
+                                                        <strong>Tên: </strong>
                                                         <input type="text" class="" name="l_name" placeholder="Last name" value="<?php echo $addr['l_name']; ?>" required>
                                                     </div>
                                                     <div class="form-group">
-                                                        <strong>Phone Number: </strong>
+                                                        <strong>Số điện thoại: </strong>
                                                         <input type="text" class="" name="phone" placeholder="Phone number" value="<?php echo $addr['phone']; ?>" required>
                                                     </div>
 
                                                     <div class="form-group">
-                                                        <strong>City/Province: </strong>
+                                                        <strong>Tỉnh/Thành phố: </strong>
                                                         <input type="text" class="" name="city" placeholder="City/Province" value="<?php echo $addr['city']; ?>" required>
                                                     </div>
                                                     <div class="form-group">
-                                                        <strong>District: </strong>
+                                                        <strong>Quận/Huyện: </strong>
                                                         <input type="text" class="" name="district" placeholder="District" value="<?php echo $addr['district']; ?>" required>
                                                     </div>
                                                     <div class="form-group">
-                                                        <strong>Ward/Village: </strong>
+                                                        <strong>Phường/Xã: </strong>
                                                         <input type="text" class="" name="ward" placeholder="Ward/Village" value="<?php echo $addr['ward']; ?>" required>
 
                                                     </div>
                                                     <div class="form-group">
-                                                        <strong>Street/Hamlet: </strong>
+                                                        <strong>Phố/Thôn: </strong>
                                                         <input type="text" class="" name="street" placeholder="Street/Hamlet" value="<?php echo $addr['street']; ?>" required>
                                                     </div>
                                                     <div class="form-group">
-                                                        <strong>Building/No: </strong>
+                                                        <strong>Số nhà/Xóm: </strong>
                                                         <input type="text" class="" name="No" placeholder="Building/No." value="<?php echo $addr['no']; ?>">
                                                     </div>
                                                     <div class="form-group">
                                                         <div class="form-floating" style="width: 100%">
                                                             <textarea class="form-control" placeholder="" name="note" id="floatingTextarea" maxlength="80" style="height: calc(5rem + 2px);"></textarea>
-                                                            <label for="floatingTextarea">Take a note </label>
+                                                            <label for="floatingTextarea">Ghi chú </label>
                                                         </div>
                                                     </div>
 

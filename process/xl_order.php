@@ -97,6 +97,7 @@ if (isset($_POST['btnOrder'])) {
                 $order = $db->query("SELECT * FROM `order` ORDER BY `o_id` DESC LIMIT 1")->fetch(); // lay ma don vua  tao
                 $o_id = $order['o_id'];
                 $db->exec("INSERT INTO `details` (`o_id`,`p_id`,`amount`,`d_price`,`g_id`) VALUES ( '$o_id','$dp_id','$unit','$s_price','$g_id')");
+                $db->exec("UPDATE `product` SET `remain` = remain - $unit WHERE `p_id` = '$dp_id'");
                 header("location:../order.php");
             }
            
