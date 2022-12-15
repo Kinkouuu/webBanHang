@@ -19,9 +19,11 @@ require_once("template/header.php");
 			} else if ($tam == "whole") {
 				$img = "img/startsourcing.jpg";
 			} else if ($tam == "") {
-				$img = "img/banner.jpg";
-			} else {
+				$img = "img/landing.jpg";
+			} else if ($tam == "onGB") {
 				$img = "img/product.jpg";
+			}else{
+				$img = "img/banner.jpg";
 			}
 			?>
 			<div class="banner" style="width:100%;height:auto">
