@@ -28,8 +28,15 @@ if(isset($_POST['save'])){
                     <th>#</th>
                     <th>Code</th>
                     <th>Discount</th>
-                    <th>Number of uses</th>
-                    <th>User ID</th>
+                    <th>Number of uses                                 
+                    <small class="rounded-circle btn btn-default pb-1 p-0 m-0" data-toggle="tooltip" data-placement="right" title="Giới hạn số lần sử dụng mã giảm giá." style="width: 10%;">
+                    <i class="fas fa-solid fa-question"></i>
+                                </small>
+                            </th>
+                    <th>User ID                     
+                        <small class=" rounded-circle btn btn-default pb-1 p-0 m-0" data-toggle="tooltip" data-placement="right" title="ID khách hàng có thể sử dụng (Đặt là 0 nếu tất cả người dùng đều có thể dùng mã giảm giá)." style="width: 10%;">
+                        <i class="fas fa-solid fa-question"></i>
+                                </small></th>
                     <th>&nbsp;</th>
                 </tr>
             </thead>
@@ -69,3 +76,8 @@ if(isset($_POST['save'])){
 </div>
 </div>
 <?php require_once 'view/end.php'; ?>
+<script>
+$(function () {
+    $('[data-toggle="tooltip"]').tooltip()
+})
+</script>

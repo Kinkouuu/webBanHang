@@ -49,6 +49,8 @@ if (isset($_POST['btnOrder'])) {
     $address = ($no . ',' . $street . ',' . $ward . ', ' . $district . ', ' . $city);
     
     // $o_date = $_POST['o_date'];
+    $od = $db->query("SELECT max(ID) as id FROM `order`")->fetch();
+    $ID = $od['id'] + 1;
 
     $cart = $db->query("SELECT * FROM `cart` WHERE `u_id` = $u_id");
     if ($cart->rowCount() == 0) { //ktra gio hang rong hay ko
@@ -78,7 +80,7 @@ if (isset($_POST['btnOrder'])) {
                     $sid = 0;
                 }
                 // echo "Ma SP: " .$dp_id . " book: " .$book. "gia gb: " .$g_price . " g_id: " .$g_id. " giam gia: " .$sid."<br></br>";
-                $db->exec("INSERT INTO `order` (`u_id`,`o_phone`,`o_name`,`adress`,`s_id`,`note`,`statuspay`,`status`) VALUES ('$u_id','$phone','$name','$address','$sid','$note','$payment','Đang chờ xác nhận')");
+                $db->exec("INSERT INTO `order` (`ID`,`u_id`,`o_phone`,`o_name`,`adress`,`s_id`,`note`,`statuspay`,`status`) VALUES ('$ID','$u_id','$phone','$name','$address','$sid','$note','$payment','Đang chờ xác nhận')");
                 $order = $db->query("SELECT * FROM `order` ORDER BY `o_id` DESC LIMIT 1")->fetch(); // lay ma don vua  tao
                 $o_id = $order['o_id'];
                 $db->exec("INSERT INTO `details` (`o_id`,`p_id`,`amount`,`d_price`,`g_id`) VALUES ( '$o_id','$dp_id','$book','$g_price','$g_id')");
@@ -93,7 +95,7 @@ if (isset($_POST['btnOrder'])) {
                     $sid = 0;
                 }
                 // echo "Ma SP: " .$dp_id . " unit: " .$unit. " gia stock: ".$s_price. " giam gia: " .$sid. "<br></br>";
-                $db->exec("INSERT INTO `order` (`u_id`,`o_phone`,`o_name`,`adress`,`s_id`,`note`,`statuspay`,`status`) VALUES ('$u_id','$phone','$name','$address','$sid','$note','$payment','Đang chờ xác nhận')");
+                $db->exec("INSERT INTO `order` (`ID`,`u_id`,`o_phone`,`o_name`,`adress`,`s_id`,`note`,`statuspay`,`status`) VALUES ('$ID','$u_id','$phone','$name','$address','$sid','$note','$payment','Đang chờ xác nhận')");
                 $order = $db->query("SELECT * FROM `order` ORDER BY `o_id` DESC LIMIT 1")->fetch(); // lay ma don vua  tao
                 $o_id = $order['o_id'];
                 $db->exec("INSERT INTO `details` (`o_id`,`p_id`,`amount`,`d_price`,`g_id`) VALUES ( '$o_id','$dp_id','$unit','$s_price','$g_id')");

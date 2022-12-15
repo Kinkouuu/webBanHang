@@ -143,38 +143,42 @@ if (isset($_GET['gdel'])) { //xoa sp gb
                                                                             <input style="height: auto; border-right:none; width:90%" name="s_code" placeholder=" Nhập mã giảm giá"></input>
                                                                             <button type="submit" style="border-left:none ;background-color:red" name="STDiscount"><i class="fa-sharp fa-solid fa-percent"></i></button>
                                                                         </form>
+
+
+
                                                                     </div>
                                                                     <div class="col-md-7 d-flex justify-content-between">
 
                                                                         <?php
                                                                         if ($pid == $p_id && $isGB == false) {
                                                                         ?>
-                                                                            <p style="margin: 0;color:white;text-align: center;"><strong>Thành tiền: <?php 
-                                                                             $tam = $product['unit'] * $product['s_price'] + 40000 - $discount;
-                                                                            if($tam < 0){
-                                                                                $tt = 0;
-                                                                                echo $tt;
-                                                                            }else{
-                                                                                $tt =$tam;
-                                                                                echo $tam;
-                                                                            }
-                                                                            
-                                                                            ?> VND </strong></p>
+                                                                            <p style="margin: 0;color:white;text-align: center;"><strong>Thành tiền: <?php
+                                                                                                                                                        $tam = $product['unit'] * $product['s_price'] + 40000 - $discount;
+                                                                                                                                                        if ($tam < 0) {
+                                                                                                                                                            $tt = 0;
+                                                                                                                                                            echo $tt;
+                                                                                                                                                        } else {
+                                                                                                                                                            $tt = $tam;
+                                                                                                                                                            echo $tam;
+                                                                                                                                                        }
+
+                                                                                                                                                        ?> VND </strong></p>
                                                                             <?php
                                                                             if (isset($_GET['reply'])) {
                                                                                 echo '<small class ="form-text" style="color:orange;text-align: center;">' . $_GET['reply'] . '</small>';
                                                                             }
                                                                         } else {
                                                                             ?>
-                                                                            <p style="margin: 0;color:white;text-align: center;"><strong>Thành tiền: <?php 
-                                                                            $tt= $product['unit'] * $product['s_price'] + 40000;
-                                                                             echo $product['unit'] * $product['s_price'] + 40000; ?> VND </strong></p>
+                                                                            <p style="margin: 0;color:white;text-align: center;"><strong>Thành tiền: <?php
+                                                                                                                                                        $tt = $product['unit'] * $product['s_price'] + 40000;
+                                                                                                                                                        echo $product['unit'] * $product['s_price'] + 40000; ?> VND </strong></p>
                                                                         <?php
                                                                         }
                                                                         $tong = $tong + $tt;
 
                                                                         ?>
                                                                     </div>
+                                                                    <h5 style="color:red"> Nhập mã "EZfreeship" để được giảm 40.000VND phí giao hàng </h5>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -221,14 +225,14 @@ if (isset($_GET['gdel'])) { //xoa sp gb
                                                                                                             } else {
                                                                                                                 $g_price =   ($product['price']  * $product['ex']) + $product['5_price'];
                                                                                                                 echo $product['price'] ?> <?php echo $product['sign'] . '≈' . $g_price . ' VND';
-                                                                                                                                }
-                                                                                                                            } else {
-                                                                                                                                if ($product['sign'] == 'VND') {
-                                                                                                                                    $g_price = ($product['price']  * $product['ex']) + $product['1_price'];
-                                                                                                                                    echo  $g_price . ' VND';
-                                                                                                                                } else {
-                                                                                                                                    $g_price = ($product['price']  * $product['ex']) + $product['1_price'];
-                                                                                                                                    echo $product['price'] ?> <?php echo $product['sign'] . '≈' . $g_price  . ' VND';
+                                                                                                                                        }
+                                                                                                                                    } else {
+                                                                                                                                        if ($product['sign'] == 'VND') {
+                                                                                                                                            $g_price = ($product['price']  * $product['ex']) + $product['1_price'];
+                                                                                                                                            echo  $g_price . ' VND';
+                                                                                                                                        } else {
+                                                                                                                                            $g_price = ($product['price']  * $product['ex']) + $product['1_price'];
+                                                                                                                                            echo $product['price'] ?> <?php echo $product['sign'] . '≈' . $g_price  . ' VND';
                                                                                                                                                             }
                                                                                                                                                         }
                                                                                                                                                                 ?>
@@ -276,33 +280,35 @@ if (isset($_GET['gdel'])) { //xoa sp gb
                                                                         if ($pid == $p_id && $isGB == true) {
 
                                                                         ?>
-                                                                            <p style="margin: 0;color:white;text-align: center;"><strong>Thành tiền: <?php 
-                                                                             $tmp = $product['book'] * $g_price + 40000 - $discount ;
-                                                                            if($tmp < 0 ){
-                                                                                $tt = 0;
-                                                                                echo "0";
-                                                                            }else{
-                                                                                $tt = $tmp;
-                                                                                echo $tmp;
-                                                                            }
-                                                                            
-                                                                            ?> VND </strong></p>
+                                                                            <p style="margin: 0;color:white;text-align: center;"><strong>Thành tiền: <?php
+                                                                                                                                                        $tmp = $product['book'] * $g_price + 40000 - $discount;
+                                                                                                                                                        if ($tmp < 0) {
+                                                                                                                                                            $tt = 0;
+                                                                                                                                                            echo "0";
+                                                                                                                                                        } else {
+                                                                                                                                                            $tt = $tmp;
+                                                                                                                                                            echo $tmp;
+                                                                                                                                                        }
+
+                                                                                                                                                        ?> VND </strong></p>
                                                                             <?php
                                                                             if (isset($_GET['reply'])) {
                                                                                 echo '<small class ="form-text" style="color:orange;text-align: center;">' . $_GET['reply'] . '</small>';
                                                                             }
                                                                         } else { ?>
                                                                             <p style="margin: 0;color:white;text-align: center;"><strong>Thành tiền: <?php
-                                                                            $tt = $product['book'] * $g_price + 40000;
-                                                                            echo $product['book'] * $g_price + 40000 ?> VND </strong></p>
-                                                                        <?php 
+                                                                                                                                                        $tt = $product['book'] * $g_price + 40000;
+                                                                                                                                                        echo $product['book'] * $g_price + 40000 ?> VND </strong></p>
+                                                                        <?php
                                                                         }
                                                                         $tong = $tong + $tt;
-                                                                        
+
                                                                         ?>
                                                                     </div>
                                                                 </div>
+                                                                <h5 style="color:red"> Nhập mã "EZfreeship" để được giảm 40.000VND phí giao hàng </h5>
                                                             </div>
+                                                            
                                                         </div>
                                                     </div>
                                                 </div>
@@ -360,7 +366,7 @@ if (isset($_GET['gdel'])) { //xoa sp gb
 
 
 
-<?php
+                            <?php
 
                             if ($payment == '100%') {
                                 $provi = $db->query("SELECT (sum(`product`.price * `money`.ex * `cart`.book) + sum(`product`.s_price*`cart`.unit)) as provi FROM (`product` INNER JOIN cart ON cart.p_id = product.p_id) INNER JOIN `money` ON product.m_id = money.m_id where cart.u_id = '$u_id';")->fetch();
@@ -371,7 +377,7 @@ if (isset($_GET['gdel'])) { //xoa sp gb
                                 $provi = $db->query("SELECT ((sum(`product`.price * `money`.ex * `cart`.book + `product`.`1_price`)) + sum(`product`.s_price*`cart`.unit)) as provi FROM (`product` INNER JOIN cart ON cart.p_id = product.p_id) INNER JOIN `money` ON product.m_id = money.m_id where cart.u_id = '$u_id';")->fetch();
                                 $coc = $provi['provi'] * 0.1 + $fee;
                             }
-                            ?> 
+                            ?>
                             <h5>Tổng tiền:<?php echo number_format($tong + 35000); ?> VND</h5>
                         </div>
 
@@ -439,8 +445,12 @@ if (isset($_GET['gdel'])) { //xoa sp gb
                         </form>
 
 
-                        <div class="card card-body m-1">
+                        <div class="card card-body text-center m-1">
                             <strong>11110000555669 - BIDV - Tran Minh Quang</strong>
+                            <div class="">
+                                <img src="img/QRCODE.jpg" alt="">
+                            </div>
+                            <span style="color:deepskyblue">Nội dung giao dịch:<br> SDT Tên Hàng Số Lượng</span>
                         </div>
                         <div class="text-center">
                             <?php

@@ -101,10 +101,10 @@ if ($them > 0 ){
               <option value="Đóng order" <?php echo $qr['status'] == 'Đóng order' ? ' selected ' : ''; ?>>Đóng order</option>
               <option value="Đặt hàng nhà máy" <?php echo $qr['status'] == 'Đặt hàng nhà máy' ? ' selected ' : ''; ?>>Đặt hàng nhà máy</option>
               <option value="Hàng ra khỏi nhà máy" <?php echo $qr['status'] == 'Hàng ra khỏi nhà máy' ? ' selected ' : ''; ?>>Hàng ra khỏi nhà máy</option>
-              <option value="Chuyển đến đơn vị vận chuyển" <?php echo $qr['status'] == 'Chuyển đến đơn vị vận chuyển' ? ' selected ' : ''; ?>>Chuyển đến đơn vị vận chuyển</option>
               <option value="Đã thông quan" <?php echo $qr['status'] == 'Đa thông quan' ? ' selected ' : ''; ?>>Đã thông quan</option>
+              <option value="Đến kho TP.HCM" <?php echo $qr['status'] == 'Đến kho TP.HCM' ? ' selected ' : ''; ?>>Đến kho TP.HCM</option>
+              <option value="Đến kho Hà Nội" <?php echo $qr['status'] == 'Đến kho Hà Nội' ? ' selected ' : ''; ?>>Đến kho Hà Nội</option>
               <option value="Vận chuyển nội địa" <?php echo $qr['status'] == 'Vận chuyển nội địa' ? ' selected ' : ''; ?>>Vận chuyển nội địa</option>
-              <option value="Đến TP HCM" <?php echo $qr['status'] == 'Đến TP HCM' ? ' selected ' : ''; ?>>Đến TP HCM</option>
               <option value="Đã giao hàng" <?php echo $qr['status'] == 'Đã giao hàng' ? ' selected ' : ''; ?>>Đã giao hàng</option>
             </select>
           </div>

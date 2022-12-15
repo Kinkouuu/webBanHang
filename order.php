@@ -15,6 +15,7 @@ if (!isset($_SESSION['user'])) {
         <div class="col-md-12">
             <table class="table table-striped table-hover">
                 <tr>
+                    <th>#</th>
                     <th>Mã đơn hàng</th>
                     <th>Ngày đặt</th>
                     <th>Tên khách hàng</th>
@@ -22,20 +23,20 @@ if (!isset($_SESSION['user'])) {
                     <th>Địa chỉ</th>
                     <th>Số lượng</th>
                     <th>Đơn giá</th>
-                    <th>Phí VC&DV</th>
+                    <th>Phí vận chuyển</th>
                     <th>Giảm giá</th>
                     <th>Tổng tiền</th>
                     <th>Trạng thái</th>
-                    <th>Phương thức thanh toán</th>
+                    <th>Thanh toán</th>
                     <th>&nbsp</th>
                 </tr>
                 <?php
                 $orders = $db->query("SELECT * FROM `order`  WHERE `u_id` = $u_id ORDER BY o_id DESC");
                 foreach ($orders as $order) {
                     $o_id = $order['o_id'];
-
                 ?>
-                    <tr>
+                            
+                    <tr><td><?php echo "#" .$order['ID']; ?></td>
                         <td><?php echo $o_id; ?></td>
                         <td><?php echo $order['o_date']; ?></td>
                         <td><?php echo $order['o_name']; ?></td>
@@ -43,25 +44,27 @@ if (!isset($_SESSION['user'])) {
                         <td><?php echo $order['o_phone']; ?></td>
                         <td><?php echo $order['adress']; ?></td>
                         <?php
-                        $details =$db->query("SELECT * FROM `details` INNER JOIN `order` ON `details`.o_id = `order`.o_id WHERE `order`.o_id = '$o_id'")->fetch();
-                        if($details['s_id'] == 0) {
+                        $details = $db->query("SELECT * FROM `details` INNER JOIN `order` ON `details`.o_id = `order`.o_id WHERE `order`.o_id = '$o_id'")->fetch();
+                        if ($details['s_id'] == 0) {
                             $discount = 0;
-                        }else{
+                        } else {
                             $sale = $db->query("SELECT * FROM `sale`,`order` WHERE `order`.s_id = `sale`.s_id AND `order`.o_id = '$o_id'")->fetch();
                             $discount = $sale['discount'];
                         }
+                        ?>
 
-                            ?>
-                            <td><?php echo $details['amount'] ?></td>
-                            <td><?php echo $details['d_price']?> VND</td>
-                            <td>75000 VND</td>
-                            <td><?php echo $discount ?> VND</td>
-                            <td><?php echo $details['d_price']  * $details['amount'] +75000 - $discount?> VND</td>
-                        
+                        <td><?php echo $details['amount'] ?></td>
+                        <td><?php echo $details['d_price'] ?> VND</td>
+                        <td>40000 VND</td>
+                        <td><?php echo $discount ?> VND</td>
+                        <td><?php echo $details['d_price']  * $details['amount'] + 40000 - $discount ?> VND</td>
+
                         <td><?php echo $order['status']; ?></td>
                         <td><?php echo $order['statuspay']; ?></td>
-                        <td><a href="details.php?o_id=<?= $o_id;?>">See more</a></td>
-                        <?php } ?>
+                        <td><a class="btn btn-link link-primary" href="details.php?o_id=<?= $o_id; ?>" role="button">Xem thêm</a>
+
+                    </td>
+                    <?php } ?>
                     </tr>
 
             </table>

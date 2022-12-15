@@ -55,7 +55,6 @@ $in4 = $db->query("SELECT * FROM `user`  WHERE `u_id` = '$u_id'")->fetch();
         <label for="no">Số nhà: </label>
         <input type="text" class="fin" name="no" placeholder="Building/No." value="<?= $in4['no'] ?>" required>
       </div>
-      <!-- <input type="submit" value="CHANGE" class="btn btn-info" name ="btnChange"> -->
 
       <!-- Button trigger modal -->
       <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">

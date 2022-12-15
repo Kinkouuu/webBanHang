@@ -31,7 +31,7 @@ if (isset($_GET['rmv'])) {
         <div class="col-sm-12">
             <div class="row">
                 <div class="col-sm-3 d-flex">
-                    <label for="" class="col-sm-6">ID group by: </label>
+                    <label for="" class="col-sm-6">ID group buy: </label>
                     <div class="col-sm-5">
                         <input type="text" disabled value="<?= $g_id ?>">
                     </div>
@@ -108,7 +108,7 @@ if (isset($_GET['rmv'])) {
                             </div>
                             <div class="col-sm-6" style="overflow-y: auto;height:60vh">
                                 <table class="table table-striped">
-                                    <caption style="caption-side:top">GROUP BY LIST</caption>
+                                    <caption style="caption-side:top">GROUP BUY LIST</caption>
                                     <tr>
                                         <th>ID product</th>
                                         <th>Name product</th>

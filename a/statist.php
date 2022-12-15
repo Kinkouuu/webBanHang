@@ -18,7 +18,9 @@ require_once "view/head.php";
     <div class="col-md-6">
       <?php
     $total = $db->query("SELECT count(distinct `order`.o_id) as sdh, sum(`details`.amount) as ssp,sum(`details`.amount*`details`.d_price) as st FROM `order`,`details` WHERE `order`.o_id = `details`.o_id")->fetch();
+    $fee = $db->query("SELECT DISTINCT `ID` FROM `order` WHERE `ID`!= 0 ")->rowCount(); 
       ?>
+      <h3>Total basket order: <?php echo $fee. '=' .$fee*35000 .' VND'   ?></h3>
       <h3>Total orders: <?php echo $total['sdh']?> orders</h3>
       <h3>Total products sold: <?php echo $total['ssp']?> products</h3>
       <h3>Total revenue: <?php echo number_format($total['st']+ 35000*$total['sdh']) ?> VND</h3>

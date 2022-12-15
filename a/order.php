@@ -16,6 +16,7 @@ if (isset($_GET['del'])) {
 
 <table class="table table-light table-striped table-hover">
     <tr>
+        <th>Basket Order</th>
         <th>ID orders</th>
         <th>Customer name</th>
         <th>Phone number</th>
@@ -43,13 +44,29 @@ if (isset($_GET['del'])) {
         $o_id = $order['o_id'];
         $haha = $db->query("SELECT `g_id` FROM `details` WHERE o_id = '$o_id'")->fetch();
         if ($haha['g_id'] == 0) {
-            $loai = 'Hàng sẵn';
+            $loai = 'In stock';
         } else {
-            $loai = 'Group by';
+            $loai = 'Group buy';
         }
     ?>
         <tr>
-            <td><?php echo $o_id . '<br>' . $loai; ?></td>
+
+            <td colspan="2">
+                <table>
+                    <tr>
+                        <td>
+                            <?php echo "#" .$order['ID']; ?>
+                        </td>
+                        <td>    
+                            <?php echo $o_id ?>
+                        </td>
+                    </tr>
+                    <tr>
+                    <td colspan="2"><?php echo $loai ?></td>
+                    </tr>
+                </table>
+                
+            </td>
 
             <td><?php echo $order['o_name']; ?></td>
 

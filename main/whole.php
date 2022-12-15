@@ -74,7 +74,7 @@ require_once 'process/upload.php';
                         <label class="form-label" for="">Giá khuyến nghị: </label>
                     </div>
                     <div class="col-sm-8">
-                        <input type="text" class="inpt" name="price" required>
+                        <input type="number" class="inpt" name="price" required>
                     </div>
 
                 </div>
@@ -83,7 +83,7 @@ require_once 'process/upload.php';
                         <label class="form-label" for="">Số lượng bán: </label>
                     </div>
                     <div class="col-sm-8">
-                        <input type="text" class="inpt" name="number" required>
+                        <input type="number" class="inpt" name="number" required>
                     </div>
 
                 </div>
@@ -92,7 +92,7 @@ require_once 'process/upload.php';
                         <label class="form-label" for="">Số lượng sản phẩm đã cọc: </label>
                     </div>
                     <div class="col-sm-8">
-                        <input type="text" class="inpt" name="deposit" required>
+                        <input type="number" class="inpt" name="deposit" required>
                     </div>
 
                 </div>
@@ -155,6 +155,11 @@ require_once 'process/upload.php';
                 $link =  $imgurData->data->link;
             }
 
+  ?>
+            <div class="me-0">
+                <input type="submit" class="btn btn-success" value="SUBMIT" class="" name="btnSend">
+            </div>
+            <?php
             use PHPMailer\PHPMailer\PHPMailer;
             use PHPMailer\PHPMailer\Exception;
             use PHPMailer\PHPMailer\SMTP;
@@ -200,25 +205,21 @@ require_once 'process/upload.php';
                         $mail->CharSet = 'UTF-8'; // SMTP charset
                         //Recipients
                         $mail->setFrom('startsourcingEzsupply@gmail.com', 'EZSUPPLY');
-                        // $mail->addAddress('hotro@ezsupply.app'); // Add a recipient
-                        $mail->addAddress('cedric.mquangtr@gmail.com@gmail.com'); // Add a recipient
-                        // $mail->addReplyTo('hotro@ezsupply.app', 'CSKH');
-                        $mail->addReplyTo('cedric.mquangtr@gmail.com@gmail.com', 'CSKH');
-                        // $mail->addAddress('chuckinkou2k1@gmail.com'); // Add a recipient
+
+                        $mail->addAddress('cedric.mquangtr@gmail.com','CSKH'); // Add a recipient
+
+                        $mail->addReplyTo('cedric.mquangtr@gmail.com', 'CSKH');
+
                         $mail->addCC($email);
 
 
-
-                        // $mail->addAttachment(''); // Add attachments
-
-                        // $mail->addAttachment('/tmp/image.jpg', 'new.jpg'); // Optional name
                         // Content
                         $mail->isHTML(true);   // Set email format to HTML
                         $mail->Subject = 'GB REQUEST';
                         $mail->Body = 'Customer Name:' . $name .
                             '<br>Phone number: ' . $phone .
                             '</br><br>Email: ' . $email . 
-                            '</br><br>Email: ' . $fb.
+                            '</br><br>Facebook: ' . $fb.
                             '</br><br>Name product: ' . $n_product .
                             '</br><br>Brand: ' . $brand .
                             '</br><br>Specifications: ' . $spec .
@@ -241,9 +242,6 @@ require_once 'process/upload.php';
             }
 
             ?>
-            <div class="me-0">
-                <input type="submit" class="btn btn-success" value="SUBMIT" class="" name="btnSend">
-            </div>
         </div>
     </div>
 </form>
