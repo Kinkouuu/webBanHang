@@ -1,7 +1,7 @@
 <?php
 require_once "head.php"; 
 ?>
-<aside class="main-sidebar sidebar-dark-primary elevation-4">
+<aside class="main-sidebar sidebar-dark-primary bg-dark elevation-4">
     <!-- Brand Logo -->
     <a href="./home.php" class="brand-link">
       <img src="dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
@@ -62,7 +62,13 @@ require_once "head.php";
           <li class="nav-item">
             <a href="statist.php" class="nav-link">
               <i class="nav-icon far fa-circle text-green"></i>
-              <p class="text">Revenue statistics</p>
+              <p class="text">Revenue Statistics</p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="spending.php" class="nav-link">
+              <i class="nav-icon far fa-circle text-gray"></i>
+              <p class="text">User's Spending</p>
             </a>
           </li>
           <li class="nav-item">

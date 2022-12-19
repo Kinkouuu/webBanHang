@@ -38,7 +38,7 @@ $them = $db->query("SELECT * FROM `statist` WHERE `o_date` = '$today'")->rowCoun
 if ($them > 0 ){
   $db ->exec("UPDATE `statist` SET `sl_o`= sl_o + 1, `stt` = stt + $total, `sl_p` = sl_p + $amount WHERE `o_date` = '$today'");
 }else{
-  $db->exec("INSERT INTO `statist` (`o_date`,`sl_o`, `stt`, `sl_p`) VALUES ( '$today', '1', '$total','$sl')");
+  $db->exec("INSERT INTO `statist` (`o_date`,`sl_o`, `stt`, `sl_p`) VALUES ( '$today', '1', '$total','$amount')");
 }
   }
 

@@ -12,7 +12,7 @@
         // echo "CONVERT = " ;
         // echo $s_date."-" .$e_date;
 
-        $db->exec("INSERT INTO `gb`  (`g_name`,`s_date`,`e_date`) VALUES ( '$g_name','$s_date','$e_date');");
+        $db->exec("INSERT INTO `gb`  (`g_name`,`s_date`,`e_date`,`gb_stt`) VALUES ( '$g_name','$s_date','$e_date','Đang mở group buy');");
         echo '<script>alert("Đã thêm đợt ' . $g_name . '"); window.location = "sourcing.php";</script>';
     }
 ?>
@@ -28,7 +28,7 @@
         <div class="tab-pane" id="settings">
             <form class="form-horizontal" method="post">
               <div class="form-group row">
-                <label class="col-sm-2 col-form-label">Name</label>
+                <label class="col-sm-2 col-form-label">Name:</label>
                 <div class="col-sm-8">
                   	<div class="form-group">
     					<input name="g_name" type="text" class="form-control" placeholder="" required>
@@ -37,13 +37,13 @@
               </div>
 				
               <div class="form-group d-flex align-items-center">
-                <label class="col-sm-1">Start</label>
+                <label class="col-sm-1">Open date:</label>
                 <div class="col-sm-5">
                   	<div class="form-group">
                       <input type="text" name = "s_day" id="date_picker1" class="form-control">
   					</div>
                 </div>
-                <label class="col-sm-1">END</label>
+                <label class="col-sm-1">Close date: </label>
                 <div class="col-sm-5">
                   	<div class="form-group">
                       <input type="text" name = "e_day" id="date_picker2" class="form-control">

@@ -105,10 +105,20 @@
 
           <div class="col-lg-3 col-6">
             <!-- small box -->
+            <div class="small-box bg-gray">
+              <div class="inner">
+                <h3><?php echo $db->query("SELECT * FROM `statist`")->rowCount(); ?></h3>
+                <p>User's Spending</p>
+              </div>
+              <a href="spending.php" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+            </div>
+          </div>
+
+          <div class="col-lg-3 col-6">
+            <!-- small box -->
             <div class="small-box bg-yellow">
               <div class="inner">
                 <h3><?php echo $db->query("SELECT * FROM `gb`")->rowcount(); ?></h3>
-
                 <p>Start Sourcing</p>
               </div>
               <a href="sourcing.php" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>

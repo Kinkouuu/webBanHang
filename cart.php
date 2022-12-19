@@ -74,7 +74,7 @@ if (isset($_GET['gdel'])) { //xoa sp gb
                             <?php
                             $list = $db->query("SELECT * from (`product` inner join `cart` on `product`.p_id = `cart`.p_id) INNER JOIN `money` ON `product`.m_id = `money`.m_id where cart.u_id = '$u_id';");
                             if ($list->rowCount() == 0) {
-                                echo "<h3 style ='text-align: center;'>Your cart is empty!</h3>";
+                                echo "<h3 style ='text-align: center;'>Giỏ hàng trống!</h3>";
                             } else {
                                 foreach ($list as $product) {
                                     $p_id = $product['p_id'];
@@ -152,7 +152,7 @@ if (isset($_GET['gdel'])) { //xoa sp gb
                                                                         <?php
                                                                         if ($pid == $p_id && $isGB == false) {
                                                                         ?>
-                                                                            <p style="margin: 0;color:white;text-align: center;"><strong>Thành tiền: <?php
+                                                                            <p style="margin: 0;color:white;text-align: center;"><strong>Tạm tính: <?php
                                                                                                                                                         $tam = $product['unit'] * $product['s_price'] + 40000 - $discount;
                                                                                                                                                         if ($tam < 0) {
                                                                                                                                                             $tt = 0;
@@ -169,7 +169,7 @@ if (isset($_GET['gdel'])) { //xoa sp gb
                                                                             }
                                                                         } else {
                                                                             ?>
-                                                                            <p style="margin: 0;color:white;text-align: center;"><strong>Thành tiền: <?php
+                                                                            <p style="margin: 0;color:white;text-align: center;"><strong>Tạm tính: <?php
                                                                                                                                                         $tt = $product['unit'] * $product['s_price'] + 40000;
                                                                                                                                                         echo $product['unit'] * $product['s_price'] + 40000; ?> VND </strong></p>
                                                                         <?php
@@ -280,7 +280,7 @@ if (isset($_GET['gdel'])) { //xoa sp gb
                                                                         if ($pid == $p_id && $isGB == true) {
 
                                                                         ?>
-                                                                            <p style="margin: 0;color:white;text-align: center;"><strong>Thành tiền: <?php
+                                                                            <p style="margin: 0;color:white;text-align: center;"><strong>Tạm tính: <?php
                                                                                                                                                         $tmp = $product['book'] * $g_price + 40000 - $discount;
                                                                                                                                                         if ($tmp < 0) {
                                                                                                                                                             $tt = 0;
@@ -296,7 +296,7 @@ if (isset($_GET['gdel'])) { //xoa sp gb
                                                                                 echo '<small class ="form-text" style="color:orange;text-align: center;">' . $_GET['reply'] . '</small>';
                                                                             }
                                                                         } else { ?>
-                                                                            <p style="margin: 0;color:white;text-align: center;"><strong>Thành tiền: <?php
+                                                                            <p style="margin: 0;color:white;text-align: center;"><strong>Tạm tính: <?php
                                                                                                                                                         $tt = $product['book'] * $g_price + 40000;
                                                                                                                                                         echo $product['book'] * $g_price + 40000 ?> VND </strong></p>
                                                                         <?php

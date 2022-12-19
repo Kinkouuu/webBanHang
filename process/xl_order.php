@@ -54,7 +54,7 @@ if (isset($_POST['btnOrder'])) {
 
     $cart = $db->query("SELECT * FROM `cart` WHERE `u_id` = $u_id");
     if ($cart->rowCount() == 0) { //ktra gio hang rong hay ko
-        $tb = "Please add product in your cart!";
+        $tb = "Vui lòng thêm sản phẩm vào giỏ hàng!";
         header("location: ../cart.php?tb= '$tb'");
     }else{
         foreach ($cart as $dt){

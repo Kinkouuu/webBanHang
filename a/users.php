@@ -28,16 +28,16 @@
                           #
                       </th>
                       <th style="width: 10%">
-                          Name
+                          User name
                       </th>
                       <th style="width: 10%">
-                          Phone
+                          Phone number
                       </th>
                       <th style="width: 35%">
                           Address
                       </th>
 					  <th style="width: 15%">
-                          Number of Orders
+                          Email
                       </th>
 					  <th style="width: 25%">
                           Comment
@@ -67,12 +67,7 @@
                                 <?= $user['city'] . ", " . $user['district'] . ", " . $user['ward'] . ", " . $user['street'] . ", " . $user['no']; ?>
                           </td>
 						  <td>
-                                <?php 
-								  $a = $db->query("SELECT COUNT(u_id) AS count FROM `order` WHERE `u_id` = '$id';");	
-								  foreach ($a as $A) {
-									  echo $A['count'];
-								  }
-					  			?>
+                                <?= $user['email']; ?>
                           </td>
 						  <td>
                                 <?= $user['comment']; ?>
