@@ -1,15 +1,5 @@
 <?php require_once 'view/head.php'; ?>
-<?php
-if(isset($_POST['save'])){
-    $s_id = locdata($_POST['s_id']);
-    $max = locdata($_POST['max']);
-    $l_uid = locdata($_POST['l_uid']);
 
-    // echo $max;
-    // echo $l_uid;
-    $db->exec("UPDATE `sale` SET `max`='$max',`l_uid`='$l_uid' WHERE `s_id` = '$s_id'");
-}
-?>
 <div class="container">
     <div class="card">
         <div class="card-header">
@@ -28,15 +18,6 @@ if(isset($_POST['save'])){
                     <th>#</th>
                     <th>Code</th>
                     <th>Discount</th>
-                    <th>Number of uses                                 
-                    <small class="rounded-circle btn btn-default pb-1 p-0 m-0" data-toggle="tooltip" data-placement="right" title="Giới hạn số lần sử dụng mã giảm giá." style="width: 10%;">
-                    <i class="fas fa-solid fa-question"></i>
-                                </small>
-                            </th>
-                    <th>User ID                     
-                        <small class=" rounded-circle btn btn-default pb-1 p-0 m-0" data-toggle="tooltip" data-placement="right" title="ID khách hàng có thể sử dụng (Đặt là 0 nếu tất cả người dùng đều có thể dùng mã giảm giá)." style="width: 10%;">
-                        <i class="fas fa-solid fa-question"></i>
-                                </small></th>
                     <th>&nbsp;</th>
                 </tr>
             </thead>
@@ -55,16 +36,9 @@ if(isset($_POST['save'])){
                         <td><?= $sale['code'] ?></td>
                         <td><?= $sale['discount'] ?></td>
                         <td>
-                            <input type="number" min ="0" name="max" value="<?= $sale['max'] ?>">
-                        </td>
-                        <td>
-                            <input type="number" min ="0" name="l_uid" value="<?= $sale['l_uid'] ?>">
-                        </td>
-                        <td>
-
-                                <button type="submit" name="save" class="btn btn-success">
-                                <i class="fas fa-solid fa-check"></i>
-                                </button>
+                        <a class="btn btn-warning btn-sm" href="saleList.php?s_id=<?= $sale['s_id'] ?>">
+                        ✎
+                        </a>
                             </td>
                     </tr>
 </form>
@@ -76,8 +50,3 @@ if(isset($_POST['save'])){
 </div>
 </div>
 <?php require_once 'view/end.php'; ?>
-<script>
-$(function () {
-    $('[data-toggle="tooltip"]').tooltip()
-})
-</script>

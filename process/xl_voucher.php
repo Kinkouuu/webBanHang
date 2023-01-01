@@ -12,7 +12,7 @@ $pid = locdata($_POST['p_id']); //lay ma sp muon add giam gia
 $_SESSION['pid'] = $pid;
 
 if(isset($_POST['STDiscount'])){ //Neu add ma hang stock
-    if(empty(mpost('s_code'))){
+    if(empty(mpost('s_code'))){ //ktra da nhap ma hay chua
         $reply = 'Bạn chưa điền mã giảm giá';
         $gb = False;
         unset($_SESSION["s_id"]);
@@ -22,20 +22,24 @@ if(isset($_POST['STDiscount'])){ //Neu add ma hang stock
         $gb = False;
         $code  = $db->query("SELECT * FROM `sale`  WHERE `code` = '$voucher' ");
         $discount = $code->fetch();
-        // // echo $discount['max'];
         $none = $code->rowCount();
-        if($none >0){
-            $check = $db->query("SELECT * FROM `sale` INNER JOIN `order` ON `sale`.s_id = `order`.s_id WHERE `sale`.code = '$voucher' AND `order`.u_id = '$u_id' ");
-                $dem = $check->rowCount();
-            if($discount['l_uid'] != $u_id && $discount['l_uid'] != 0 ){
+        if($none >0){ //ktra ma giam gia ton tai hay ko
+            $s_id = $discount['s_id'];
+            $num_use = $db->query("SELECT * FROM `sale_list` WHERE `s_id` = '$s_id' AND `u_id` = '$u_id'");
+            $no = $num_use->rowCount();
+            $max = $num_use->fetch();
+            if( $no == 0){ // ktra khach hang co trong danh sach giam gia ko
                 $reply = 'Bạn không đủ điều kiện sử dụng mã này';
                 unset($_SESSION["s_id"]);
                 header("location:../cart.php?reply='$reply'");
             }else{
-                if( $dem >= $discount['max'] ){
+                $max = $max['max'];
+                $check = $db->query("SELECT * FROM `order` WHERE `s_id` = '$s_id' AND `u_id` = '$u_id'");
+                $dem = $check->rowCount();
+                if($dem >= $max){ //ktra da het luot dung hay chua
                     $reply = "Bạn đã hết số lần dùng mã này";
-                    unset($_SESSION["s_id"]);
-                header("location:../cart.php?reply='$reply'");
+                        unset($_SESSION["s_id"]);
+                        header("location:../cart.php?reply='$reply'");
                 }else{
                     $reply = "Bạn được giảm " .$discount['discount'] ." VND";
                     $_SESSION['s_id']=$discount['s_id'];
@@ -61,20 +65,24 @@ if (isset($_POST['GBDiscount'])) { //Neu add ma hang GB
         $gb = True;
         $code  = $db->query("SELECT * FROM `sale`  WHERE `code` = '$voucher' ");
         $discount = $code->fetch();
-        // // echo $discount['max'];
         $none = $code->rowCount();
-        if($none >0){
-            $check = $db->query("SELECT * FROM `sale` INNER JOIN `order` ON `sale`.s_id = `order`.s_id WHERE `sale`.code = '$voucher' AND `order`.u_id = '$u_id' ");
-                $dem = $check->rowCount();
-            if($discount['l_uid'] != $u_id && $discount['l_uid'] != 0 ){
+        if($none >0){ //ktra ma giam gia ton tai hay ko
+            $s_id = $discount['s_id'];
+            $num_use = $db->query("SELECT * FROM `sale_list` WHERE `s_id` = '$s_id' AND `u_id` = '$u_id'");
+            $no = $num_use->rowCount();
+            $max = $num_use->fetch();
+            if( $no == 0){ // ktra khach hang co trong danh sach giam gia ko
                 $reply = 'Bạn không đủ điều kiện sử dụng mã này';
                 unset($_SESSION["s_id"]);
                 header("location:../cart.php?reply='$reply'");
             }else{
-                if( $dem >= $discount['max'] ){
-                    $reply = "Bạn đã hết số lần dùng mã này ";
-                    unset($_SESSION["s_id"]);
-                header("location:../cart.php?reply='$reply'");
+                $max = $max['max'];
+                $check = $db->query("SELECT * FROM `order` WHERE `s_id` = '$s_id' AND `u_id` = '$u_id'");
+                $dem = $check->rowCount();
+                if($dem >= $max){ //ktra da het luot dung hay chua
+                    $reply = "Bạn đã hết số lần dùng mã này";
+                        unset($_SESSION["s_id"]);
+                        header("location:../cart.php?reply='$reply'");
                 }else{
                     $reply = "Bạn được giảm " .$discount['discount'] ." VND";
                     $_SESSION['s_id']=$discount['s_id'];
@@ -88,6 +96,7 @@ if (isset($_POST['GBDiscount'])) { //Neu add ma hang GB
             }
     }
 }
+
 $_SESSION['isGB'] = $gb; 
 
 require_once "../template/end.php";

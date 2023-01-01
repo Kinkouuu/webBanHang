@@ -48,30 +48,30 @@ if (isset($_GET['rmv'])) { // xoa san pham khoi gb list
 
                     <form class="d-flex" method="GET">
                         <div class="col-md-2 d-flex">
-                            <label for="" class="col-sm-6">ID group buy: </label>
-                            <div class="col-sm-6">
-                               <input type="text" class="form-control" name="g_id" readonly value="<?= $g_id ?>"> 
+                            <label for="" class="col-sm-8">ID group buy: </label>
+                            <div class="col-sm-4">
+                                <input type="text" class="form-control" name="g_id" readonly value="<?= $g_id ?>"> 
                             </div>
                         </div>
                         <div class="col-md-3 d-flex">
-                            <label for="" class="col-sm-6">From:</label>
-                            <div class="col-sm-6">
+                            <label for="" class="col-sm-4">From:</label>
+                            <div class="col-sm-8">
                                 <input type="text" name="s_day" id="date_picker1" class="form-control" value="<?= date("d-m-Y", $list['s_date']) ?>">
 
                             </div>
                         </div>
                         <div class="col-md-3 d-flex">
-                            <label for="" class="col-sm-6">To:</label>
-                            <div class="col-sm-6">
+                            <label for="" class="col-sm-4">To:</label>
+                            <div class="col-sm-8">
 
                                 <input type="text" name="e_day" id="date_picker2" class="form-control" value="<?= date("d-m-Y", $list['e_date']) ?>">
                             </div>
                         </div>
 
                         <div class="col-md-3 d-flex">
-                            <label class="col-sm-6">Status:</label>
-                            <div class="col-sm-6">
-                                <select class="form-select" name="stt">
+                            <label class="col-sm-4">Status:</label>
+                            <div class="col-sm-8">
+                                <select class="form-control" name="stt">
                                 <option value="Đang mở group buy" <?php echo $list['gb_stt'] == 'Đang mở group buy' ? ' selected ' : ''; ?>>Đang mở group buy</option>
                                 <option value="Đóng order" <?php echo $list['gb_stt'] == 'Đóng order' ? ' selected ' : ''; ?>>Đóng order</option>
                                 <option value="Đặt hàng nhà máy" <?php echo $list['gb_stt'] == 'Đặt hàng nhà máy' ? ' selected ' : ''; ?>>Đặt hàng nhà máy</option>

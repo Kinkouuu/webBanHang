@@ -81,8 +81,15 @@ if (!isset($_SESSION['user'])) {
                                             <?php echo $discount ." VND"?>
                                         </td>
                                         <td style="width: 12.5%">
-                                            <?php echo $order['d_price']  * $order['amount'] + 40000 - $discount . " VND";
-                                                $total += $order['d_price']  * $order['amount'] + 40000 - $discount ?>
+                                            <?php $tmp= $order['d_price']  * $order['amount'] + 40000 - $discount ;
+                                            if($tmp <0){
+                                                echo "0 VND";
+                                                
+                                            }else{
+                                                echo $tmp. ' VND';
+                                                $total += $tmp;
+                                            }
+                                            ?>
                                         </td>
                                         <td style="width: 13%">
                                                 <?php echo $order['status'] ?>
