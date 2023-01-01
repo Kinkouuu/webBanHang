@@ -4,10 +4,14 @@
     if (isset($_POST['save'])) {
         $code = mpost('code');
         $discount = mpost('discount');
-        $max = mpost('max');
+        $lap = $db->query("SELECT * FROM `sale` WHERE `code` = '$code'")->rowCount();
+        if ($lap > 0) {
+          echo '<script>alert("Đã tồn tại mã ' . $code . '"); window.location = "sale.php";</script>';
+        }else{
+          $db->exec("INSERT INTO `sale`  (`code`,`discount`) VALUES ( '$code','$discount');");
+          echo '<script>alert("Đã thêm ' . $code . '"); window.location = "sale.php";</script>';
+        }
 
-        $db->exec("INSERT INTO `sale`  (`code`,`discount`,`max`) VALUES ( '$code','$discount','$max');");
-        echo '<script>alert("Đã thêm ' . $code . '"); window.location = "sale.php";</script>';
     }
 ?>
     <!-- Content Header (Page header) -->
@@ -38,18 +42,7 @@
   					</div>
                 </div>
               </div>
-
-              <div class="form-group row">
-                <label class="col-sm-2 col-form-label">Number of uses</label>
-                <div class="col-sm-8">
-                  	<div class="form-group">
-    					<input name="max" type="number" min ="0" class="form-control" placeholder="Enter number of uses" required>
-  					</div>
-                </div>
-              </div>
-
-              
-			
+		
               <div class="form-group row">
                 <div class="offset-sm-2 col-sm-10">
                     <button type="submit" name="save" class="btn btn-success">ADD</button>
