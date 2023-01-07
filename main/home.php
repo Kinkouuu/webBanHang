@@ -4,18 +4,17 @@
 <h3>Sản phẩm mới</h3>
 <div class="row">
 <?php
-$items = !empty($_GET['items'])?$_GET['items']:6;
+$items = !empty($_GET['items'])?$_GET['items']:6;// so san pham hien thi tren 1 trang
 $page = !empty($_GET['page'])?$_GET['page']:1; //trang hien tai 
-$offset = ($page - 1) * $items;
-$new_pro = $db->query("SELECT * FROM `product` INNER JOIN `money` ON `product`.m_id = `money`.m_id WHERE `product`.remain >0  ORDER BY `p_id` DESC ");
+$offset = ($page - 1) * $items;// offset san pham
 $ssp = $db->query("SELECT * FROM `product` WHERE remain > 0")->rowCount();
 $st = ceil($ssp/$items);
+$new_pro = $db->query("SELECT * FROM `product` INNER JOIN `money` ON `product`.m_id = `money`.m_id WHERE `product`.remain >0  ORDER BY `p_id` DESC LIMIT $items OFFSET $offset");
 
 if ($new_pro -> rowCount() > 0){
     foreach ($new_pro as $product){
         $p_id = $product['p_id'];
-        //sl hang ban duoc thanh cong
-        //  $sold = $db->query("SELECT sum(amount) as sold FROM `details` INNER JOIN `order` ON `details`.o_id = `order`.o_id WHERE `details`.p_id = $p_id AND `order`.status = 'Đã giao hàng'")->fetch();
+
         $sold = $db->query("SELECT sum(amount) as sold FROM `details` WHERE `p_id` = $p_id")->fetch();
 ?>
 
@@ -32,7 +31,7 @@ if ($new_pro -> rowCount() > 0){
     </div>
     <?php }}
     else {
-        echo "<h3>There are currently no products for sale.</h3>";
+        echo "<h3>Không có sản phẩm nào được mở bán.</h3>";
     } 
 ?>
 </div>
@@ -45,6 +44,6 @@ if ($new_pro -> rowCount() > 0){
 <a class="num_page"  href="?items=<?= $items ?>&page=<?= $num ?>"><?= $num ?></a>
 <?php } }else{
     ?>
-<a class="num_page" style ="background-color: black;color: white" href="#"><?= $num ?></a>
+<a class="num_page" style ="background-color: black;color: white" ><?= $num ?></a>
 <?php } }?>
 </div>
