@@ -142,7 +142,7 @@
         <label class="col-sm-2 col-form-label">Review Product</label>
         <div class="col-sm-10">
           <div class="form-group">
-            <input name="video" type="text" class="form-control" placeholder="Enter link review product" required>
+            <input name="video" type="text" class="form-control" placeholder="Enter link review product">
           </div>
         </div>
       </div>

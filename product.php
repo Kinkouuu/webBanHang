@@ -145,7 +145,7 @@ $pre = $db->query("SELECT sum(amount) as tong FROM `details` WHERE `g_id` = '$g_
 <?php
     if($product['remain'] == 0 && $product1->rowCount() == 0) {
         ?>
-        <input type="submit" class="btn btn-outline-danger" disabled value="SOLD OUT">
+        <input type="submit" class="btn btn-outline-danger" disabled value="Đã hết hàng">
         <?php
     } else{
 
@@ -171,7 +171,10 @@ $pre = $db->query("SELECT sum(amount) as tong FROM `details` WHERE `g_id` = '$g_
                 </p>
 
             </form>
+            <?php if ($product['video'] != ''){
+                ?>
             <a href="<?= $product['video']; ?>"><strong>Video reviews.</strong></a>
+            <?php }?>
         </div>
     </div>
 

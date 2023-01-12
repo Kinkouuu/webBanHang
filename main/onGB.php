@@ -40,7 +40,7 @@ if ($new_pro -> rowCount() > 0){
     </div>
     <?php }}
     else {
-        echo "<h3>There are currently no products for sale.</h3>";
+        echo "<h3>Không có sản phẩm nào được mở bán.</h3>";
     } 
 ?>
 </div>
@@ -50,7 +50,7 @@ if ($new_pro -> rowCount() > 0){
         if ($num > $page -3 && $num < $page +3){ 
         ?>
     
-<a class="num_page"  href="?items=<?= $items ?>&page=<?= $num ?>"><?= $num ?></a>
+<a class="num_page"  href="?action=onGB&items=<?= $items ?>&page=<?= $num ?>"><?= $num ?></a>
 <?php } }else{
     ?>
 <a class="num_page" style ="background-color: black;color: white" href="#"><?= $num ?></a>
