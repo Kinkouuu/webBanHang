@@ -1,4 +1,5 @@
 <?php require_once 'view/head.php';
+require_once 'view/sidebar.php';
 ?>
 
 <!-- Content Header (Page header) -->
@@ -15,7 +16,7 @@
 <!-- Main content -->
 <section class="content">
   <div class="tab-pane" id="settings">
-    <form class="form-horizontal" method="post" enctype="multipart/form-data">
+  <form method="post" action="" class="form" enctype="multipart/form-data">
       <div class="form-group row">
         <label class="col-sm-2 col-form-label">Name Product</label>
         <div class="col-sm-10">

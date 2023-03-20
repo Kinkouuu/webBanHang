@@ -1,5 +1,8 @@
 
-<?php require_once 'view/head.php'; ?>
+<?php 
+require_once 'view/head.php';
+require_once 'view/sidebar.php';
+ ?>
     <!-- Main content -->
     <section class="content">
       <div class="container-fluid">

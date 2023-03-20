@@ -1,5 +1,6 @@
 <?php
 require_once 'view/head.php';
+require_once 'view/sidebar.php';
 ?>
 <?php
 $id = mget('p_id');

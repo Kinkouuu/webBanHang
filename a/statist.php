@@ -1,6 +1,5 @@
-<?php
-require_once "view/head.php";
-?>
+<?php require_once 'view/head.php';
+require_once 'view/sidebar.php'; ?>
 <body>
 <div class="d-flex">
 <h1>Revenue statistics: </h1><h1 id ="text-date"></h1>

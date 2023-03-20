@@ -1,4 +1,25 @@
-<?php require_once '../template/core.php'; ?>
+<?php 
+//Start a new session
+
+session_start();
+
+//Check the session start time is set or not
+if(!isset($_SESSION['start']))
+{
+    //Set the session start time
+    $_SESSION['start'] = time();
+}
+//Check the session is expired or not
+if (isset($_SESSION['start']) && (time() - $_SESSION['start'] >3600)) {
+    //Unset the session variables
+    session_unset();
+    //Destroy the session
+    session_destroy();
+    echo '<script>alert("Your session is expired.");window.location = "https:localhost/ez/a/index.php";</script>';
+}
+require_once 'config.php';
+require_once 'function.php';
+ ?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -53,20 +74,8 @@
 
   <!-- Main Sidebar Container -->
 
-<?php 
-require_once "view/sidebar.php";
-?>
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
+    
     <!-- Content Header (Page header) -->
-    <div class="content-header bg-white">
-      <div class="container-fluid ">
-
-          <div class="col-sm-6 d-flex ">
-          <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
-            <h1 class="m-0">Dashboard</h1>
-          </div><!-- /.col -->
-
-      </div><!-- /.container-fluid -->
-    </div>
     <!-- /.content-header -->

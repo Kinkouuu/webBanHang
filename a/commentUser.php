@@ -1,4 +1,5 @@
-<?php require_once 'view/head.php'; ?>
+<?php require_once 'view/head.php';
+require_once 'view/sidebar.php'; ?>
 <?php
     $id = mget('u_id');
     $qr = $db->query("SELECT * FROM `user` WHERE `u_id` = '$id'")->fetch();

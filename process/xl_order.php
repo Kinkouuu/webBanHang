@@ -101,7 +101,7 @@ if (isset($_POST['btnOrder'])) {
                 $db->exec("INSERT INTO `details` (`o_id`,`p_id`,`amount`,`d_price`,`g_id`) VALUES ( '$o_id','$dp_id','$unit','$s_price','$g_id')");
                 $db->exec("UPDATE `product` SET `remain` = remain - $unit WHERE `p_id` = '$dp_id'");
                 header("location:../order.php");
-            }
+            }   
            
         }
     }

@@ -1,4 +1,5 @@
 <?php require_once 'view/head.php';
+require_once 'view/sidebar.php';
 ?>
 <?php
     if (isset($_POST['save'])) {

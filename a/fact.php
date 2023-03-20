@@ -1,4 +1,5 @@
 <?php require_once 'view/head.php';
+require_once 'view/sidebar.php';
  ?>
 <div class="container">
     <div class="card">

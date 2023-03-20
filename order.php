@@ -1,12 +1,7 @@
 <?php
-require_once "template/config.php";
-require_once "template/header.php";
-require_once   "template/nav.php";
-if (!isset($_SESSION['user'])) {
-    header("location:signin.php");
-} else {
-    $u_id = $_SESSION['user'];
-}
+require_once "template/core.php";
+require_once('template/header.php');
+require_once('template/nav.php');
 ?>
 
 <h2 style="text-align: center;">Quản lý đơn hàng</h2>

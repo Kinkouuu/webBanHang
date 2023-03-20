@@ -1,16 +1,10 @@
 <?php
-require_once 'config.php';
-require_once 'function.php';
-
+require_once ("header.php");
 if (isset($_SESSION['user'])) {
-    $userdata = $db->query("SELECT * FROM `user` WHERE `u_id` = '" . $_SESSION['user'] . "' ")->fetch();
-    if ($userdata == null) {
-        session_unset();
-        header("Location: index.php");
-        exit;
-    } else {
-        $uid = $userdata['u_id'];
-    }
+        $u_id =$_SESSION['user'];
+        // echo $u_id;
+}else{
+  header("Location:signin.php");
 }
 
 ?>

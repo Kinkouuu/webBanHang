@@ -1,4 +1,5 @@
-<?php require_once 'view/head.php'; ?>
+<?php require_once 'view/head.php';
+require_once 'view/sidebar.php'; ?>
 
     <!-- Content Header (Page header) -->
 

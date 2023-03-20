@@ -1,10 +1,10 @@
 <?php
-session_start();
 if (isset($_SESSION['user'])) {
     $u_id = $_SESSION['user'];
 }
 ?>
 <?php
+
 if (isset($_POST['btnSearch'])) {
     $text = $_POST['text'];
     if ($text != '') {

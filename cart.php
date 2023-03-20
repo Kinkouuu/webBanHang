@@ -1,16 +1,10 @@
 <?php
+require_once "template/core.php";
 require_once('template/header.php');
 require_once('template/nav.php');
-require_once "template/config.php";
 ?>
 
 <?php
-
-if (!isset($_SESSION['user'])) {
-    header("location:signin.php");
-} else {
-    $u_id = $_SESSION['user'];
-}
 if (isset($_SESSION['payment'])) {
     $payment = $_SESSION['payment'];
 } else {
@@ -445,13 +439,7 @@ if (isset($_GET['gdel'])) { //xoa sp gb
                         </form>
 
 
-                        <div class="card card-body text-center m-1">
-                            <strong>11110000555669 - BIDV - Tran Minh Quang</strong>
-                            <div class="">
-                                <img src="img/QRCODE.jpg" alt="">
-                            </div>
-                            <span style="color:deepskyblue">Nội dung giao dịch:<br> SDT Tên Hàng Số Lượng</span>
-                        </div>
+                                    
                         <div class="text-center">
                             <?php
 

@@ -1,4 +1,5 @@
-<?php require_once 'view/head.php' ?>
+<?php require_once 'view/head.php';
+require_once 'view/sidebar.php'; ?>
 
 <?php
 $s_id = mget('s_id');

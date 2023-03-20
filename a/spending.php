@@ -1,4 +1,5 @@
-<?php require_once 'view/head.php'; ?>
+<?php require_once 'view/head.php';
+require_once 'view/sidebar.php'; ?>
 
 <!-- Content Header (Page header) -->
 <script src="table2excel.js"></script>
@@ -117,8 +118,8 @@ $total = 0 ; //số tiền đã chi ra
                             $n_p += $tt['ssp']?>
                         </td>
                         <td>
-                            <?= $tt['sd'] * 350000;
-                            $n_pf += $tt['sd'] * 350000?>
+                            <?= $tt['sd'] * 35000;
+                            $n_pf += $tt['sd'] * 35000?>
                         </td>
                         <td>
                             <?= $tt['sdh'] * 40000;

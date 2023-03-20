@@ -1,93 +1,43 @@
-<?php
-    require_once '../template/core.php';
-    if (isset($_SESSION['admin'])) {
-        header("Location: home.php");
-        exit;
-    }
-    if (isset($_POST['login'])) {
-        $user = locdata($_POST['user']);
-        $pass = locdata($_POST['pass']);
-        $hihi = $db->query("SELECT * FROM `admin` WHERE `username` = '$user' AND `password` = '" . hashp($pass) . "' LIMIT 1")->fetch();
-        if ($hihi['id'] != null) {
-            $_SESSION['admin'] = $hihi['id'];
-            header("Location: home.php");
-            exit;
-        } else {
-            echo '<script>alert("User or Pass incorrect");</script>';
-        }
-    }
+<?php 
+    require_once ("view/head.php");
 ?>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Login Admin Panel</title>
-
-  <!-- Google Font: Source Sans Pro -->
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
-  <!-- Font Awesome -->
-  <link rel="stylesheet" href="plugins/fontawesome-free/css/all.min.css">
-  <!-- icheck bootstrap -->
-  <link rel="stylesheet" href="plugins/icheck-bootstrap/icheck-bootstrap.min.css">
-  <!-- Theme style -->
-  <link rel="stylesheet" href="dist/css/adminlte.min.css">
-</head>
-<body class="hold-transition login-page">
-<div class="login-box">
-  <!-- /.login-logo -->
-  <div class="card card-outline card-primary">
-    <div class="card-header text-center">
-      <a href="login.php" class="h1"><b>Admin</b></a>
+<?php 
+if (isset($_POST['signin'])) {
+    $account = locdata($_POST['account']);
+    $pass = locdata($_POST['pass']);
+    $hihi = $db->query("SELECT `id` FROM `admin` WHERE `username` = '$account' AND `password` = '" . hashp($pass) . "'")->fetch();
+    if ($hihi['id'] == null) {
+        session_destroy();
+        echo '<script>alert("Tên đăng nhập hoặc mật khẩu sai");window.location = "index.php";</script>';
+    } else {
+        $_SESSION['admin'] = $hihi['id'];
+        $a_id = $_SESSION['admin'];
+        $db->exec("INSERT INTO `history` (`a_id`, `action`) VALUES ('$a_id', 'Đã đăng nhập vào hệ thống')");
+        header("Location: home.php");
+    }
+}
+?>
+<div class="container">
+    <div class = "position-absolute top-50 start-50 translate-middle">
+        <form action="" method="POST" class="" >
+            <div class="text-center">
+                <h3>ADMIN</h3>
+                <h5>Login to start your session</h5>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Account</label>
+                <div class="d-flex align-items-center">
+                <input class="border rounded-start border-2 border-end-0" name="account" placeholder=" Admin account" style="width: 100%;height:30px">
+                <span class="border rounded-end bg-light border-2 border-start-0" style="height: 30px;width:15%; text-align:center"><i class="fas fa-user"></i></span>
+            </div>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Password</label>
+                <div class="d-flex align-items-center">
+                <input type="password" class="border rounded-start border-2 border-end-0" name="pass" placeholder=" Password" style="width: 100%;height:30px">
+                <span class="border rounded-end bg-light border-2 border-start-0" style="height: 30px;width:15%; text-align:center"><i class="fas fa-key"></i></span>
+            </div>
+            <button name = "signin" type="submit" class="btn btn-primary mt-1">Sign In</button>
+        </form>
     </div>
-    <div class="card-body">
-      <p class="login-box-msg">Sign in to start your session</p>
-
-      <form method="post">
-        <div class="input-group mb-3">
-          <input type="text" class="form-control" name="user" placeholder="Username">
-          <div class="input-group-append">
-            <div class="input-group-text">
-              <span class="fas fa-envelope"></span>
-            </div>
-          </div>
-        </div>
-        <div class="input-group mb-3">
-          <input type="password" class="form-control" name="pass" placeholder="Password">
-          <div class="input-group-append">
-            <div class="input-group-text">
-              <span class="fas fa-lock"></span>
-            </div>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-8">
-            <div class="icheck-primary">
-              <input type="checkbox" id="remember">
-              <label for="remember">
-                Remember Me
-              </label>
-            </div>
-          </div>
-          <!-- /.col -->
-          <div class="col-4">
-            <button name="login" type="submit" class="btn btn-primary btn-block">Sign In</button>
-          </div>
-          <!-- /.col -->
-        </div>
-      </form>
-    </div>
-    <!-- /.card-body -->
-  </div>
-  <!-- /.card -->
 </div>
-<!-- /.login-box -->
-
-<!-- jQuery -->
-<script src="plugins/jquery/jquery.min.js"></script>
-<!-- Bootstrap 4 -->
-<script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-<!-- AdminLTE App -->
-<script src="dist/js/adminlte.min.js"></script>
-</body>
-</html>

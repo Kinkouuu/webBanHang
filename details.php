@@ -1,12 +1,7 @@
 <?php
+require_once "template/core.php";
 require_once('template/header.php');
 require_once('template/nav.php');
-require_once "template/config.php";
-if (!isset($_SESSION['user'])) {
-    header("location:signin.php");
-} else {
-    $u_id = $_SESSION['user'];
-}
 ?>
 
 <div class="container">
@@ -99,7 +94,7 @@ if (!isset($_SESSION['user'])) {
                 ?>
                     <tr>
                         <td style="width:15%;">
-                            <img src="<?php echo $sp['pics'] ?>" alt="">
+                            <img src="<?php echo $sp['pics'] ?>" alt="" style="width:100%">
                         </td>
 
                         <td><?php echo $sp['p_name'] ?></td>
